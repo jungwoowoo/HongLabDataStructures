@@ -31,9 +31,21 @@ int main()
 
 		// i = 4인 경우에 대해서 구현
 		int i = 4;
-		// for (...)
+		int t = arr[i];
+		for (int j=0; j<n; ++j)
 		{
 			// TODO:
+			if(j<i)
+			{
+				arr[i-j] = arr[i-j-1];
+
+				if( arr[i] > arr[i-j] )
+				{
+				 	arr[i-j-1] = t;
+					break;
+				}
+				
+			}
 			Print(arr, n);
 		}
 
