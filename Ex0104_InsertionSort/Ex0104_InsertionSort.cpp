@@ -58,9 +58,28 @@ int main()
 	//int arr[] = { 1, 2, 3, 4, 5, 6 }; // Best
 	int n = sizeof(arr) / sizeof(arr[0]);
 
+	Print(arr, n);
+
 	// Insertion Sort
 	{
+		int t = 0;
+		for( int i=1; i<n; ++i)
+		{
+			t = arr[i];
+			for (int j=0; j<i; ++j)
+			{
+				// TODO:
+				arr[i-j] = arr[i-j-1];
 
+				if( t < arr[j] )
+				{
+					// cout << "t => " << t << endl;
+					arr[i-j-1] = t;
+					// break;
+				}
+				Print(arr, n);
+			}
+		}
 	}
 
 	// Stability
