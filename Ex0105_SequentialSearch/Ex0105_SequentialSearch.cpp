@@ -47,6 +47,12 @@ int main()
 
 	Print(arr, n);
 
+	cout << "Search 9 = " << SequentialSearch(arr, n, 9) << endl;
+	cout << "Search 2 = " << SequentialSearch(arr, n, 2) << endl;
+	cout << "Search 8 = " << SequentialSearch(arr, n, 8) << endl;
+	cout << "Search 1 = " << SequentialSearch(arr, n, 1) << endl;
+	cout << endl;	
+
 	cout << "Sorted Count 9 = " << SortedCount(arr, n, 9) << endl;
 	cout << "Sorted Count 2 = " << SortedCount(arr, n, 2) << endl;
 	cout << "Sorted Count 8 = " << SortedCount(arr, n, 8) << endl;
@@ -60,30 +66,51 @@ int main()
 int Count(int* arr, int n, int x)
 {
 	// TODO:
+	int resultCount = 0;
+	for ( int i=0; i<n; i++)
+	{
+		if ( arr[i] == x ) resultCount++;
+	}
 
-	return 0;
+	return resultCount;
 }
 
 // 배열 arr에 x가 있으면 index 반환, 없으면 -1 반환
 int SequentialSearch(int* arr, int n, int x)
 {
 	// TODO:
-
-	return -1;
+	int searchIndex = -1;
+	for ( int i=0; i<n; i++)
+	{
+		if ( arr[i] == x ) 
+		{
+			searchIndex = i;
+			// 최초 발견 index 값을 start 로 활용하기 위함
+			break;
+		}
+	}
+	return searchIndex;
 }
 
 int SortedCountHelper(int* arr, int n, int x, int start) // start 사용
 {
-	// TODO: 
+	// TODO:
+	int sortedCount = 0;
+	for( int i=start; i<n; i++)
+	{
+		if ( arr[i] == x ) sortedCount++;
 
-	return 0;
+		// 정렬이 이미 되있으므로 다른 값일 경우 조기 종료
+		else break;
+	}
+	return sortedCount;
 }
 
 int SortedCount(int* arr, int n, int x)
 {
 	int i = SequentialSearch(arr, n, x);
 
-	if (i >= 0)
+	if (i >= 0) // 0 index 이상이므로 1개 이상 존재
 		return SortedCountHelper(arr, n, x, i + 1) + 1;
 	else
 		return 0;
