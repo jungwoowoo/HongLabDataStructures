@@ -101,7 +101,10 @@ int SortedCountHelper(int* arr, int n, int x, int start) // start 사용
 		if ( arr[i] == x ) sortedCount++;
 
 		// 정렬이 이미 되있으므로 다른 값일 경우 조기 종료
-		else break;
+		else{
+			cout << "정렬이 이미 되있으므로 다른 값일 경우 조기 종료 " << endl;
+			break;
+		} 
 	}
 	return sortedCount;
 }
