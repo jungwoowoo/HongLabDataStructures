@@ -65,7 +65,7 @@ int main()
 
 		// 표를 만들고 나중에 몰아서 출력하는 방법
 		// table[i] = ...
-
+		table[i] = i + 97;
 		// 표를 만들지 않고 직접 출력하는 방법
 		// ...
 	}
@@ -76,6 +76,10 @@ int main()
 	for (int i = 0; i < 26; i++)
 	{
 		// ...
+		int count = Count(arr , n , table[i]);
+
+		cout << char(table[i]) << count;
+		
 	}
 	cout << endl << endl;
 
@@ -97,10 +101,12 @@ int main()
 		if (arr[i] == c)
 		{
 			// TODO: ...
+			count++;
 		}
 		else
 		{
 			// TODO: ...
+			break;
 		}
 	}
 
