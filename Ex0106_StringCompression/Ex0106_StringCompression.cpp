@@ -40,6 +40,7 @@ int main()
 	// - 알파벳은 총 26 글자	
 
 	// cout << int('a') << " " << int('z') << endl; // 97 122
+	// cout << int('A') << " " << int('B') << endl; // 65 66
 
 	// char arr[] = "ababcdfdceeefda";
 	// char arr[] = "a";
