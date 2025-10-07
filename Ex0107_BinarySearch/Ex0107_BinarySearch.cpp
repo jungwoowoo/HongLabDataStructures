@@ -43,7 +43,7 @@ int BinarySearch(int* arr, int n, int x) // 이진 탐색
 			left = middle+1;
 			cout << "left " << left << endl;
 		}
-		else // x == middle ?
+		else // x == arr[middle] ?
 		{
 			cout << "Found " << middle << endl;
 			return arr[middle];
