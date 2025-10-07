@@ -33,12 +33,12 @@ int BinarySearch(int* arr, int n, int x) // 이진 탐색
 
 		cout << "middle " << middle << endl;
 
-		if ( x < middle )
+		if ( x < arr[middle] )
 		{
 			right = middle-1;
 			cout << "right " << right << endl;
 		}
-		else if ( x > middle )
+		else if ( x > arr[middle] )
 		{
 			left = middle+1;
 			cout << "left " << left << endl;
@@ -46,7 +46,7 @@ int BinarySearch(int* arr, int n, int x) // 이진 탐색
 		else // x == middle ?
 		{
 			cout << "Found " << middle << endl;
-			return middle;
+			return arr[middle];
 		}
 
 		//break; // 임시: 무한루프 방지
@@ -59,18 +59,18 @@ int BinarySearch(int* arr, int n, int x) // 이진 탐색
 int main()
 {
 	// 정렬된 배열 (임의의 배열 사용 가능, 여기서는 디버깅 편의를 위해 index와 같은 값)
-	int arr[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-	//int arr[] = { 2, 4, 5, 5, 6, 8, 9, 10, 12, 13 };
+	//int arr[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+	int arr[] = { 2, 4, 5, 5, 6, 8, 9, 10, 12, 13 };
 	int n = sizeof(arr) / sizeof(arr[0]);
 
 	assert(n > 0);
 
 	// 정렬이 안된 배열은 미리 정렬
 
-	BinarySearch(arr, n, 3);
+	//BinarySearch(arr, n, 3);
 
-	//for (int x = 0; x < n; x++)
-	//	cout << x << " " << BinarySearch(arr, n, x) << endl;
+	for (int x = 0; x < n; x++)
+		cout << x << " " << BinarySearch(arr, n, x) << endl;
 
 	return 0;
 }
