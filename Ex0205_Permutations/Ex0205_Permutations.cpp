@@ -22,6 +22,15 @@ void RecurPermutations(char* arr, int left, int right)
 		// - right는 고정
 
 		// TODO:
+		//RecurPermutations
+
+		int n = right+1;//sizeof(arr)/sizeof(arr[0]);
+
+		for (int i = left; i<n; i++)
+			cout << arr[i] << " ";
+		cout << endl;
+
+		//RecurPermutations(arr ,  , )
 	}
 }
 

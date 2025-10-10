@@ -43,15 +43,17 @@ int RecurBinarySearch(int* arr, int left, int right, int x) // n 대신에 left,
 
 		if (x < arr[middle])
 		{
-			return -1; // TODO:
+			int n_right = middle - 1;
+			return RecurBinarySearch(arr, left, n_right, x); // TODO:
 		}
 		else if (x > arr[middle])
 		{
-			return -1; // TODO:
+			int n_left = middle + 1;
+			return RecurBinarySearch(arr, n_left, right, x); // TODO:
 		}
 		else
 		{
-			return -1; // TODO:
+			return middle; // TODO:
 		}
 	}
 
