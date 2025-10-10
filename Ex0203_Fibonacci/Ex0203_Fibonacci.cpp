@@ -14,8 +14,15 @@ int Fibonacci(int n)
 	else
 	{
 		int fn = 0;
-
 		// TODO:
+		int fn1 = 0;
+		int fn2 = 1;
+		for( int i=2; i<=n; i++)
+		{
+			fn = fn2 + fn1;
+			fn1 = fn2;
+			fn2 = fn;
+		}
 
 		return fn;
 	}
@@ -23,7 +30,14 @@ int Fibonacci(int n)
 
 int RecurFibonacci(int n)
 {
-	return 0;
+	if (n == 0)
+		return 0; // F0 = 0 
+	else if (n == 1)
+		return 1; // F1 = 1
+	else // n > 1
+	{
+		return RecurFibonacci(n-2) + RecurFibonacci(n-1);
+	}
 }
 
 int main()
