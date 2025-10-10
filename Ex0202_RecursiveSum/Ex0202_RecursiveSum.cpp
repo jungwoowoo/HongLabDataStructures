@@ -22,22 +22,30 @@ int RecurSum(int* arr, int n)
 	= ((1 + 2 + ... 8) + 9) + 10
 	= ...
 	*/
-
-	int result = 0;
+	//int result = 0;
 
 	// exit condition
-	if ( n == 0 ) return result;
-	
+	//if ( n == 0 ) return result;
+	if ( n == 0 ) return 0;
 	else
 	{
-		result += arr[n-1];
-		RecurSum(arr , n-1);
-		return result; // <- TODO:
+		cout << "RecurSum arr[n-1] " << arr[n-1] << endl;
+		int c = RecurSum(arr , n-1);
+		c += arr[n-1];
+		cout << "RecurSum c " << c << endl;
+		return c; // <- TODO:
 	}
 	//result = RecurSum(arr, n-1);
-
-	
 }
+
+// int RecurSum(int* arr , int n)
+// {
+// 	if ( n <= 0) return 0;
+// 	else
+// 	{
+// 		return RecurSum(arr, n-1) + arr[n-1];
+// 	}
+// }
 
 int main()
 {
