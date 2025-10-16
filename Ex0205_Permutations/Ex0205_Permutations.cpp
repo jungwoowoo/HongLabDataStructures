@@ -13,6 +13,7 @@ void RecurPermutations(char* arr, int left, int right)
 		for (int i = 0; i <= right; i++)
 			cout << arr[i] << " ";
 		cout << endl;
+		
 	}
 	else
 	{
@@ -22,27 +23,63 @@ void RecurPermutations(char* arr, int left, int right)
 		// - right는 고정
 
 		// TODO:
-		//RecurPermutations
+		if (left>right)
+		{
+			return;
+		}
 
-		int n = right+1;//sizeof(arr)/sizeof(arr[0]);
+		else{
+			//cout << "left ? " << left << endl;
+			int n = 1;
+			for( int k=0; k<=right; k++ )
+			{
+				n = n * (k+1);
+				//cout << "k : " << k << " n : " << n << endl;
+						
+				for (int i=0; i <= right; i++)
+				{
+					if( left==0 )
+					{
+						RecurPermutations(arr, i+1, right);
+					}
+				}			
+			}
+			//cout << " ==== " << n << endl;
+		}
 
-		for (int i = left; i<n; i++)
-			cout << arr[i] << " ";
-		cout << endl;
-
-		//RecurPermutations(arr ,  , )
+		// if( left < right )
+		// {
+		// 	// if ( left == 0 )
+		// 	// {
+		// 	// 	for ( int j=0; j<n; j++ )
+		// 	// 	{
+		// 	// 		//if ( j > 0) swap(arr[left],arr[right]);
+		// 	// 		for (int i=0; i <= right; i++)
+		// 	// 		{
+		// 	// 			RecurPermutations(arr, i+1, right);
+		// 	// 		}
+		// 	// 	}
+		// 	// }
+		// 	// for (int j=0; j<=right-left; j++)
+		// 	// {
+		// 	// 	for (int i=0; i<right; i++)
+		// 	// 	{
+		// 	// 		RecurPermutations(arr, left+1, right);
+		// 	// 	}
+		// 	// }			
+		// }
+		// else return; // left > right
 	}
 }
 
 int main()
 {
-	/* a 한 글자의 순열 (Permutations)
+	/* a 한 글자의 순열 (Permutations) 
 
 		a
 	*/
 
 	/* ab 두 글자의 순열 (Permutations)
-
 		a b
 		b a
 	*/
@@ -69,8 +106,8 @@ int main()
 	RecurPermutations(arr, 0, 2);
 	cout << endl;
 
-	// RecurPermutations(arr, 0, 3);
-	// cout << endl;
+	//RecurPermutations(arr, 0, 3);
+	//cout << endl;
 
 	return 0;
 }
