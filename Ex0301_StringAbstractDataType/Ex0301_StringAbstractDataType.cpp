@@ -13,7 +13,10 @@ int main()
 	// Find()
 	{
 		MyString str1("hi hay he hel hello llo ello el el o!");
-		cout << str1.Find(MyString("hell")) << endl;
+		cout << str1.Find(MyString("hell")) << endl; // shoud be 14
+
+		MyString str2("hi hay he hel llo ello el el o hello!");
+		cout << str2.Find(MyString("hell")) << endl; // shoud be 30
 
 		cout << "Found at " << MyString("ABCDEF").Find(MyString("A")) << endl;
 		cout << "Found at " << MyString("ABCDEF").Find(MyString("AB")) << endl;
@@ -22,15 +25,15 @@ int main()
 		cout << "Found at " << MyString("ABCDEF").Find(MyString("EFG")) << endl;
 		cout << "Found at " << MyString("ABCDEF").Find(MyString("EFGHIJ")) << endl;
 	}
-
-	// 복사 생성자
+	
+	// // 복사 생성자
 	{
-		MyString str1("hi hay he hel hello llo ello el el o!");
-		MyString str2 = str1; // MyString str2(str1);
-		str2.Print();
+		MyString str1("kkk hi hay he hel hello llo ello el el o!");
+		MyString str3 = str1; // MyString str3(str1);
+		str3.Print();
 	}
 
-	// IsEqual()
+	// // IsEqual()
 	{
 		MyString str3("Hello, World!");
 		cout << boolalpha;
@@ -38,7 +41,7 @@ int main()
 		cout << str3.IsEqual(MyString("Hay, World!")) << endl;
 	}
 
-	// Insert()
+	// // Insert()
 	{
 		MyString str4("ABCDE");
 		for (int i = 0; i <= str4.Length(); i++)
@@ -48,14 +51,14 @@ int main()
 		}
 	}
 
-	// Substr()
+	// // Substr()
 	{
 		MyString str("ABCDEFGHIJ");
 
 		str.Substr(3, 4).Print();
 	}
 
-	// Concat()
+	// // Concat()
 	{
 		MyString str1("Hello, ");
 		MyString str2("World!");

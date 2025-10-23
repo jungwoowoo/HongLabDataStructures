@@ -8,6 +8,7 @@ void RecurPermutations(char* arr, int left, int right)
 {
 	// arr[left], ..., arr[right]
 
+	//cout << "left ? " << left << endl;
 	if (left == right)
 	{
 		for (int i = 0; i <= right; i++)
@@ -27,48 +28,29 @@ void RecurPermutations(char* arr, int left, int right)
 		{
 			return;
 		}
-
-		else{
-			//cout << "left ? " << left << endl;
-			int n = 1;
-			for( int k=0; k<=right; k++ )
+		else{		
+			// +1 incremented starting index will be transferred by recursive flow
+			for(int i=left; i<=right; i++)
 			{
-				n = n * (k+1);
-				//cout << "k : " << k << " n : " << n << endl;
-						
-				for (int i=0; i <= right; i++)
-				{
-					if( left==0 )
-					{
-						RecurPermutations(arr, i+1, right);
-					}
-				}			
+				swap(arr[left],arr[i]);
+				RecurPermutations(arr, left+1, right);
+				swap(arr[left],arr[i]);
 			}
-			//cout << " ==== " << n << endl;
+			// for(int i=0; i<=right; i++)
+			// {
+			// 	swap(arr[left],arr[i]);	
+			// 	for(int j=1; j<=right; j++)
+			// 	{
+			// 		//swap(arr[left],arr[j]);
+			// 		for(int k=0; k<=right; k++)
+			// 		{
+			// 			if(left==0) RecurPermutations(arr, k+1, right);
+			// 		}
+			// 		//swap(arr[left],arr[j]);
+			// 	}
+			// 	swap(arr[left],arr[i]);
+			// }
 		}
-
-		// if( left < right )
-		// {
-		// 	// if ( left == 0 )
-		// 	// {
-		// 	// 	for ( int j=0; j<n; j++ )
-		// 	// 	{
-		// 	// 		//if ( j > 0) swap(arr[left],arr[right]);
-		// 	// 		for (int i=0; i <= right; i++)
-		// 	// 		{
-		// 	// 			RecurPermutations(arr, i+1, right);
-		// 	// 		}
-		// 	// 	}
-		// 	// }
-		// 	// for (int j=0; j<=right-left; j++)
-		// 	// {
-		// 	// 	for (int i=0; i<right; i++)
-		// 	// 	{
-		// 	// 		RecurPermutations(arr, left+1, right);
-		// 	// 	}
-		// 	// }			
-		// }
-		// else return; // left > right
 	}
 }
 

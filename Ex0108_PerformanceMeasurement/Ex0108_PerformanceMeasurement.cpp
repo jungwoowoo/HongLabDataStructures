@@ -3,6 +3,7 @@
 #include <chrono>
 #include <fstream>
 #include <algorithm> // swap
+#include <math.h>
 
 using namespace std;
 using namespace std::chrono;

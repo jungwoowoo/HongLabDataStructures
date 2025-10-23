@@ -53,8 +53,8 @@ int main()
 		cout << endl;
 	}
 
-	int arr[] = { 8, 3, 2, 5, 1, 2 };
-	//int arr[] = { 6, 5, 4, 3, 2, 1 }; // Worst
+	//int arr[] = { 8, 3, 2, 5, 1, 2 };
+	int arr[] = { 6, 5, 4, 3, 2, 1 }; // Worst
 	//int arr[] = { 1, 2, 3, 4, 5, 6 }; // Best
 	int n = sizeof(arr) / sizeof(arr[0]);
 
@@ -67,16 +67,14 @@ int main()
 		{
 			t = arr[i];
 			cout << "t => " << t << " was current target ! " << endl;
-			for (int j=i-1; j>-1; --j)
+			for (int j=i-1; j>-1 , t < arr[j]; --j)
 			{
 				// TODO:
-				if( t < arr[j] )
-				{
-					cout << "arr[j] => " << arr[j] << endl;
-					arr[j+1] = arr[j];
-					arr[j] = t;
-					// break;
-				}
+				cout << "arr[j] => " << arr[j] << endl;
+				arr[j+1] = arr[j];
+				arr[j] = t;
+				// break;
+				
 				Print(arr, n);
 			}
 		}
