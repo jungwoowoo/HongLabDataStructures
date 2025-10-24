@@ -7,6 +7,7 @@ int main()
 	using namespace std;
 
 	Polynomial p1; // max_degree는 기본값으로 설정
+	//Polynomial p1 = Polynomial(2);
 
 	p1.NewTerm(1, 0);		// 1 * x^0 = 1
 	p1.NewTerm(1.5f, 1);	// 1.5 * x^1
@@ -46,4 +47,3 @@ int main()
 
 	return 0;
 }
-

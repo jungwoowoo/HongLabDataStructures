@@ -10,6 +10,8 @@ Polynomial::Polynomial(int max_degree) // 편의상 기본값 사용
 {
 	assert(max_degree > 0);
 
+	cout << "max_degress while constructor " << max_degree << endl;
+
 	// - 상수항 포함
 	// - 예: max_degree가 2이면 c0*x^0 + c1*x^1 + c2*x^2 총 3개의 항들
 	capacity_ = max_degree + 1;
@@ -43,8 +45,9 @@ int Polynomial::MaxDegree()
 void Polynomial::NewTerm(const float coef, const int exp)
 {
 	assert(exp < capacity_); // exp가 너무 크면 resize 하도록 구현할 수도 있음
-
 	// TODO: 쉬워요
+	coeffs_[exp] = coef;
+
 }
 
 Polynomial Polynomial::Add(const Polynomial& poly)
@@ -52,8 +55,13 @@ Polynomial Polynomial::Add(const Polynomial& poly)
 	assert(poly.capacity_ == this->capacity_); // 문제를 단순화하기 위한 가정
 
 	Polynomial temp(this->MaxDegree());
-
 	// TODO:
+	// thanks to the above `assert(poly.capacity_ == this->capacity_);`
+	for(int i=0; i<this->capacity_; i++)
+	{
+		temp.coeffs_[i] = this->coeffs_[i] + poly.coeffs_[i];
+	}
+	//this->coeffs_[]
 
 	return temp;
 }
@@ -67,6 +75,22 @@ Polynomial Polynomial::Mult(const Polynomial& poly)
 	Polynomial temp(this->MaxDegree());
 
 	// TODO: 항상 인덱싱 오류 조심
+	int size_m = sizeof(poly.coeffs_) / sizeof(poly.coeffs_[0]);
+	int size_n = sizeof(this->coeffs_) / sizeof(this->coeffs_[0]);
+
+	cout << " size_m " << size_m << " size_n " << size_n << endl;
+
+	int k = 0;
+	for(int i=0; i<size_m+1; i++)
+	{
+		for(int j=0; j<size_n+1; j++)
+		{
+			k = i + j;
+			//temp.coeffs_[k] += poly.coeffs_[i] * this->coeffs_[j];
+			cout << " k ?? " << k << " j " << j << " poly.coeffs_[i] ?? " << poly.coeffs_[i] << " this->coeffs_[j] ?? " << this->coeffs_[j] << endl;
+			temp.coeffs_[k] = temp.coeffs_[k] + poly.coeffs_[i] * this->coeffs_[j];
+		}
+	}
 
 	return temp;
 }
@@ -77,6 +101,11 @@ float Polynomial::Eval(float x)
 
 	// TODO:
 	// 힌트 std::powf(2.0f, float(3)); // 2.0f^3.0f = 8.0f (2.0f의 3.0f 제곱)
+	for(int i=0; i<capacity_; i++)
+	{
+		// coeffs_[]
+		temp += coeffs_[i]*powf(x, float(i));
+	}
 
 	return temp;
 }
