@@ -77,6 +77,7 @@ int main()
 		p2.NewTerm(3.2f, 0);
 		p2.NewTerm(1.0f, 1);
 		p2.NewTerm(3.0f, 2);
+		p2.NewTerm(4.0f, 6);
 		p2.NewTerm(2.0f, 11);
 
 		p2.Print(); // 3.2 + 1*x^1 + 3*x^2 + 2*x^11
@@ -85,6 +86,7 @@ int main()
 
 		SparsePolynomial psum = p1.Add(p2);
 		psum.Print(); // 4.2 + 2.5*x^1 + 5*x^2 + 5*x^7 + 3.5*x^10 + 2*x^11 + 5.5*x^20 + 5*x^1000
+		//psum.Print(); // 4.2 + 2.5*x^1 + 5*x^2 + 4*x^6 + 5*x^7 + 3.5*x^10 + 2*x^11 + 5.5*x^20 + 5*x^1000
 
 		cout << endl;
 	}
