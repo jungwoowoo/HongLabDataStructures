@@ -27,6 +27,9 @@ int main()
 	Matrix tr = m1.Transpose(); // 전치행렬
 	tr.Print();
 
+	Matrix new_matrix(tr);
+	new_matrix.Print();
+
 	return 0;
 }
 

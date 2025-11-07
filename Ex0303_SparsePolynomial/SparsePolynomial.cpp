@@ -64,129 +64,163 @@ SparsePolynomial SparsePolynomial::Add(const SparsePolynomial& poly)
 
 	// TODO:
 	/**
-	 * solution 1
+	 * solution 1 
 	 */
-	{
-	temp.num_terms_ = this->num_terms_ + poly.num_terms_;
-	temp.capacity_ = this->capacity_ + poly.capacity_;
-	temp.terms_ = new Term[temp.num_terms_+1];
+	// {
+	// temp.num_terms_ = this->num_terms_ + poly.num_terms_;
+	// temp.capacity_ = this->capacity_ + poly.capacity_;
+	// temp.terms_ = new Term[temp.num_terms_+1];
 	
-	int max_exp = 0;
+	// int max_exp = 0;
 
-	for(int i=0; i<this->num_terms_; i++)
-	{
-		if( max_exp < this->terms_[i].exp ) max_exp = this->terms_[i].exp;
-	}
-	for(int i=0; i<poly.num_terms_; i++)
-	{
-		if( max_exp < poly.terms_[i].exp ) max_exp = poly.terms_[i].exp;
-	}
+	// for(int i=0; i<this->num_terms_; i++)
+	// {
+	// 	if( max_exp < this->terms_[i].exp ) max_exp = this->terms_[i].exp;
+	// }
+	// for(int i=0; i<poly.num_terms_; i++)
+	// {
+	// 	if( max_exp < poly.terms_[i].exp ) max_exp = poly.terms_[i].exp;
+	// }
 
-	// first , assign p1 terms
-	for(int i=0; i<this->num_terms_; i++)
-	{
-		temp.terms_[i].coef = this->terms_[i].coef;
-		temp.terms_[i].exp = this->terms_[i].exp;
-	}
+	// // first , assign p1 terms
+	// for(int i=0; i<this->num_terms_; i++)
+	// {
+	// 	temp.terms_[i].coef = this->terms_[i].coef;
+	// 	temp.terms_[i].exp = this->terms_[i].exp;
+	// }
 
-	// second assign p2 terms
-	int last_i_index = 0;
-	int last_j_index = 0;
+	// // second assign p2 terms
+	// int last_i_index = 0;
+	// int last_j_index = 0;
 
-	for(int i=0; i<temp.num_terms_; i++)
-	{
-		for(int j=0; j<poly.num_terms_; j++)
-		{
-			if ( poly.terms_[j].exp == temp.terms_[i].exp )
-			{
-				if( i>0 && temp.terms_[i].exp!=0 )
-				{
-					temp.terms_[i].coef += poly.terms_[j].coef;
-					last_i_index = i;
-					last_j_index = j;
-					cout << " each i " << i << " each j ?? " << j << endl;
-				}
-				else if ( i==0 && temp.terms_[i].exp==0 )
-				{
-					temp.terms_[i].coef += poly.terms_[j].coef;
-					cout << " each i " << i << " each j ?? " << j << endl;
-				}
-			}
-		}
-	}
+	// for(int i=0; i<temp.num_terms_; i++)
+	// {
+	// 	for(int j=0; j<poly.num_terms_; j++)
+	// 	{
+	// 		if ( poly.terms_[j].exp == temp.terms_[i].exp )
+	// 		{
+	// 			if( i>0 && temp.terms_[i].exp!=0 )
+	// 			{
+	// 				temp.terms_[i].coef += poly.terms_[j].coef;
+	// 				last_i_index = i;
+	// 				last_j_index = j;
+	// 				cout << " each i " << i << " each j ?? " << j << endl;
+	// 			}
+	// 			else if ( i==0 && temp.terms_[i].exp==0 )
+	// 			{
+	// 				temp.terms_[i].coef += poly.terms_[j].coef;
+	// 				cout << " each i " << i << " each j ?? " << j << endl;
+	// 			}
+	// 		}
+	// 	}
+	// }
 
-	cout << "last_i_index " << last_i_index << endl;
-	cout << "last_j_index " << last_j_index << endl;
+	// cout << "last_i_index " << last_i_index << endl;
+	// cout << "last_j_index " << last_j_index << endl;
 
-	int diffs_array_size = 0;
-	int *exp_diffs_array = new int [diffs_array_size];
-	float *coef_diffs_array = new float [diffs_array_size];
+	// int diffs_array_size = 0;
+	// int *exp_diffs_array = new int [diffs_array_size];
+	// float *coef_diffs_array = new float [diffs_array_size];
 
-	for(int i=0; i<poly.num_terms_; i++)
-	{
-		int exist_count = 0;
-		for(int j=0; j<temp.num_terms_; j++)
-		{
-			if ( temp.terms_[j].exp == poly.terms_[i].exp )
-			{
-				exist_count++;
-			}
-		}
+	// for(int i=0; i<poly.num_terms_; i++)
+	// {
+	// 	int exist_count = 0;
+	// 	for(int j=0; j<temp.num_terms_; j++)
+	// 	{
+	// 		if ( temp.terms_[j].exp == poly.terms_[i].exp )
+	// 		{
+	// 			exist_count++;
+	// 		}
+	// 	}
 
-		if(exist_count>0)
-		{
-		}
-		else
-		{
-			diffs_array_size++;
-			exp_diffs_array[diffs_array_size-1] = poly.terms_[i].exp;
-			coef_diffs_array[diffs_array_size-1] = poly.terms_[i].coef;
-		}
-	}
+	// 	if(exist_count>0)
+	// 	{
+	// 	}
+	// 	else
+	// 	{
+	// 		diffs_array_size++;
+	// 		exp_diffs_array[diffs_array_size-1] = poly.terms_[i].exp;
+	// 		coef_diffs_array[diffs_array_size-1] = poly.terms_[i].coef;
+	// 	}
+	// }
 
-	for(int k=0; k<diffs_array_size; k++)
-	{
-		cout << "exp_diffs_array[k] ?? " << exp_diffs_array[k] << endl;
-		int break_i = 0;
-		for(int i=0; i<temp.num_terms_; i++)
-		{
-			if ( temp.terms_[i].exp > exp_diffs_array[k] )
-			{
-				// cout << "diffs_array[k] ?? " << diffs_array[k] << endl;
-				break_i = i;
-				break;
-			}
-			else if ( temp.terms_[i].exp < exp_diffs_array[k] )
-			{
+	// for(int k=0; k<diffs_array_size; k++)
+	// {
+	// 	cout << "exp_diffs_array[k] ?? " << exp_diffs_array[k] << endl;
+	// 	int break_i = 0;
+	// 	for(int i=0; i<temp.num_terms_; i++)
+	// 	{
+	// 		if ( temp.terms_[i].exp > exp_diffs_array[k] )
+	// 		{
+	// 			// cout << "diffs_array[k] ?? " << diffs_array[k] << endl;
+	// 			break_i = i;
+	// 			break;
+	// 		}
+	// 		else if ( temp.terms_[i].exp < exp_diffs_array[k] )
+	// 		{
 
-			}
-		}
-		cout << "break_i ? " << break_i << endl;
+	// 		}
+	// 	}
+	// 	cout << "break_i ? " << break_i << endl;
 
-		if ( break_i > 0 )
-		{
-			for( int p=temp.num_terms_-1; p>0 ; p-- )
-			{
-				temp.terms_[break_i+p].coef = temp.terms_[break_i+p-1].coef;
-				temp.terms_[break_i+p].exp = temp.terms_[break_i+p-1].exp;
-			}
+	// 	if ( break_i > 0 )
+	// 	{
+	// 		for( int p=temp.num_terms_-1; p>0 ; p-- )
+	// 		{
+	// 			temp.terms_[break_i+p].coef = temp.terms_[break_i+p-1].coef;
+	// 			temp.terms_[break_i+p].exp = temp.terms_[break_i+p-1].exp;
+	// 		}
 
-			temp.terms_[break_i].exp = exp_diffs_array[k];
-			temp.terms_[break_i].coef = coef_diffs_array[k];
-		}
-		else if ( break_i == 0 )
-		{
-			temp.terms_[this->num_terms_+k].exp = exp_diffs_array[k];
-			temp.terms_[this->num_terms_+k].coef = coef_diffs_array[k];
-		}
-	}
-	} // solution 1 end
+	// 		temp.terms_[break_i].exp = exp_diffs_array[k];
+	// 		temp.terms_[break_i].coef = coef_diffs_array[k];
+	// 	}
+	// 	else if ( break_i == 0 )
+	// 	{
+	// 		temp.terms_[this->num_terms_+k].exp = exp_diffs_array[k];
+	// 		temp.terms_[this->num_terms_+k].coef = coef_diffs_array[k];
+	// 	}
+	// }
+	// } // solution 1 end
 	
 	/**
-	 * solution 2
+	 * solution 2 by honglab lecture
 	 */
 	{
-		
+		int i=0,j=0;
+		while( i < this->num_terms_ && j < poly.num_terms_ )
+		{
+			if ( this->terms_[i].exp == poly.terms_[j].exp )
+			{
+				temp.NewTerm(this->terms_[i].coef + poly.terms_[j].coef , this->terms_[i].exp);
+				i++;
+				j++;
+			}
+			else if ( this->terms_[i].exp < poly.terms_[j].exp )
+			{
+				temp.NewTerm(this->terms_[i].coef , this->terms_[i].exp);
+				i++;
+			}
+			else if ( this->terms_[i].exp > poly.terms_[j].exp )
+			{
+				temp.NewTerm(poly.terms_[j].coef , poly.terms_[j].exp);
+				j++;
+			}			
+		}
+
+		cout << "last i " << i << " last j " << j << endl;
+
+		while(i < this->num_terms_)
+		{
+			temp.NewTerm(this->terms_[i].coef , this->terms_[i].exp);
+			i++;
+		}
+
+		while(j < poly.num_terms_)
+		{
+			temp.NewTerm(poly.terms_[j].coef , poly.terms_[j].exp);
+			j++;
+		}		
+				
 	}
 	return temp;
 }

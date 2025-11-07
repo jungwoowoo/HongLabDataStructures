@@ -86,8 +86,6 @@ Polynomial Polynomial::Mult(const Polynomial& poly)
 		for(int j=0; j<size_n+1; j++)
 		{
 			k = i + j;
-			//temp.coeffs_[k] += poly.coeffs_[i] * this->coeffs_[j];
-			cout << " k ?? " << k << " j " << j << " poly.coeffs_[i] ?? " << poly.coeffs_[i] << " this->coeffs_[j] ?? " << this->coeffs_[j] << endl;
 			temp.coeffs_[k] = temp.coeffs_[k] + poly.coeffs_[i] * this->coeffs_[j];
 		}
 	}

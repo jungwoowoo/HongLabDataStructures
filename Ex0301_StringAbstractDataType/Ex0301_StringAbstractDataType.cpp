@@ -68,5 +68,13 @@ int main()
 		str3.Print();
 	}
 
+	// // Resize() , more practice
+	{
+		MyString str4("ABCDEFGHIJ");
+		str4.Resize(5);
+		str4.Print();
+
+	}
+
 	return 0;
 }

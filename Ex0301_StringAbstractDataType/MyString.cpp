@@ -1,4 +1,6 @@
 ﻿#include "MyString.h"
+#include <iostream>
+#include <cstring>
 
 using namespace std;
 
@@ -22,10 +24,12 @@ MyString::MyString(const char* init)
 	str_ = new char[size_+1];
 
 	// 데이터 복사 , include null character '\0'
-	for(int i=0; i<size_+1; i++)
-	{
-		str_[i] = init[i];
-	}
+	// for(int i=0; i<size_+1; i++)
+	// {
+	// 	str_[i] = init[i];
+	// }
+
+	memcpy(str_, init , size_+1);
 }
 
 // MyString의 다른 instance로부터 초기화
@@ -51,9 +55,14 @@ MyString::MyString(const MyString& str)
 MyString::~MyString()
 {	
 	// 메모리 해제
-	str_ = nullptr;
-	//delete []str_;
-
+	// str_ = nullptr;
+	// delete []str_;
+	if( str_ != nullptr )
+	{
+		delete []str_;
+		str_ = nullptr;
+		size_ = 0;		
+	}
 }
 
 bool MyString::IsEmpty()
@@ -87,7 +96,17 @@ int MyString::Length()
 void MyString::Resize(int new_size)
 {
 	// 메모리 재할당과 원래 갖고 있던 내용 복사
+	// copy from original str_
+	char *new_str = new char[new_size];
+	size_ = new_size;
 
+	// copy from original str
+	for(int i=0; i<new_size; i++)
+	{
+		new_str[i] = str_[i];
+	}
+
+	memcpy(str_ , new_str , new_size);
 }
 
 // // 인덱스 start위치의 글자부터 num개의 글자로 새로운 문자열 만들기
