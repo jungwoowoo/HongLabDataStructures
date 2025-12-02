@@ -29,12 +29,23 @@ public:
 
 	bool IsEmpty() const
 	{
-		return false; // TODO:
+		using namespace std;
+		//return false; // TODO:
+		bool empty_bool = false;//int(stack_[top_]) > 0;
+		// cout << boolalpha;
+		// cout << " int(stack_[top_]) ? " << int(stack_[top_]) << endl;
+		// cout << " empty_bool ? " << empty_bool << endl;
+		if(top_ > 0) empty_bool = false;
+		else if(top_==-1) empty_bool = true;
+
+		return empty_bool;
+		
 	}
 
 	int Size() const
 	{
-		return 0; //TODO:
+		//return 0; //TODO:
+		return capacity_;
 	}
 
 	void Print()
@@ -50,24 +61,35 @@ public:
 	T& Top() const
 	{
 		assert(!IsEmpty());
-
 		return stack_[top_];
 	}
 
+	int getTopPos() const
+	{
+		return top_;
+	}
 	// Insert item into the TOP of the stack
 	void Push(const T& item)
 	{
 		// TODO: 필요하면 리사이즈 
-
+		if ( Size() == 0 )
+		{
+			Resize(1);
+		}
+		top_ = top_+1;
+		capacity_ = capacity_+1;
 		// TODO:
+		stack_[top_] = item;
 	}
 
 	// Delete the TOP element of the stack
 	void Pop()
 	{
 		assert(!IsEmpty());
-
 		// TODO:
+		//stack_[top_] = NULL;
+		top_ = top_-1;
+		capacity_ = capacity_-1;
 	}
 
 protected: // 뒤에서 상속해서 사용
