@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <cstring>
 
 #include "../shared/Stack.h"
 
@@ -46,18 +47,41 @@ void MoveDisk(int from, int to)
 void RecurMoveDisks(int n, int from, int temp, int to)
 {
 	// TODO:
+	//MoveDisk(int from, int to)
+	cout <<  " ## from " << from << " to " << to << endl;
+	if( n == 3 )
+	{
+		MoveDisk(from , to);
+		RecurMoveDisks(n-1, from , temp , to);
+	}
+	else if( n == 2 )
+	{
+		MoveDisk(from , temp);
+		RecurMoveDisks(n-1, from , temp , to);
+	}
+	else if( n == 1 )
+	{
+		MoveDisk(to , temp);
+		RecurMoveDisks(n-1, from , temp , to);
+	}
+	else if( n == 0 )
+	{
+		MoveDisk(temp , from);
+		RecurMoveDisks(n+1, from , temp , to);
+	}
+	
 }
 
 int main()
 {
-	int num_disks = 5;
+	int num_disks = 3;
 
 	for (int i = 0; i < num_disks; i++)
 		tower[0].Push('A' + i);
 
 	PrintTowers();
 
-	// MoveDisk(0, 2); // <- 디스크 하나만 움직이는 함수 tower 0 -> tower 2
+	//MoveDisk(0, 2); // <- 디스크 하나만 움직이는 함수 tower 0 -> tower 2
 
 	RecurMoveDisks(num_disks, 0, 1, 2);
 

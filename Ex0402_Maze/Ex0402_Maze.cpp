@@ -46,95 +46,130 @@ struct Pos
 	}
 };
 
-void RecurMaze(Pos p)
-{
-	const char mark = maze[p.row][p.col];
+// void RecurMaze(Pos p)
+// {
+// 	const char mark = maze[p.row][p.col];
 
-	if (mark == 'G')
-	{
-		cout << "Found!" << endl;
-		return;
-	}
-	// 방문했던 적이 없고 ('X'가 아니고)
-	// 벽도 아닌 경우 ('1'도 아닌 경우)
-	else if (mark!='X' && mark!='1')
-	{
-		//'X' 표시
-		maze[p.row][p.col] = mark!='S' ? 'X' : 'S';
+// 	if (mark == 'G')
+// 	{
+// 		cout << "Found!" << endl;
+// 		return;
+// 	}
+// 	// 방문했던 적이 없고 ('X'가 아니고)
+// 	// 벽도 아닌 경우 ('1'도 아닌 경우)
+// 	else if (mark!='X' && mark!='1')
+// 	{
+// 		//'X' 표시
+// 		maze[p.row][p.col] = mark!='S' ? 'X' : 'S';
 
-		//if path not exists in bottom
-		if( maze[p.row+1][p.col] != '0' )
-		{
-			// cout << endl;
-			// //select direction
-			// for(int i=0; i<kNumCols; i++)
-			// {
-			// 	cout << " : " << maze[p.row][i];
-			// }
-			// cout << endl;
-			maze[p.row][p.col] = mark!='S' ? 'X' : 'S';
+// 		//if path not exists in bottom
+// 		if( maze[p.row+1][p.col] != '0' )
+// 		{
+// 			// cout << endl;
+// 			// //select direction
+// 			// for(int i=0; i<kNumCols; i++)
+// 			// {
+// 			// 	cout << " : " << maze[p.row][i];
+// 			// }
+// 			// cout << endl;
+// 			maze[p.row][p.col] = mark!='S' ? 'X' : 'S';
 			
-			//옆으로 이동 : right
-			if(p.col<kNumCols-2)
-			{
-				maze[p.row][p.col] = 'X';
-				int new_col = p.col+1;
-				RecurMaze({p.row,new_col});
-			}
-			//옆으로 이동 : left
-			// else if(p.col>0 && direct=='l')
-			// {
-			// 	cout << " left mark ? " << mark << endl;
-			// 	maze[p.row][p.col] = 'X';
-			// 	int new_col = p.col-1;
-			// 	RecurMaze({p.row,new_col});
-			// }			
-			//bakward to left
-			else if(p.col==kNumCols-2)
-			{
-				// int new_row = p.row+1;
-				// RecurMaze({new_row,1});
-				//direct='l';
-				cout << " left start row ? " << p.row << endl;
-				//int new_col = p.col-1;
-				RecurMaze({p.row,0});
-			}
-		}
-		else if (maze[p.row+1][p.col] == '0')
-		{
-			//'X' 표시
-			maze[p.row][p.col] = mark!='S' ? 'X' : 'S';
+// 			//옆으로 이동 : right
+// 			if(p.col<kNumCols-2)
+// 			{
+// 				maze[p.row][p.col] = 'X';
+// 				int new_col = p.col+1;
+// 				RecurMaze({p.row,new_col});
+// 			}
+// 			//옆으로 이동 : left
+// 			// else if(p.col>0 && direct=='l')
+// 			// {
+// 			// 	cout << " left mark ? " << mark << endl;
+// 			// 	maze[p.row][p.col] = 'X';
+// 			// 	int new_col = p.col-1;
+// 			// 	RecurMaze({p.row,new_col});
+// 			// }			
+// 			//bakward to left
+// 			else if(p.col==kNumCols-2)
+// 			{
+// 				// int new_row = p.row+1;
+// 				// RecurMaze({new_row,1});
+// 				//direct='l';
+// 				cout << " left start row ? " << p.row << endl;
+// 				//int new_col = p.col-1;
+// 				RecurMaze({p.row,0});
+// 			}
+// 		}
+// 		else if (maze[p.row+1][p.col] == '0')
+// 		{
+// 			//'X' 표시
+// 			maze[p.row][p.col] = mark!='S' ? 'X' : 'S';
 
-			int new_row = p.row+1;
-			cout << " has a path in bottom " << new_row << endl;
-			RecurMaze({new_row,p.col});
-		}
+// 			int new_row = p.row+1;
+// 			cout << " has a path in bottom " << new_row << endl;
+// 			RecurMaze({new_row,p.col});
+// 		}
 
-	}
-	// '1'
-	else
-	{
-		//옆으로 이동
-		if(p.col<kNumCols-2)
-		{
-			int new_col = p.col+1;
-			RecurMaze({p.row,new_col});
-		}
-		//forward bottom
-		else if(p.col==kNumCols-2)
-		{
-			int new_row = p.row+1;
-			//cout << " new_row " << new_row << endl;
-			RecurMaze({new_row,1});
-		}
-	}
-}
+// 	}
+// 	// '1'
+// 	else
+// 	{
+// 		//옆으로 이동
+// 		if(p.col<kNumCols-2)
+// 		{
+// 			int new_col = p.col+1;
+// 			RecurMaze({p.row,new_col});
+// 		}
+// 		//forward bottom
+// 		else if(p.col==kNumCols-2)
+// 		{
+// 			int new_row = p.row+1;
+// 			//cout << " new_row " << new_row << endl;
+// 			RecurMaze({new_row,1});
+// 		}
+// 	}
+// }
 
 //조기 종료가 가능한 버전
-//int RecurMaze(Pos p)
-//{
-//	// TODO:
-//}
+int RecurMaze(Pos p)
+{
+	// TODO:
+	Pos pos_top = { p.row-1 , p.col };
+	Pos pos_bottom = { p.row+1 , p.col };
+	Pos pos_right = { p.row , p.col+1 };
+	Pos pos_left = { p.row , p.col+1 };
+	Pos pos_array[4] = { pos_top , pos_bottom , pos_right , pos_left };
+	
+	Pos next_direction = {};
+	for(int i=0; i<sizeof(pos_array)/sizeof(pos_array[0]); i++)
+	{
+		int value = maze[pos_array[i].row][pos_array[i].col];
+		//prior to bottom
+		if(i==1)
+		{
+			if(value == '0')
+			{
+				next_direction = pos_array[i];
+				break;
+			}
+		}
+		else
+		{
+			if(value == '0')
+			{
+				next_direction = pos_array[i];
+				break;
+			}			
+		}
+	}
+
+	cout << " next_direction ? " << next_direction << endl;
+
+	int value = RecurMaze(next_direction);
+
+	return int(value);
+
+}
 
 void StackMaze()
 {
