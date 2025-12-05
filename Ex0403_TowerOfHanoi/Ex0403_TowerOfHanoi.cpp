@@ -48,28 +48,32 @@ void RecurMoveDisks(int n, int from, int temp, int to)
 {
 	// TODO:
 	//MoveDisk(int from, int to)
-	cout <<  " ## from " << from << " to " << to << endl;
-	if( n == 3 )
+	cout <<  " ## from " << from << " to " << to << " ## n " << n << endl;
+
+	if(n == 0)
 	{
-		MoveDisk(from , to);
-		RecurMoveDisks(n-1, from , temp , to);
+		MoveDisk(from, to);
+		return;
 	}
-	else if( n == 2 )
+
+	else if(n > 0)
 	{
-		MoveDisk(from , temp);
-		RecurMoveDisks(n-1, from , temp , to);
+		//MoveDisk(from, to);
+		//MoveDisk(from, temp); // 0 , 1
+		//MoveDisk(to, temp); // 2 , 1
+
+		//MoveDisk(from, to);
+		//MoveDisk(temp, from); // 1 , 0
+		//MoveDisk(temp, to); // 1 , 2
+
+		//MoveDisk(from, to);
+
+		for(int i=0; i<3; i++)
+		{
+			//MoveDisk(temp, from);
+			RecurMoveDisks(n-1, from, temp, to);
+		}
 	}
-	else if( n == 1 )
-	{
-		MoveDisk(to , temp);
-		RecurMoveDisks(n-1, from , temp , to);
-	}
-	else if( n == 0 )
-	{
-		MoveDisk(temp , from);
-		RecurMoveDisks(n+1, from , temp , to);
-	}
-	
 }
 
 int main()
