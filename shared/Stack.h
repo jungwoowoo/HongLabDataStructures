@@ -87,7 +87,7 @@ public:
 	{
 		assert(!IsEmpty());
 		// TODO:
-		//stack_[top_] = NULL;
+		stack_[top_] = NULL;
 		top_ = top_-1;
 		capacity_ = capacity_-1;
 	}

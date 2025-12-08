@@ -46,34 +46,22 @@ void MoveDisk(int from, int to)
 
 void RecurMoveDisks(int n, int from, int temp, int to)
 {
-	// TODO:
-	//MoveDisk(int from, int to)
-	cout <<  " ## from " << from << " to " << to << " ## n " << n << endl;
+    if (n == 0)
+        return;
 
-	if(n == 0)
-	{
-		MoveDisk(from, to);
-		return;
-	}
+    // TODO: // n-1개를 from -> temp
+	// MoveDisk(from, to);
+	// MoveDisk(from, temp);
+	// MoveDisk(to, temp);
+	RecurMoveDisks(n-1, from, to, temp);
+	
+    MoveDisk(from, to);  // 1개를 from -> to (가장 큰 것)
 
-	else if(n > 0)
-	{
-		//MoveDisk(from, to);
-		//MoveDisk(from, temp); // 0 , 1
-		//MoveDisk(to, temp); // 2 , 1
-
-		//MoveDisk(from, to);
-		//MoveDisk(temp, from); // 1 , 0
-		//MoveDisk(temp, to); // 1 , 2
-
-		//MoveDisk(from, to);
-
-		for(int i=0; i<3; i++)
-		{
-			//MoveDisk(temp, from);
-			RecurMoveDisks(n-1, from, temp, to);
-		}
-	}
+    // TODO: // 그 위에 n-1개를 temp에서 to로 보내기
+	// MoveDisk(temp, from);
+	// MoveDisk(temp, to);
+	// MoveDisk(from, to);
+	RecurMoveDisks(n-1, temp, from, to);
 }
 
 int main()
