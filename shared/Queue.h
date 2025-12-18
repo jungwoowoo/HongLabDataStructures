@@ -3,6 +3,9 @@
 #include <cassert>
 #include <iostream>
 #include <iomanip>
+#include <cstring>
+
+using namespace std;
 
 template<typename T>
 class Queue // Circular Queue
@@ -60,16 +63,27 @@ public:
 		//	return 0;
 
 		// 또는 if-else 하나로도 구현 가능합니다.
-		// if (...)
-		//	  return ...;
+		if(front_ < rear_)
+		{
+			return rear_ - front_;
+		}
+		else if(front_ > rear_)
+		{
+			return rear_ + (capacity_ - front_); 
+		}
+		else return 0;
 		// else
 		//    return ...;
 
-		return 0; // TODO: 임시
+		//return 0; // TODO: 임시
 	}
 
 	void Resize() // 2배씩 증가
 	{
+		cout << " entering Resize ?? " << endl;
+		cout << rear_ << endl;
+		cout << front_ << endl;
+		//capacity_ = capacity_*2;
 		// 조언
 		// - 새로운 개념이 항상 그렇듯 원형 큐도 처음에는 어렵고 나중에는 당연해집니다.
 		// - 처음 공부하실 때 답을 맞추려고 하지 마시고 "어떻게 디버깅을 잘 할까?"를 찾으세요.
@@ -78,7 +92,89 @@ public:
 		// - 힘들면 디스코드에서 조금씩 도움 받으시는 것도 좋아요.
 
 		// TODO: 하나하나 복사하는 방식은 쉽게 구현할 수 있습니다. 
-		//       (도전) 경우를 나눠서 memcpy()로 블럭 단위로 복사하면 더 효율적입니다.
+		// (도전) 경우를 나눠서 memcpy()로 블럭 단위로 복사하면 더 효율적입니다.
+
+		// copy one by one in for loop
+		//if(rear_ == front_-1)
+		//{
+			// for(int i=0; i<capacity_; i++)
+			// {
+			// 	cout << " ~ " << queue_[i] << " ~ ";
+			// }			
+	
+			// cout << "new capacity queue wil be created " << endl;
+			// capacity_ = capacity_*2;
+			// T *temp_queue = new T(capacity_);
+
+			// for(int i=0; i<capacity_; i++)
+			// {
+			// 	//temp_queue[i] = queue_[i];
+			// 	//cout << " ~ " << queue_[i] << " ~ ";
+			// 	if(i>front_ && i<(capacity_/2))
+			// 	{
+			// 		temp_queue[i] = queue_[i];
+			// 		//cout << " # " << temp_queue[i] << " # ";
+			// 	}
+			// 	else if(i>=0 && i<front_)
+			// 	{
+			// 		if(i != front_) temp_queue[i+(capacity_/2)] = queue_[i];
+			// 		//cout << " # " << temp_queue[i] << " # ";
+			// 	}
+			// }
+			// for(int i=0; i<capacity_; i++)
+			// {
+			// 	cout << " # " << temp_queue[i] << " # ";
+			// }
+			// cout << endl;
+			// //queue_ = temp_queue;
+			// memcpy(queue_,temp_queue, capacity_);
+
+			// rear_ = rear_ + (capacity_/2)-1;
+
+			// this->Print();
+		//}
+		// else
+		// {
+		// 	capacity_ = capacity_*2;
+		// }
+
+		// using memcpy
+		{
+			if(rear_ == front_-1)
+			{
+				capacity_ = capacity_*2;
+				T* temp_queue = new T(capacity_);
+
+				//from front to (capacity_/2)-1
+				memcpy(temp_queue + sizeof(T) * (front_+1) , queue_ + sizeof(T) * (front_+1)  , sizeof(T) * ((capacity_/2)-1));
+
+				//from 0 to rear
+				memcpy(temp_queue + sizeof(T)*(capacity_/2)  , queue_ , sizeof(T) * (rear_+1));
+		
+
+				for(int i=0; i<capacity_; i++)
+				{
+					cout << " # " << temp_queue[i] << " # ";
+				}			
+
+				queue_ = temp_queue;
+
+				rear_ = (capacity_/2) + rear_;
+				
+			}
+			else if(rear_ > front_)
+			{
+				capacity_ = capacity_*2;
+				T* temp_queue = new T(capacity_);
+				memcpy(temp_queue , queue_ , (capacity_/2));
+				queue_ = temp_queue;
+			}
+			// else if(rear_ < front_-1)
+			// {
+				
+			// }
+
+		}
 	}
 
 	void Enqueue(const T& item) // 맨 뒤에 추가, Push()
@@ -87,6 +183,24 @@ public:
 			Resize();
 
 		// TODO:
+		int new_rear = rear_+1;
+
+		if(new_rear >= capacity_)
+		{
+			int temp_new_rear = (new_rear)%capacity_;
+			
+			rear_ = temp_new_rear;
+			new_rear = temp_new_rear;
+			
+		}
+		else if(new_rear < capacity_)
+		{
+			//new_rear = new_rear + 1;
+			rear_++;
+		}
+
+		queue_[new_rear] = item;
+
 	}
 
 	void Dequeue() // 큐의 첫 요소 삭제, Pop()
@@ -94,6 +208,7 @@ public:
 		assert(!IsEmpty());
 
 		// TODO: 
+		front_ = front_+1;
 	}
 
 	void Print()
@@ -112,11 +227,14 @@ public:
 	{
 		using namespace std;
 
-		cout << "Cap = " << capacity_ << ", Size = " << Size();
+		cout << "Cap = " << capacity_ << ", Size = " <<  Size() << " , current rear_ " << rear_ << " , cuurent front_ " << front_;
 		cout << endl;
 
 		// front와 rear 위치 표시
 		for (int i = 0; i < capacity_; i++) {
+
+			//cout << " ## i ## " << i << endl;
+
 			if (i == front_) cout << " F ";
 			else if (i == rear_) cout << " R ";
 			else cout << "   ";

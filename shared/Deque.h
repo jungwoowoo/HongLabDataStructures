@@ -10,7 +10,6 @@
 template<typename T>
 class Deque : public Queue<T>
 {
-
 	typedef Queue<T> Base;
 
 public:
@@ -35,6 +34,29 @@ public:
 			Base::Resize();
 
 		// TODO:
+		int new_front = Base::front_-1;
+
+		cout << "1 item " << item << endl;
+
+		cout << "1 new_front " << new_front << endl;
+
+		if(new_front > 0)
+		{
+			Base::front_--;
+			new_front = Base::front_+1;
+		}
+		else if(new_front <= 0)
+		{
+			cout << "1 capacity_ " << Base::capacity_ << endl;
+			Base::front_ = Base::capacity_-1;
+			new_front = new_front + 1;
+		}
+
+		cout << "2 new_front " << new_front << endl;
+		cout << "2 front_ " << Base::front_ << endl;
+
+		Base::queue_[new_front]=item;
+		
 	}
 
 	void PushBack(const T& item)
@@ -50,10 +72,9 @@ public:
 	void PopBack()
 	{
 		assert(!Base::IsEmpty());
-
-		// TODO:
+		Base::rear_ = Base::rear_-1;
 	}
 
 private:
-	// Queue와 동일
+	// Queue와 동일	
 };
