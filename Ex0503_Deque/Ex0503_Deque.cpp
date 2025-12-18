@@ -29,6 +29,9 @@ int main()
 	d.PopBack();
 	d.Print();
 
+	d.PopBack();
+	d.Print();	
+
 	return 0;
 }
 
