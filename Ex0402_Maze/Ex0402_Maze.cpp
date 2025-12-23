@@ -131,44 +131,96 @@ struct Pos
 // }
 
 //조기 종료가 가능한 버전
+// int RecurMaze(Pos p)
+// {
+// 	cout << " origin p # " << p.row << " " << p.col << endl;
+// 	char origin_value = maze[p.row][p.col];
+
+// 	if(origin_value == 'S') maze[p.row][p.col] = 'S';
+// 	else if(origin_value == '1') maze[p.row][p.col] = '1';
+// 	else if(origin_value == '0') maze[p.row][p.col] = 'X';
+
+// 	//maze[p.row][p.col] = (mark_!='S' && mark_!='1') ? 'X' :'S';
+
+// 	// TODO:
+	
+// 	Pos pos_bottom = { p.row+1 , p.col };
+// 	Pos pos_right = { p.row , p.col+1 };
+// 	Pos pos_left = { p.row , p.col-1 };
+	
+// 	Pos pos_array[3] = { pos_bottom , pos_right , pos_left };
+	
+// 	Pos next_direction = {};
+// 	for(int i=0; i<sizeof(pos_array)/sizeof(pos_array[0]); i++)
+// 	{
+// 		int value = maze[pos_array[i].row][pos_array[i].col];
+// 		//bottom
+// 		if(i==0)
+// 		{
+// 			if(value == '0')
+// 			{
+// 				next_direction = pos_array[i];
+// 				//break;
+// 				return RecurMaze(next_direction);
+// 			}
+// 			// else if(value == '1' || value == 'X')
+// 			// {
+// 			// 	next_direction = { pos_array[i].row-1 , pos_array[i].col };
+// 			// 	return RecurMaze(next_direction);				
+// 			// }
+// 		}
+
+// 		//right
+// 		else if(i==1)
+// 		{
+// 			if(value == '0')
+// 			{
+// 				next_direction = pos_array[i];
+// 				//break;
+// 				return RecurMaze(next_direction);
+// 			}
+// 			else if(value == '1' || value == 'X')
+// 			{
+// 				next_direction = { pos_array[i].row-1 , 1 };
+// 				return RecurMaze(next_direction);
+// 			}
+// 			else if(value =='G')
+// 			{
+// 				cout << " found G at right ! " << value << endl;
+// 				return 0;
+// 			}
+// 		}
+// 		//left
+// 		else if(i==2)
+// 		{
+// 			if(value == '0')
+// 			{
+// 				next_direction = pos_array[i];
+// 				//break;
+// 				return RecurMaze(next_direction);
+// 			}
+// 			else if(value == '1' || value == 'X')
+// 			{
+// 				next_direction = { pos_array[i].row+1 , 1 };
+// 				return RecurMaze(next_direction);
+// 			}
+// 		}		
+
+// 	}
+// }
+
 int RecurMaze(Pos p)
 {
-	// TODO:
-	Pos pos_top = { p.row-1 , p.col };
-	Pos pos_bottom = { p.row+1 , p.col };
-	Pos pos_right = { p.row , p.col+1 };
-	Pos pos_left = { p.row , p.col+1 };
-	Pos pos_array[4] = { pos_top , pos_bottom , pos_right , pos_left };
-	
-	Pos next_direction = {};
-	for(int i=0; i<sizeof(pos_array)/sizeof(pos_array[0]); i++)
+	if(maze[p.row][p.col]=='G') return 0;
+	else if(maze[p.row][p.col]=='0' || maze[p.row][p.col]=='S')
 	{
-		int value = maze[pos_array[i].row][pos_array[i].col];
-		//prior to bottom
-		if(i==1)
-		{
-			if(value == '0')
-			{
-				next_direction = pos_array[i];
-				break;
-			}
-		}
-		else
-		{
-			if(value == '0')
-			{
-				next_direction = pos_array[i];
-				break;
-			}			
-		}
+		maze[p.row][p.col] = 'X';
+
+		if(RecurMaze({p.row+1,p.col})==1) return 1;
+		if(RecurMaze({p.row-1,p.col})==1) return 1;
+		if(RecurMaze({p.row,p.col+1})==1) return 1;
+		if(RecurMaze({p.row,p.col-1})==1) return 1;
 	}
-
-	cout << " next_direction ? " << next_direction << endl;
-
-	int value = RecurMaze(next_direction);
-
-	return int(value);
-
 }
 
 void StackMaze()
