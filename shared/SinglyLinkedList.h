@@ -20,6 +20,22 @@ public:
 	SinglyLinkedList(const SinglyLinkedList& list)
 	{
 		// TODO: 연결 리스트 복사
+		Node *new_node = new Node;
+		first_ = new_node;
+		first_->item = list.first_->item;
+
+		Node *temp = list.first_->next;
+		while(temp)
+		{
+			Node *new_temp = new Node;
+			new_node->next = new_temp;
+			new_temp->item = temp->item;
+			new_node = new_temp;
+
+			temp = temp->next;
+
+
+		}
 	}
 
 	~SinglyLinkedList()
@@ -89,17 +105,37 @@ public:
 
 		// 연결 관계 정리
 		// TODO:
+		Node *temp = new Node;
+		temp->item = item;
+		temp->next = first_;
+
+		first_ = temp;
+
 	}
 
 	void PushBack(T item)
 	{
+		Node *temp = new Node;
 		if (first_)
 		{
 			// TODO:
+			// find last one
+			Node *current = first_;
+			while(current->next)
+			{
+				current = current->next;
+			}
+
+			current->next = temp;
+
+			temp->item = item;
+			temp->next = nullptr;			
 		}
 		else
 		{
 			// TODO:
+			first_ = temp;
+			first_->item = item;
 		}
 	}
 
@@ -135,7 +171,26 @@ public:
 
 	void Reverse()
 	{
+		using namespace std;
 		// TODO: 
+		Node *prev = nullptr;
+		Node *current = first_;
+
+		while(current)
+		{
+			Node *temp = prev;
+			
+			prev = current;
+			
+			cout << " prev->item " << prev->item << endl;
+		
+			current = current->next;
+
+			prev->next = temp;
+			//temp = prev;
+		}
+
+		first_ = prev;
 	}
 
 	void SetPrintDebug(bool flag)
