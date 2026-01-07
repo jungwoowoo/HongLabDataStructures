@@ -182,6 +182,7 @@ public:
 
 	void PopBack()
 	{
+		using namespace std;
 		if (IsEmpty())
 		{
 			using namespace std;
@@ -190,10 +191,22 @@ public:
 		}
 
 		// 맨 뒤에서 하나 앞의 노드를 찾아야 합니다.
+		Node *current = first_;
+		while(current->next->next)
+		{
+			current = current->next;
+		}
 
 		assert(first_);
+		
+		cout << " prev of last ? " << current->item << endl;
+
+		Node *last_node = current->next;
+		delete last_node;
+		current->next = nullptr;
 
 		// TODO: 메모리 삭제
+		
 	}
 
 	void Reverse()
