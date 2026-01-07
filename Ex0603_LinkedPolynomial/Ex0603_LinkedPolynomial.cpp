@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 #include "../shared/SinglyLinkedList.h"
+#include <math.h> // std::powf()
 
 using namespace std;
 
@@ -17,19 +18,37 @@ public:
 	void NewTerm(float coef, int exp)
 	{
 		// TODO:
+		//Node *temp = new Node;
+		Term *temp_term = new Term;
+
+		temp_term->coef = coef;
+		temp_term->exp = exp;
+		
+		PushBack(*temp_term);
 	}
 
 	float Eval(float x)
 	{
+		using namespace std;
 		float temp = 0.0f;
 
 		// TODO:
+		Node *current = first_;
+		while(current)
+		{
+			Term *term = &(current->item);
+
+			temp += term->coef * ( powf(x , (term->exp) ) );
+
+			current = current->next;
+		}
 
 		return temp;
 	}
 
 	LinkedPolynomial Add(const LinkedPolynomial& poly)
 	{
+		using namespace std;
 		// this와 poly의 terms_가 exp의 오름차순으로 정렬되어 있다고 가정
 		// 하나의 다항식 안에 exp가 중복되는 term이 없다라고 가정 (한 exp는 하나의 term만 존재)
 
@@ -39,15 +58,53 @@ public:
 		Node* j = poly.first_;
 
 		// TODO:
+		cout << " this->size " << this->Size() << endl;
+		cout << " poly->size " << poly.Size() << endl;
 
 		return temp;
 	}
 
 	void Print()
 	{
+		using namespace std;
 		bool is_first = true; // 더하기 출력시 확인용
-
+		int i = 0;
 		// TODO:
+		Node *current = first_;
+		while(current)
+		{
+			Term *temp = &(current->item);
+			// cout << "current coef " << temp->coef << endl;
+			// cout << "current exp " << temp->exp << endl;
+			current = current->next;
+			if( temp->coef != 0.0f )
+			{
+				if (!is_first)
+					cout << " + "; // 첫 항이 아니라면 사이사이에 더하기 출력
+				cout << temp->coef;
+
+				if (i != 0) cout << "*" << "x^" << temp->exp;
+
+				is_first = false;
+			}
+
+			i = i+1;
+		}
+
+		// for (int i = 0; i < capacity_; i++)
+		// {
+		// 	if (coeffs_[i] != 0.0f) // 주의: 0이 아닌 항들만 출력
+		// 	{
+		// 		if (!is_first)
+		// 			cout << " + "; // 첫 항이 아니라면 사이사이에 더하기 출력
+
+		// 		cout << coeffs_[i];
+
+		// 		if (i != 0) cout << "*" << "x^" << i;
+
+		// 		is_first = false;
+		// 	}
+		// }
 
 		cout << endl;
 	}

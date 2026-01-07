@@ -25,6 +25,22 @@ public:
 	SinglyLinkedList(const SinglyLinkedList& list)
 	{
 		// TODO: 연결 리스트 복사
+		Node *new_node = new Node;
+		first_ = new_node;
+		first_->item = list.first_->item;
+
+		Node *temp = list.first_->next;
+		while(temp)
+		{
+			Node *new_temp = new Node;
+			new_node->next = new_temp;
+			new_temp->item = temp->item;
+			new_node = new_temp;
+
+			temp = temp->next;
+
+
+		}
 		//first_ = list.first_;
 		Node *cursor = first_;
 
@@ -55,6 +71,13 @@ public:
 		int size = 0;
 
 		// TODO: size를 하나하나 세어서 반환
+		Node *current = first_;
+
+		while(current)
+		{
+			size++;
+			current=current->next;
+		}
 
 		return size;
 	}
@@ -76,10 +99,12 @@ public:
 	Node* Find(T item)
 	{
 		// TODO: item이 동일한 노드 포인터 반환
-		Node *cursor_node = first_; 
-		while(cursor_node->item!=item)
+		Node *current = first_;
+
+		while(current)
 		{
-			cursor_node = cursor_node->next;
+			if(current->item == item) return current;
+			current = current->next;
 		}
 
 		if(cursor_node) return cursor_node;
@@ -94,22 +119,14 @@ public:
 		cout << item << endl;
 		// param node -> item -> next node of param node
 		// TODO:
-		Node *insert_node = new Node;
-		cout << " &insert_node " << endl;
-		cout <<  &insert_node  << endl;
-		insert_node->item = item;
+		Node *n_node = new Node;
+		n_node->item = item;
 
-		// save next_node_of_param_node
-		Node *next_node_of_param_node = node->next;
+		Node *origin_n_node = node->next;
+		n_node->next = origin_n_node;
+		
+		node->next = n_node;
 
-		cout << " next_node_of_param_node " << endl;
-		cout << next_node_of_param_node->item << endl;
-
-		// param node -> item
-		node->next = insert_node;
-
-		// item -> next node of param node
-		insert_node->next = next_node_of_param_node;
 
 	}
 
@@ -119,74 +136,61 @@ public:
 
 		// 하나 앞의 노드를 찾아야 합니다.
 		// TODO:
-		Node* temp = first_;
-		while(temp)
+		Node *current = first_;
+
+		while(current)
 		{
-			if(temp->next == n) break;
-			temp = temp->next;
+			if(current->next == n) break;
+			current=current->next;
 		}
 
-		temp->next = n->next;
+		current->next = n->next;
+
+		delete n;
 	}
 
 	void PushFront(T item)
 	{
 		// first_가 nullptr인 경우와 아닌 경우 나눠서 생각해보기 (결국은 두 경우를 하나로 합칠 수 있음)
-		{
-			Node* next_node = first_;
-			first_ = new Node;
-			first_->item = item;
-			first_->next = next_node;			
-		}
 
-		// if(first_==nullptr)
-		// {
-		// 	// 새로운 노드 만들기
-		// 	// TODO:
-		// 	first_ = new Node;
-		// 	first_->item = item;
-		// }
-		// else if(first_!=nullptr)
-		// {
-		// 	// 연결 관계 정리
-		// 	// TODO:
-			
-		// 	Node* next_node = first_;
-		// 	first_ = new Node;
-		// 	first_->item = item;
-		// 	first_->next = next_node;
+		// 새로운 노드 만들기
+		// TODO:
 
-		// }
+		// 연결 관계 정리
+		// TODO:
+		Node *temp = new Node;
+		temp->item = item;
+		temp->next = first_;
+
+		first_ = temp;
 
 	}
 
 	void PushBack(T item)
 	{
-		using namespace std;
+		Node *temp = new Node;
 		if (first_)
 		{
 			cout << " push back item " << endl;
 			cout << item << endl; 
 			// TODO:
-			Node *next = new Node;
-			next->item = item;
-
-			// find next==nullptr tail
-			Node *tail = first_;
-
-			while(tail->next!=nullptr)
+			// find last one
+			Node *current = first_;
+			while(current->next)
 			{
-				tail = tail->next;
+				current = current->next;
 			}
-			// connect tail->next = next
-			tail->next = next;
+
+			current->next = temp;
+
+			temp->item = item;
+			temp->next = nullptr;			
 		}
 		else
 		{
 			// TODO:
-			// first_ = new Node;
-			// first_->item = item;
-			PushFront(item);
+			first_ = temp;
+			first_->item = item;
 		}
 	}
 
@@ -218,97 +222,46 @@ public:
 		}
 
 		// 맨 뒤에서 하나 앞의 노드를 찾아야 합니다.
-		Node *temp = first_;
-		while(temp)
+		Node *current = first_;
+		while(current->next->next)
 		{
-			if(temp->next->next==nullptr) break;
-			temp = temp->next;
+			current = current->next;
 		}
 
-		cout << "prev node of last " << temp->item << endl;
-
 		assert(first_);
+		
+		cout << " prev of last ? " << current->item << endl;
+
+		Node *last_node = current->next;
+		delete last_node;
+		current->next = nullptr;
 
 		// TODO: 메모리 삭제
-		delete temp->next;
-		temp->next = nullptr;
-
+		
 	}
 
 	void Reverse()
 	{
 		using namespace std;
-		// TODO:
+		// TODO: 
+		Node *prev = nullptr;
+		Node *current = first_;
 
-		{ //
-
-		  Node *current = first_;
-		  Node *prev = NULL;
-
-		  while(current)
-		  {
-			Node *temp = NULL;
-			temp = prev;
-			prev = current; // 1 2 3 4 5
-
-			current = current->next; // 2 3 4 5 null
-			//cout << " prev->item " << prev->item << endl;
+		while(current)
+		{
+			Node *temp = prev;
 			
+			prev = current;
+			
+			cout << " prev->item " << prev->item << endl;
+		
+			current = current->next;
+
 			prev->next = temp;
-		  }
-
-		  cout << " while end ? prev " << prev->item << endl;
-		  first_ = prev;
-
+			//temp = prev;
 		}
 
-		{ // using std:stack
-		// Node *tail = first_;
-
-	    // stack<Node*> node_stacks;
-		// //Stack<Node*> node_stacks;
-
-		// while(tail!=nullptr)
-		// {
-		// 	cout << " tail -> item" << endl;
-		// 	cout << tail->item << endl;
-			
-		// 	node_stacks.push(tail);
-		// 	tail = tail->next;
-		// }
-
-		// Node *current_cursor = nullptr;
-		// Node *origin_first = first_;
-		// while(!node_stacks.empty())
-		// {
-		// 	current_cursor = node_stacks.top();
-
-		// 	if(current_cursor == origin_first)
-		// 	{
-		// 		cout << " origin_first found and it will be new last " << endl;
-		// 		current_cursor->next = nullptr;
-		// 		cout << current_cursor->item << endl;
-		// 		node_stacks.pop();
-		// 	}
-		// 	else if(current_cursor->next == nullptr)
-		// 	{
-		// 		cout << " last found and it will be new first_ " << endl;
-		// 		first_ = current_cursor;
-		// 		node_stacks.pop();
-
-		// 		cout << " last found and it will be new first_ , and next " << endl;
-		// 		cout << node_stacks.top()->item << endl;
-		// 		first_->next = node_stacks.top();
-		// 	}
-		// 	else
-		// 	{
-		// 		cout << " the others found " << endl;
-		// 		cout << current_cursor->item << endl;
-		// 		node_stacks.pop();
-		// 		current_cursor->next = node_stacks.top();
-		// 	}
-		// }
-		}
+		first_ = prev;
 	}
 
 	void SetPrintDebug(bool flag)
