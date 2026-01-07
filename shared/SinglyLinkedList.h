@@ -79,6 +79,13 @@ public:
 	Node* Find(T item)
 	{
 		// TODO: item이 동일한 노드 포인터 반환
+		Node *current = first_;
+
+		while(current)
+		{
+			if(current->item == item) return current;
+			current = current->next;
+		}
 
 		return nullptr;
 	}
@@ -86,6 +93,15 @@ public:
 	void InsertBack(Node* node, T item)
 	{
 		// TODO:
+		Node *n_node = new Node;
+		n_node->item = item;
+
+		Node *origin_n_node = node->next;
+		n_node->next = origin_n_node;
+		
+		node->next = n_node;
+
+
 	}
 
 	void Remove(Node* n)
@@ -94,6 +110,17 @@ public:
 
 		// 하나 앞의 노드를 찾아야 합니다.
 		// TODO:
+		Node *current = first_;
+
+		while(current)
+		{
+			if(current->next == n) break;
+			current=current->next;
+		}
+
+		current->next = n->next;
+
+		delete n;
 	}
 
 	void PushFront(T item)
