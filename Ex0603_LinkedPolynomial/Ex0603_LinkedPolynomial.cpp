@@ -48,6 +48,7 @@ public:
 
 	LinkedPolynomial Add(const LinkedPolynomial& poly)
 	{
+		using namespace std;
 		// this와 poly의 terms_가 exp의 오름차순으로 정렬되어 있다고 가정
 		// 하나의 다항식 안에 exp가 중복되는 term이 없다라고 가정 (한 exp는 하나의 term만 존재)
 
@@ -57,6 +58,8 @@ public:
 		Node* j = poly.first_;
 
 		// TODO:
+		cout << " this->size " << this->Size() << endl;
+		cout << " poly->size " << poly.Size() << endl;
 
 		return temp;
 	}

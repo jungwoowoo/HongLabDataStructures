@@ -58,6 +58,13 @@ public:
 		int size = 0;
 
 		// TODO: size를 하나하나 세어서 반환
+		Node *current = first_;
+
+		while(current)
+		{
+			size++;
+			current=current->next;
+		}
 
 		return size;
 	}
