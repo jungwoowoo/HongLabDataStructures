@@ -17,14 +17,36 @@ public:
 
 	void NewTerm(float coef, int exp)
 	{
+		using namespace std;
 		// TODO:
-		//Node *temp = new Node;
+
 		Term *temp_term = new Term;
 
 		temp_term->coef = coef;
 		temp_term->exp = exp;
 		
-		PushBack(*temp_term);
+		Node *current = this->first_;
+
+		if(current==nullptr)
+		{
+			PushBack(*temp_term);
+		}
+		else if(current!=nullptr)
+		{
+			while(current)
+			{
+				if(temp_term->exp == current->item.exp)
+				{
+					float new_coef = temp_term->coef + current->item.coef;
+					current->item.coef = new_coef;
+					return;
+				}
+
+				current = current->next;
+			}
+
+			PushBack(*temp_term);
+		}
 	}
 
 	float Eval(float x)
@@ -58,6 +80,20 @@ public:
 		Node* j = poly.first_;
 		
 		// TODO:
+		while(i)
+		{
+			temp.NewTerm(i->item.coef , i->item.exp);
+
+			i = i->next;
+		}
+
+		while(j)
+		{
+			temp.NewTerm(j->item.coef , j->item.exp);
+
+			j = j->next;
+		}			
+		
 		cout << " this->size " << this->Size() << endl;
 		while(i)
 		{
@@ -97,22 +133,6 @@ public:
 
 			i = i+1;
 		}
-
-		// for (int i = 0; i < capacity_; i++)
-		// {
-		// 	if (coeffs_[i] != 0.0f) // 주의: 0이 아닌 항들만 출력
-		// 	{
-		// 		if (!is_first)
-		// 			cout << " + "; // 첫 항이 아니라면 사이사이에 더하기 출력
-
-		// 		cout << coeffs_[i];
-
-		// 		if (i != 0) cout << "*" << "x^" << i;
-
-		// 		is_first = false;
-		// 	}
-		// }
-
 		cout << endl;
 	}
 
@@ -204,3 +224,4 @@ int main()
 
 	return 0;
 }
+
