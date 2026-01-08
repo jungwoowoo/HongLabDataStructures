@@ -56,11 +56,18 @@ public:
 
 		Node* i = this->first_;
 		Node* j = poly.first_;
-
+		
 		// TODO:
 		cout << " this->size " << this->Size() << endl;
-		cout << " poly->size " << poly.Size() << endl;
-
+		while(i)
+		{
+		
+			i=i->next;
+		}
+		while(j)
+		{
+			j=j->next;
+		}
 		return temp;
 	}
 
