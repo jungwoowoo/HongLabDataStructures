@@ -25,28 +25,30 @@ public:
 		temp_term->coef = coef;
 		temp_term->exp = exp;
 		
-		Node *current = this->first_;
+		PushBack(*temp_term);
 
-		if(current==nullptr)
-		{
-			PushBack(*temp_term);
-		}
-		else if(current!=nullptr)
-		{
-			while(current)
-			{
-				if(temp_term->exp == current->item.exp)
-				{
-					float new_coef = temp_term->coef + current->item.coef;
-					current->item.coef = new_coef;
-					return;
-				}
+		// Node *current = this->first_;
 
-				current = current->next;
-			}
+		// if(current==nullptr)
+		// {
+		// 	PushBack(*temp_term);
+		// }
+		// else if(current!=nullptr)
+		// {
+		// 	while(current)
+		// 	{
+		// 		if(temp_term->exp == current->item.exp)
+		// 		{
+		// 			float new_coef = temp_term->coef + current->item.coef;
+		// 			current->item.coef = new_coef;
+		// 			return;
+		// 		}
 
-			PushBack(*temp_term);
-		}
+		// 		current = current->next;
+		// 	}
+
+		// 	PushBack(*temp_term);
+		// }
 	}
 
 	float Eval(float x)
@@ -80,30 +82,43 @@ public:
 		Node* j = poly.first_;
 		
 		// TODO:
-		while(i)
+		while(i&&j)
 		{
-			temp.NewTerm(i->item.coef , i->item.exp);
+			//temp.NewTerm(i->item.coef , i->item.exp);
+				cout << " i->item.exp " << i->item.exp;
+				cout << " j->item.exp " << j->item.exp;
+				cout << endl;
+			if(i->item.exp == j->item.exp)
+			{
+				cout << " i->item.coef " << i->item.coef;
+				cout << " j->item.coef " << j->item.coef;
+				cout << endl;
+				float new_coef = i->item.coef + j->item.coef; 
+				temp.NewTerm(new_coef , i->item.exp);
+			}
+			else if(i->item.exp < j->item.exp)
+			{
+				temp.NewTerm(i->item.coef , i->item.exp);
+				temp.NewTerm(j->item.coef , j->item.exp);
+			} 
+			else if(j->item.exp < i->item.exp)
+			{
+				temp.NewTerm(j->item.coef , j->item.exp);
+				temp.NewTerm(i->item.coef , i->item.exp);
+			} 
 
 			i = i->next;
-		}
-
-		while(j)
-		{
-			temp.NewTerm(j->item.coef , j->item.exp);
-
 			j = j->next;
-		}			
-		
-		cout << " this->size " << this->Size() << endl;
-		while(i)
-		{
-		
-			i=i->next;
 		}
-		while(j)
-		{
-			j=j->next;
-		}
+
+		// while(j)
+		// {
+		// 	temp.NewTerm(j->item.coef , j->item.exp);
+
+		// 	j = j->next;
+		// }			
+		
+
 		return temp;
 	}
 
@@ -127,6 +142,10 @@ public:
 				cout << temp->coef;
 
 				if (i != 0) cout << "*" << "x^" << temp->exp;
+				else
+				{
+					if(temp->exp>0) cout << "*" << "x^" << temp->exp;
+				}
 
 				is_first = false;
 			}
@@ -186,6 +205,8 @@ int main()
 		psum.Print(); // 1 + 2.5*x^1 + 5*x^2 + 5*x^7 + 2*x^11
 
 		cout << endl;
+
+		return 0;
 	}
 
 	// Add() Test2
