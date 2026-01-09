@@ -82,18 +82,11 @@ public:
 		Node* j = poly.first_;
 		
 		// TODO:
-		while(i&&j)
+		while(i!=nullptr && j!=nullptr)
 		{
-			//temp.NewTerm(i->item.coef , i->item.exp);
-				cout << " i->item.exp " << i->item.exp;
-				cout << " j->item.exp " << j->item.exp;
-				cout << endl;
 			if(i->item.exp == j->item.exp)
 			{
-				cout << " i->item.coef " << i->item.coef;
-				cout << " j->item.coef " << j->item.coef;
-				cout << endl;
-				float new_coef = i->item.coef + j->item.coef; 
+				float new_coef = i->item.coef + j->item.coef;
 				temp.NewTerm(new_coef , i->item.exp);
 			}
 			else if(i->item.exp < j->item.exp)
@@ -105,19 +98,57 @@ public:
 			{
 				temp.NewTerm(j->item.coef , j->item.exp);
 				temp.NewTerm(i->item.coef , i->item.exp);
-			} 
+			}
+
+			cout << " i->item.exp " << i->item.exp;
+			cout << " j->item.exp " << j->item.exp;
+			cout << endl;
 
 			i = i->next;
 			j = j->next;
 		}
 
-		// while(j)
-		// {
-		// 	temp.NewTerm(j->item.coef , j->item.exp);
+		Node *temp_k = i ? i : j;
 
-		// 	j = j->next;
-		// }			
-		
+		while(temp_k)
+		{
+			temp.NewTerm(temp_k->item.coef , temp_k->item.exp);
+			temp_k = temp_k->next;
+		}
+
+		Node* t = temp.first_;
+
+		while(t)
+		{
+			// cout << " t->item.exp " << t->item.exp;
+			// cout << " t->item.coef " << t->item.coef;
+			// cout << endl;
+
+			Node* t_sub = temp.first_;
+
+			while(t_sub)
+			{
+				if(t!=t_sub && t->item.exp == t_sub->item.exp)
+				{
+					// cout << " Before remove ";
+					// //cout << " t->item.exp " << t->item.exp;
+					// cout << " t_sub->item.exp " << t_sub->item.exp;
+
+					// //cout << " t->item.coef " << t->item.coef;
+					// cout << " t_sub->item.coef " << t_sub->item.coef;
+					
+					// cout << endl;
+
+					float new_coef = t->item.coef + t_sub->item.coef;
+					t->item.coef = new_coef;
+					temp.Remove(t_sub);					
+				}
+
+				t_sub = t_sub->next;
+			}
+
+			t = t->next;
+		}
 
 		return temp;
 	}
@@ -205,8 +236,6 @@ int main()
 		psum.Print(); // 1 + 2.5*x^1 + 5*x^2 + 5*x^7 + 2*x^11
 
 		cout << endl;
-
-		return 0;
 	}
 
 	// Add() Test2
