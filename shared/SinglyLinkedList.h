@@ -107,8 +107,7 @@ public:
 			current = current->next;
 		}
 
-		if(cursor_node) return cursor_node;
-		else return nullptr;
+		return nullptr;
 	}
 
 	void InsertBack(Node* node, T item)
@@ -171,8 +170,6 @@ public:
 		Node *temp = new Node;
 		if (first_)
 		{
-			cout << " push back item " << endl;
-			cout << item << endl; 
 			// TODO:
 			// find last one
 			Node *current = first_;
