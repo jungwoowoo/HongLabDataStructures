@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <string> // BinaryTree 출력
+#include <math.h>
 
 #include "Queue.h"
 #include "Stack.h"
@@ -71,7 +72,20 @@ public:
 
 	int Sum(Node* node)
 	{
-		return 0; // TODO:
+		// TODO:
+		int sum = 0;
+		//sum += node->item;
+		if(node)
+		{ 
+			sum += node->item;
+			sum += Sum(node->left) + Sum(node->right);
+		}
+		else if(node==nullptr)
+		{
+			return sum;
+		}
+		
+		return sum;
 	}
 
 	int Height()
@@ -81,7 +95,34 @@ public:
 
 	int Height(Node* node)
 	{
-		return 0; // TODO:
+		using namespace std;
+		// TODO:
+		int height = 0;
+		if(node)
+		{
+			//cout << " node->item " << node->item << endl;
+			height = height + 1;
+
+			if(node->left==nullptr && node->right==nullptr) return height;	
+			else if(node->left!=nullptr || node->right!=nullptr)
+			{
+				if(node->left) 
+				{
+					height+=Height(node->left);
+				}
+				else if(node->right)
+				{
+					height+=Height(node->right);
+				}
+			}
+		}
+		else if(node==nullptr)
+		{
+			return height;
+		}
+
+		return height;
+
 	}
 
 	~BinaryTree()
