@@ -100,13 +100,16 @@ public:
 		int height = 0;
 		if(node)
 		{
-			//cout << " node->item " << node->item << endl;
 			height = height + 1;
 
 			if(node->left==nullptr && node->right==nullptr) return height;	
 			else if(node->left!=nullptr || node->right!=nullptr)
-			{
-				if(node->left) 
+			{			
+				if(node->left && node->right)
+				{
+					height+= (Height(node->left) >= Height(node->right)) ? Height(node->left) : Height(node->right);
+				}
+				else if(node->left)
 				{
 					height+=Height(node->left);
 				}
@@ -142,18 +145,53 @@ public:
 	void Preorder(Node* node)
 	{
 		// TODO:
+		if(node)
+		{
+			Visit(node);
+
+			if(node->left) Preorder(node->left);
+			if(node->right) Preorder(node->right);
+		}		
 	};
 
 	void Inorder() { Inorder(root_); }
 	void Inorder(Node* node)
 	{
 		// TODO:
+		if(node)
+		{
+			if(node->left)
+			{
+				Inorder(node->left);
+			}
+
+			Visit(node);
+
+			if(node->right)
+			{
+				Inorder(node->right);
+			}	
+		}
 	}
 
 	void Postorder() { Postorder(root_); }
 	void Postorder(Node* node)
 	{
 		// TODO:
+		if(node)
+		{
+			if(node->left)
+			{
+				Inorder(node->left);
+			}
+
+			if(node->right)
+			{
+				Inorder(node->right);
+			}	
+
+			Visit(node);
+		}		
 	}
 
 	void LevelOrder()

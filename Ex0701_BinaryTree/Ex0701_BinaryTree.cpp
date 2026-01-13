@@ -30,6 +30,11 @@ int main()
 	Node* n1 = new Node{ 1, nullptr, nullptr }; // 물결괄호 초기값 나열 (생성자 아님)
 	Node* n2 = new Node{ 2, n1, nullptr };
 	Node* n3 = new Node{ 3, nullptr, nullptr };
+
+	// Node* n8 = new Node{ 8, nullptr, nullptr };
+	// Node* n7 = new Node{ 7, nullptr, n8 };
+	// Node* n4 = new Node{ 4, nullptr, n7 };
+
 	Node* n4 = new Node{ 4, nullptr, nullptr };
 	Node* n5 = new Node{ 5, nullptr, n4 };
 	Node* n6 = new Node{ 6, n2, n5 };
@@ -53,11 +58,11 @@ int main()
 	tree.Inorder();
 	cout << endl;
 
-	return 0;
-
 	cout << "Postorder" << endl; // 3 1 2 4 5 6
 	tree.Postorder();
 	cout << endl;
+
+	return 0;
 
 	cout << "LevelOrder" << endl; // 6 2 5 1 4 3
 	tree.LevelOrder();
