@@ -177,21 +177,11 @@ public:
 	void Postorder() { Postorder(root_); }
 	void Postorder(Node* node)
 	{
-		// TODO:
-		if(node)
-		{
-			if(node->left)
-			{
-				Inorder(node->left);
-			}
+		// TODO:	
+		if(node->left) Postorder(node->left);
+		if(node->right) Postorder(node->right);
 
-			if(node->right)
-			{
-				Inorder(node->right);
-			}	
-
-			Visit(node);
-		}		
+		Visit(node);
 	}
 
 	void LevelOrder()
