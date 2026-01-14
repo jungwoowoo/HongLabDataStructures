@@ -186,13 +186,58 @@ public:
 
 	void LevelOrder()
 	{
-		Queue<Node*> q; // 힌트: MyQueue q;
-		Node* current = root_;
-		while (current)
-		{
-			Visit(current);
-			// TODO:
-		}
+		Queue<int> q(2); // capacity_ = 2에서 시작 (메모리 증가 확인)
+
+		q.SetDebugFlag(false);
+
+		q.Print();
+
+		//q.Enqueue(root_->left->item);
+		q.Enqueue(1);
+		q.Print();
+
+		//q.Enqueue(root_->right->item);
+		q.Enqueue(2);
+		q.Print();		
+		// using namespace std;
+		// Queue<Node*> q(2); // 힌트: MyQueue q;
+
+		// Node* current = root_;
+
+		// cout << " current->left " << current->left << endl;
+		// q.Enqueue(current->left);
+
+		// cout << " current->right " << current->right << endl;
+		// q.Enqueue(current->right);		
+		// while (current)
+		// {
+		// 	cout << " current " << current->item << endl;
+		// 	//Visit(current);
+		// 	// TODO:
+			
+		// 		cout << " current->left " << current->left << endl;
+		// 		q.Enqueue(current->left);
+
+		// 		cout << " current->right " << current->right << endl;
+		// 		q.Enqueue(current->right);				
+				
+				
+		// 	// if(current->left)
+		// 	// {
+		// 	// 	cout << " current->left " << current->left << endl;
+		// 	// 	q.Enqueue(current->left);
+		// 	// }
+		// 	// if(current->right)
+		// 	// {
+		// 	// 	cout << " current->right " << current->right << endl;
+		// 	// 	q.Enqueue(current->right);
+		// 	// }
+
+		// 	break;
+
+		// 	//Node *temp = q.Front();
+		// 	//current = q.Front();
+		// }
 	}
 
 	void IterPreorder()
