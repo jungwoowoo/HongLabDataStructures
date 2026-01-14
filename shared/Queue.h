@@ -80,9 +80,9 @@ public:
 
 	void Resize() // 2배씩 증가
 	{
-		cout << " entering Resize ?? " << endl;
-		cout << rear_ << endl;
-		cout << front_ << endl;
+		// cout << " entering Resize ?? " << endl;
+		// cout << rear_ << endl;
+		// cout << front_ << endl;
 		//capacity_ = capacity_*2;
 		// 조언
 		// - 새로운 개념이 항상 그렇듯 원형 큐도 처음에는 어렵고 나중에는 당연해집니다.
@@ -95,90 +95,89 @@ public:
 		// (도전) 경우를 나눠서 memcpy()로 블럭 단위로 복사하면 더 효율적입니다.
 
 		// copy one by one in for loop
-		//if(rear_ == front_-1)
-		//{
-			// for(int i=0; i<capacity_; i++)
-			// {
-			// 	cout << " ~ " << queue_[i] << " ~ ";
-			// }			
+		if(rear_ == front_-1)
+		{
+			for(int i=0; i<capacity_; i++)
+			{
+				cout << " ~ " << queue_[i] << " ~ ";
+			}			
 	
-			// cout << "new capacity queue wil be created " << endl;
-			// capacity_ = capacity_*2;
-			// T *temp_queue = new T(capacity_);
+			cout << "new capacity queue wil be created " << endl;
+			capacity_ = capacity_*2;
+			T *temp_queue = new T(capacity_);
 
-			// for(int i=0; i<capacity_; i++)
-			// {
-			// 	//temp_queue[i] = queue_[i];
-			// 	//cout << " ~ " << queue_[i] << " ~ ";
-			// 	if(i>front_ && i<(capacity_/2))
-			// 	{
-			// 		temp_queue[i] = queue_[i];
-			// 		//cout << " # " << temp_queue[i] << " # ";
-			// 	}
-			// 	else if(i>=0 && i<front_)
-			// 	{
-			// 		if(i != front_) temp_queue[i+(capacity_/2)] = queue_[i];
-			// 		//cout << " # " << temp_queue[i] << " # ";
-			// 	}
-			// }
-			// for(int i=0; i<capacity_; i++)
-			// {
-			// 	cout << " # " << temp_queue[i] << " # ";
-			// }
-			// cout << endl;
-			// //queue_ = temp_queue;
-			// memcpy(queue_,temp_queue, capacity_);
+			for(int i=0; i<capacity_; i++)
+			{
+				//temp_queue[i] = queue_[i];
+				//cout << " ~ " << queue_[i] << " ~ ";
+				if(i>front_ && i<(capacity_/2))
+				{
+					temp_queue[i] = queue_[i];
+					//cout << " # " << temp_queue[i] << " # ";
+				}
+				else if(i>=0 && i<front_)
+				{
+					if(i != front_) temp_queue[i+(capacity_/2)] = queue_[i];
+					//cout << " # " << temp_queue[i] << " # ";
+				}
+			}
+			for(int i=0; i<capacity_; i++)
+			{
+				cout << " # " << temp_queue[i] << " # ";
+			}
+			cout << endl;
+			//queue_ = temp_queue;
+			memcpy(queue_,temp_queue, capacity_);
 
-			// rear_ = rear_ + (capacity_/2)-1;
+			rear_ = rear_ + (capacity_/2)-1;
 
-			// this->Print();
-		//}
-		// else
-		// {
-		// 	capacity_ = capacity_*2;
-		// }
+			this->Print();
+		}
+		else
+		{
+			capacity_ = capacity_*2;
+		}
 
 		// using memcpy
 		{
-			if(rear_ == front_-1)
-			{
-				capacity_ = capacity_*2;
-				T* temp_queue = new T(capacity_);
+			// if(rear_ == front_-1)
+			// {
+			// 	capacity_ = capacity_*2;
 
-				//from front to (capacity_/2)-1
-				memcpy(temp_queue + sizeof(T) * (front_+1) , queue_ + sizeof(T) * (front_+1)  , sizeof(T) * ((capacity_/2)-1));
+			// 	T *temp_queue = new T(capacity_);
+				
+			// 	//from front to (capacity_/2)-1
+			// 	memcpy(temp_queue + sizeof(T) * (front_+1) , queue_ + sizeof(T) * (front_+1)  , sizeof(T) * ((capacity_/2)-1));
 
-				//from 0 to rear
-				memcpy(temp_queue + sizeof(T)*(capacity_/2)  , queue_ , sizeof(T) * (rear_+1));
+			// 	//from 0 to rear
+			// 	memcpy(temp_queue + sizeof(T)*(capacity_/2)  , queue_ , sizeof(T) * (rear_+1));
 		
 
-				for(int i=0; i<capacity_; i++)
-				{
-					cout << " # " << temp_queue[i] << " # ";
-				}			
+			// 	for(int i=0; i<capacity_; i++)
+			// 	{
+			// 		cout << " # " << temp_queue[i] << " # ";
+			// 	}			
 
-				queue_ = temp_queue;
+			// 	queue_ = temp_queue;
 
-				rear_ = (capacity_/2) + rear_;
-				
-			}
-			else if(rear_ > front_)
-			{
-				capacity_ = capacity_*2;
-				T* temp_queue = new T(capacity_);
-				memcpy(temp_queue , queue_ , (capacity_/2));
-				queue_ = temp_queue;
-			}
-			// else if(rear_ < front_-1)
-			// {
+			// 	rear_ = (capacity_/2) + rear_;
 				
 			// }
+			// else if(rear_ > front_)
+			// {
+			// 	capacity_ = capacity_*2;
 
+			// 	T *temp_queue = new T(capacity_);
+
+			// 	memcpy(temp_queue , queue_ , (capacity_/2));
+			// 	queue_ = temp_queue;
+			// }
 		}
 	}
 
 	void Enqueue(const T& item) // 맨 뒤에 추가, Push()
 	{
+		//cout << "item " << item->item << endl;
 		if (IsFull())
 			Resize();
 
@@ -191,7 +190,6 @@ public:
 			
 			rear_ = temp_new_rear;
 			new_rear = temp_new_rear;
-			
 		}
 		else if(new_rear < capacity_)
 		{
@@ -199,8 +197,15 @@ public:
 			rear_++;
 		}
 
-		queue_[new_rear] = item;
+		using namespace std;
 
+		cout << " ## new_rear  ## " << new_rear << endl;
+		
+		if( new_rear > 0)
+		{
+			cout << " ## queue_[new_rear-1] ## " << queue_[new_rear-1] << endl;
+		}
+		queue_[new_rear] = item;
 	}
 
 	void Dequeue() // 큐의 첫 요소 삭제, Pop()
