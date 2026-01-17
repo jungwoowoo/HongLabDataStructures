@@ -215,12 +215,21 @@ public:
 	void IterPreorder()
 	{
 		if (!root_) return;
-		Stack<Node*> s; // 힌트: MyStack q;
+		//Stack<Node*> s; // 힌트: MyStack q;
+		MyStack s;
 		s.Push(root_);
 
 		while (!s.IsEmpty())
 		{
 			// TODO:
+			Node *left_temp = s.Top()->left ? s.Top()->left : nullptr;
+			Node *right_temp = s.Top()->right ? s.Top()->right : nullptr;
+
+			Visit(s.Top());
+			s.Pop();
+
+			if(right_temp) s.Push(right_temp);
+			if(left_temp) s.Push(left_temp);
 		}
 	}
 
