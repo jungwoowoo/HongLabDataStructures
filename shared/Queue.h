@@ -104,7 +104,7 @@ public:
 	
 			cout << "new capacity queue wil be created " << endl;
 			capacity_ = capacity_*2;
-			T *temp_queue = new T(capacity_);
+			T *temp_queue = new T[capacity_];
 
 			for(int i=0; i<capacity_; i++)
 			{
@@ -197,14 +197,6 @@ public:
 			rear_++;
 		}
 
-		using namespace std;
-
-		cout << " ## new_rear  ## " << new_rear << endl;
-		
-		if( new_rear > 0)
-		{
-			cout << " ## queue_[new_rear-1] ## " << queue_[new_rear-1] << endl;
-		}
 		queue_[new_rear] = item;
 	}
 

@@ -187,35 +187,34 @@ public:
 	void LevelOrder()
 	{		
 	
-		Queue<Node*> q; // 힌트: MyQueue q;
+		// 힌트: MyQueue q;
+		MyQueue q;
 
 		Node* current = root_;
 		
 		while (current)
 		{
-			cout << " current " << current->item << endl;
-			//Visit(current);
-			// TODO:		
-			if(current->left)
+			if(!q.IsEmpty()) 
 			{
-				cout << " current->left " << current->left << endl;
-				q.Enqueue(current->left);
+				current=q.Front();
+				q.Dequeue();
 			}
-			if(current->right)
+			
+			if(current) 
 			{
-				cout << " current->right " << current->right << endl;
-				q.Enqueue(current->right);
+				Visit(current);
+				// TODO:
+				if(current->left) q.Enqueue(current->left);
+				if(current->right) q.Enqueue(current->right);
+				else if(!current->left && !current->left) q.Enqueue(nullptr);
 			}
 
-			Node *temp = q.Front();
-			current = q.Front();
 		}
 	}
 
 	void IterPreorder()
 	{
 		if (!root_) return;
-
 		Stack<Node*> s; // 힌트: MyStack q;
 		s.Push(root_);
 
