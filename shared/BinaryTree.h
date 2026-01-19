@@ -235,15 +235,40 @@ public:
 
 	void IterInorder()
 	{
+		using namespace std;
+
+		cout << " root_->item " << root_->item << endl;
+
 		if (!root_) return;
 
 		Stack<Node*> s;
 
 		Node* current = root_;
+
 		while (current || !s.IsEmpty())
 		{
+			//cout << "current : " << current << " item : " << current->item << endl;
+			//cout << "current->item : " << current->item << endl;
+
 			// TODO:
+			if(current->left != nullptr)
+			{
+				s.Push(current);
+				current = current->left;
+			}
+			else if(current->left == nullptr)
+			{
+				//Visit(s.Top());
+				if(current->right != nullptr) s.Push(current->right);
+
+				cout << "current : " << current << " item : " << current->item << endl;
+				s.Push(current);
+
+				break;
+			}
 		}
+		s.Print();
+
 	}
 
 	void IterPostorder()
