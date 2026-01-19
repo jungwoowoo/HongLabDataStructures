@@ -275,6 +275,7 @@ public:
 			// 	break;
 			// }
 		}
+		cout << "s.Top() " << s.Top()->item << endl;
 		s.Print();
 
 	}
