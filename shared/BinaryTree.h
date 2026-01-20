@@ -247,35 +247,34 @@ public:
 
 		while (current || !s.IsEmpty())
 		{
-			//cout << "current : " << current << " item : " << current->item << endl;
 			//cout << "current->item : " << current->item << endl;
 
 			// TODO:
 			while(current)
 			{
-				cout << "current : " << current << " item : " << current->item << endl;
-				s.Push(current);
+				if(current) 
+				{
+					// cout << "11111111 current " << current << endl;
+					s.Push(current);
+				}
 				current = current->left;
 			}
 
-			break;
-			// if(current->left != nullptr)
-			// {
-			// 	s.Push(current);
-			// 	current = current->left;
-			// }
-			// else if(current->left == nullptr)
-			// {
-			// 	//Visit(s.Top());
-			// 	if(current->right != nullptr) s.Push(current->right);
+			cout << "1111 s.getTopPos()" << s.getTopPos() << endl;
+			current = s.Top();
+			Visit(s.Top());
+			s.Pop();
 
-			// 	cout << "current : " << current << " item : " << current->item << endl;
-			// 	s.Push(current);
-
-			// 	break;
+			cout << "2222 s.getTopPos()" << s.getTopPos() << endl;
+			// if(current->right)
+			// {
+			// 	cout << "2222222 current->right " << current->right->item << endl;
+			// 	s.Push(current->right);
+			// 	current = current->right;
 			// }
 		}
-		cout << "s.Top() " << s.Top()->item << endl;
+
+		//cout << "s.Top() " << s.Top()->item << endl;
 		s.Print();
 
 	}

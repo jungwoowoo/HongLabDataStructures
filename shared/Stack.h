@@ -79,6 +79,8 @@ public:
 		top_ = top_+1;
 		capacity_ = capacity_+1;
 		// TODO:
+		// using namespace std;
+		// cout << "@Push top_ " << top_ << endl;
 		stack_[top_] = item;
 	}
 
@@ -89,7 +91,9 @@ public:
 		// TODO:
 		delete stack_[top_];
 		top_ = top_-1;
+
 		capacity_ = capacity_-1;
+		
 	}
 
 protected: // 뒤에서 상속해서 사용
