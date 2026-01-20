@@ -252,20 +252,22 @@ public:
 			// TODO:
 			while(current)
 			{
-				if(current) 
-				{
-					cout << "0000 s.getTopPos()" << s.getTopPos() << endl;
-					s.Push(current);
-				}
+				s.Push(current);
 				current = current->left;
 			}
 
-			cout << "1111 s.getTopPos()" << s.getTopPos() << endl;
-			current = s.Top();
+			//cout << "1111 s.getTopPos()" << s.getTopPos() << endl;
+			//current = s.Top();
+			//if(s.Top()==root_) current=s.Top()->right;
+
+			Node *temp = s.Top();
+
 			Visit(s.Top());
 			s.Pop();
 
-			cout << "2222 s.getTopPos()" << s.getTopPos() << endl;
+			if(temp->right) s.Push(temp->right);
+
+			//cout << "2222 s.getTopPos()" << s.getTopPos() << endl;
 			// if(current->right)
 			// {
 			// 	cout << "2222222 current->right " << current->right->item << endl;
@@ -275,7 +277,7 @@ public:
 		}
 
 		//cout << "s.Top() " << s.Top()->item << endl;
-		s.Print();
+		//s.Print();
 
 	}
 
