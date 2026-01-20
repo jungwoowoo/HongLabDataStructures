@@ -254,7 +254,7 @@ public:
 			{
 				if(current) 
 				{
-					// cout << "11111111 current " << current << endl;
+					cout << "0000 s.getTopPos()" << s.getTopPos() << endl;
 					s.Push(current);
 				}
 				current = current->left;
