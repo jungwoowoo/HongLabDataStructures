@@ -15,7 +15,7 @@ public:
 
 	~Stack()
 	{
-		if (stack_) delete[] stack_;
+		//if (stack_) delete[] stack_;
 	}
 
 	void Resize(int new_capacity)
@@ -91,7 +91,6 @@ public:
 		// TODO:
 		delete stack_[top_];
 		top_ = top_-1;
-
 		capacity_ = capacity_-1;
 		
 	}

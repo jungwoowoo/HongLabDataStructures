@@ -283,6 +283,7 @@ public:
 
 	void IterPostorder()
 	{
+		using namespace std;
 		if (!root_) return;
 
 		Stack<Node*> s1, s2;
@@ -290,7 +291,29 @@ public:
 
 		while (!s1.IsEmpty())
 		{
+			cout << "s1.Top()->item " << s1.Top()->item << endl;
 			// TODO:
+
+			//while( (s1.Top()->left || s1.Top()->right) )
+			while( s1.Top()->right )
+			{
+				if(s1.Top()->right)
+				{
+					cout << "1 @when right found " << s1.Top()->item << endl;
+					cout << "2 @when right found " << s1.Top()->right->item << endl;
+					s1.Push(s1.Top()->right);
+				}
+				else if(s1.Top()->left)
+				{
+					// cout << "1 @when left found " << s1.Top() << endl;
+					// cout << "22 @when left found " << s1.Top()->left << endl;
+					s1.Push(s1.Top()->left);
+				}
+				
+			}
+			Visit(s1.Top());
+			//cout << endl;
+			s1.Pop();
 		}
 
 		while (!s2.IsEmpty())
