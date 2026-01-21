@@ -45,7 +45,7 @@ public:
 	int Size() const
 	{
 		//return 0; //TODO:
-		return capacity_;
+		return top_+1;
 	}
 
 	void Print()
@@ -53,7 +53,7 @@ public:
 		using namespace std;
 
 		for (int i = 0; i < Size(); i++) // Size() 사용
-			cout << stack_[i] << " ";
+			cout << i << " => " << stack_[i] << " ";
 		cout << endl;
 	}
 
@@ -74,15 +74,11 @@ public:
 		//using namespace std;
 		//cout << "entering @Push top_ " << top_ << endl;
 		// TODO: 필요하면 리사이즈 
-		// if ( Size() == 0 )
-		// {
-		// 	Resize(1);
-		// }
+		if( top_ == capacity_-1 )
+		{
+			Resize(capacity_*2);
+		}
 		top_ = top_+1;
-		capacity_ = capacity_+1;
-		// TODO:
-		// cout << "@Push item " << item->item << endl;
-		// cout << "@Push top_ " << top_ << endl;
 		stack_[top_] = item;
 	}
 
@@ -91,10 +87,10 @@ public:
 	{	
 		assert(!IsEmpty());
 		// TODO:
-		using namespace std;
-		cout << "@Pop top_ " << top_ << endl;
-		cout << "@Pop stack_[top_] " << stack_[top_]->item << endl;
-		delete stack_[top_];
+		// using namespace std;
+		// cout << "@Pop top_ " << top_ << endl;
+		// cout << "@Pop stack_[top_] " << stack_[top_]->item << endl;
+		//delete stack_[top_];
 		top_ = top_-1;
 		capacity_ = capacity_-1;
 		
