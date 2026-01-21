@@ -291,37 +291,10 @@ public:
 		//cout << "1 s1.Top() " << s1.Top() << endl;		
 
 		s1.Push(root_);
-		s1.Print();
 
 		while (!s1.IsEmpty())
 		{
-			//cout << "s1.Top()->item " << s1.Top()->item << endl;
 			//TODO:
-			while( s1.Top()->left != nullptr )
-			{
-				//s1.Print();
-				//cout << "1 @when right found " << s1.Top()->item << endl;
-				//cout << "2 @when right found " << s1.Top()->right->item << endl;
-				
-				//if(s1.Top()->right)
-				{
-
-					s1.Push(s1.Top()->left);
-				}
-				// else if(s1.Top()->left)
-				// {
-				// 	// cout << "1 @when left found " << s1.Top() << endl;
-				// 	// cout << "22 @when left found " << s1.Top()->left << endl;
-				// 	s1.Push(s1.Top()->left);
-				// }
-				
-			}
-
-			s1.Print();
-			//Visit(s1.Top());
-			//s1.Pop();
-			//cout << endl;
-			// if(s1.getTopPos()>=0) s1.Pop();
 		}
 
 		while (!s2.IsEmpty())
