@@ -287,33 +287,44 @@ public:
 		if (!root_) return;
 
 		Stack<Node*> s1, s2;
+
+		// s1.Print();
+		// cout << "1 s1.Size() " << s1.Size() << endl;	
+		// cout << "1 s1.getTopPos() " << s1.getTopPos() << endl;
+		// cout << "1 s1.Top() " << s1.Top() << endl;		
+
 		s1.Push(root_);
+		s1.Print();
+		cout << "2 s1.Size() " << s1.Size() << endl;
+		cout << "2 s1.getTopPos() " << s1.getTopPos() << endl;
+		cout << "2 s1.Top() " << s1.Top()->item << endl;
 
 		while (!s1.IsEmpty())
 		{
-			cout << "s1.Top()->item " << s1.Top()->item << endl;
+			//cout << "s1.Top()->item " << s1.Top()->item << endl;
 			// TODO:
-
-			//while( (s1.Top()->left || s1.Top()->right) )
-			while( s1.Top()->right )
+			while( s1.Top()->right != nullptr )
 			{
-				if(s1.Top()->right)
+				//s1.Print();
+				//cout << "1 @when right found " << s1.Top()->item << endl;
+				//cout << "2 @when right found " << s1.Top()->right->item << endl;
+				
+				//if(s1.Top()->right)
 				{
-					cout << "1 @when right found " << s1.Top()->item << endl;
-					cout << "2 @when right found " << s1.Top()->right->item << endl;
+
 					s1.Push(s1.Top()->right);
 				}
-				else if(s1.Top()->left)
-				{
-					// cout << "1 @when left found " << s1.Top() << endl;
-					// cout << "22 @when left found " << s1.Top()->left << endl;
-					s1.Push(s1.Top()->left);
-				}
+				// else if(s1.Top()->left)
+				// {
+				// 	// cout << "1 @when left found " << s1.Top() << endl;
+				// 	// cout << "22 @when left found " << s1.Top()->left << endl;
+				// 	s1.Push(s1.Top()->left);
+				// }
 				
 			}
-			Visit(s1.Top());
+			//Visit(s1.Top());
 			//cout << endl;
-			s1.Pop();
+			if(s1.getTopPos()>=0) s1.Pop();
 		}
 
 		while (!s2.IsEmpty())

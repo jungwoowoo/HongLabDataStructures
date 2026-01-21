@@ -15,7 +15,7 @@ public:
 
 	~Stack()
 	{
-		//if (stack_) delete[] stack_;
+		if (stack_) delete[] stack_;
 	}
 
 	void Resize(int new_capacity)
@@ -29,13 +29,13 @@ public:
 
 	bool IsEmpty() const
 	{
-		using namespace std;
 		//return false; // TODO:
-		bool empty_bool = false;//int(stack_[top_]) > 0;
+		//bool empty_bool = false;//int(stack_[top_]) > 0;
+		bool empty_bool = false;
 		// cout << boolalpha;
 		// cout << " int(stack_[top_]) ? " << int(stack_[top_]) << endl;
 		// cout << " empty_bool ? " << empty_bool << endl;
-		if(top_ > 0) empty_bool = false;
+		if(top_ >= 0) empty_bool = false;
 		else if(top_==-1) empty_bool = true;
 
 		return empty_bool;
@@ -71,24 +71,29 @@ public:
 	// Insert item into the TOP of the stack
 	void Push(const T& item)
 	{
+		//using namespace std;
+		//cout << "entering @Push top_ " << top_ << endl;
 		// TODO: 필요하면 리사이즈 
-		if ( Size() == 0 )
-		{
-			Resize(1);
-		}
+		// if ( Size() == 0 )
+		// {
+		// 	Resize(1);
+		// }
 		top_ = top_+1;
 		capacity_ = capacity_+1;
 		// TODO:
-		// using namespace std;
+		// cout << "@Push item " << item->item << endl;
 		// cout << "@Push top_ " << top_ << endl;
 		stack_[top_] = item;
 	}
 
 	// Delete the TOP element of the stack
 	void Pop()
-	{
+	{	
 		assert(!IsEmpty());
 		// TODO:
+		using namespace std;
+		cout << "@Pop top_ " << top_ << endl;
+		cout << "@Pop stack_[top_] " << stack_[top_]->item << endl;
 		delete stack_[top_];
 		top_ = top_-1;
 		capacity_ = capacity_-1;
