@@ -90,7 +90,7 @@ public:
 		// using namespace std;
 		// cout << "@Pop top_ " << top_ << endl;
 		// cout << "@Pop stack_[top_] " << stack_[top_]->item << endl;
-		//delete stack_[top_];
+		delete stack_[top_];
 		top_ = top_-1;
 		capacity_ = capacity_-1;
 		
