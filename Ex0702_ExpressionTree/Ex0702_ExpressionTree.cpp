@@ -35,7 +35,7 @@ public:
 		cout << " node->item " << node->item << endl;
 		// TODO: 트리에 저장된 수식의 결과값을 계산
 		int result = 0;
-		if(!node) return result;
+		if(!node->left && !node->right) return result;
 		else
 		{
 			//cout << " node->item " << node->item << endl;
