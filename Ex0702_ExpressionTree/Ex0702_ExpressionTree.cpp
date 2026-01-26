@@ -45,7 +45,14 @@ public:
 				else if(!IsDigit(node->left->item)) Evaluate(node->left);
 			}
 
-			if(node) Evaluate(node);
+			if(node) 
+			{
+				if(IsDigit(node->item)) Evaluate(node);
+				else if(!IsDigit(node->item))
+				{
+					
+				}
+			}
 
 			if(node->right)
 			{
