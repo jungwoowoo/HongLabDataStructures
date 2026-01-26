@@ -70,11 +70,9 @@ int main()
 	// tree.IterPreorder();
 	// cout << endl;
 
-	cout << "Iterative Inorder" << endl; // 1 3 2 6 5 4
-	tree.IterInorder();
-	cout << endl;
-
-	return 0;
+	// cout << "Iterative Inorder" << endl; // 1 3 2 6 5 4
+	// tree.IterInorder();
+	// cout << endl;
 
 	cout << "Iterative Postorder" << endl; // 3 1 2 4 5 6
 	tree.IterPostorder();
