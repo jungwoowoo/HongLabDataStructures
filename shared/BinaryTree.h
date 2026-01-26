@@ -288,19 +288,49 @@ public:
 
 		Stack<Node*> s1, s2;
 
-		//cout << "1 s1.Top() " << s1.Top() << endl;		
-
 		s1.Push(root_);
 
 		while (!s1.IsEmpty())
 		{
 			//TODO:
+			while(s1.Top()->right)
+			{
+				if(s1.Top()==root_ && s1.Top()->left) s2.Push(s1.Top()->left);
+				else if(s1.Top()!=root_ && s1.Top()->left) s1.Push(s1.Top()->left);
+				s1.Push(s1.Top()->right);
+			}
+			break;
 		}
 
 		while (!s2.IsEmpty())
 		{
 			// TODO:
-		}
+			while(s2.Top()->left)
+			{
+				if(s2.Top()->left) s2.Push(s2.Top()->left);
+				if(s2.Top()->right) s2.Push(s2.Top()->right);
+			}
+
+			while(!s2.IsEmpty())
+			{
+				Visit(s2.Top());
+				s2.Pop();
+			}
+
+			while(!s1.IsEmpty())
+			{
+				Visit(s1.Top());
+				s1.Pop();
+			}			
+		}		
+
+		
+
+		// while(s1.Top())
+		// {
+		// 	Visit(s1.Top());
+		// 	s1.Pop();
+		// }
 	}
 
 	void Print2D();
