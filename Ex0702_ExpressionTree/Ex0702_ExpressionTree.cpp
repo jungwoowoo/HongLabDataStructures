@@ -31,7 +31,29 @@ public:
 
 	int Evaluate(Node* node)
 	{
+		using namespace std;
+		cout << " node->item " << node->item << endl;
 		// TODO: 트리에 저장된 수식의 결과값을 계산
+		int result = 0;
+		if(!node) return result;
+		else
+		{
+			//cout << " node->item " << node->item << endl;
+			if(node->left)
+			{
+				if(IsDigit(node->left->item)) Evaluate(node->left);
+				else if(!IsDigit(node->left->item)) Evaluate(node->left);
+			}
+
+			if(node) Evaluate(node);
+
+			if(node->right)
+			{
+				if(IsDigit(node->right->item)) Evaluate(node->right);
+				else if(!IsDigit(node->right->item)) Evaluate(node->right);
+			}
+		}
+
 		return 0;
 	}
 
@@ -122,6 +144,7 @@ int main()
 
 	// 수식 트리에 저장되어 있는 수식을 실제로 계산해서 그 결과를 출력합니다.
 	cout << "Evaluated = " << tree.Evaluate() << endl; // Evaluated = 9
+	return 0;
 
 	// 수식 트리에 저장되어 있는 수식을 Infix 방식으로 출력합니다.
 	cout << "  Infix: ";
