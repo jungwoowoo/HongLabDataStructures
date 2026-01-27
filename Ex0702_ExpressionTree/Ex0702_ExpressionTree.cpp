@@ -32,36 +32,67 @@ public:
 	int Evaluate(Node* node)
 	{
 		using namespace std;
-		cout << " node->item " << node->item << endl;
+		
+		//cout << " node->item " << node->item << endl;
 		// TODO: 트리에 저장된 수식의 결과값을 계산
 		int result = 0;
-		if(!node->left && !node->right) return result;
+		if(!node->left && !node->right)
+		{
+			//cout << " when digit ? " << int(node->item)-int('0') << endl;
+			return int(node->item)-int('0');
+		}
 		else
 		{
 			//cout << " node->item " << node->item << endl;
 			if(node->left)
 			{
-				if(IsDigit(node->left->item)) Evaluate(node->left);
+				if(IsDigit(node->left->item))
+				{
+					//cout << " left node->left->item ? " <<  node->left->item << endl;
+					//Evaluate(node->left);
+				}
 				else if(!IsDigit(node->left->item)) Evaluate(node->left);
 			}
 
 			if(node) 
 			{
-				if(IsDigit(node->item)) Evaluate(node);
+				if(IsDigit(node->item)) 
+				{
+					// cout << " center node->item ? " <<  node->item << endl;
+					Evaluate(node);
+				}
 				else if(!IsDigit(node->item))
 				{
-					
+					if(node->item=='-')
+					{
+						result = Evaluate(node->left) - Evaluate(node->right);
+						return result;
+					}
+					else if(node->item=='*')
+					{
+						result = Evaluate(node->left) * Evaluate(node->right);
+						return result;
+					}
+					else if(node->item=='+')
+					{
+						result = Evaluate(node->left) + Evaluate(node->right);
+						return result;
+					}					
 				}
 			}
 
 			if(node->right)
 			{
-				if(IsDigit(node->right->item)) Evaluate(node->right);
+				if(IsDigit(node->right->item))
+				{
+					//cout << " right node->right->item ? " <<  node->right->item << endl;
+					//Evaluate(node->right);
+				}
 				else if(!IsDigit(node->right->item)) Evaluate(node->right);
 			}
 		}
 
-		return 0;
+		return result;
 	}
 
 	void Infix() { Infix(root_); cout << endl; }
@@ -151,6 +182,7 @@ int main()
 
 	// 수식 트리에 저장되어 있는 수식을 실제로 계산해서 그 결과를 출력합니다.
 	cout << "Evaluated = " << tree.Evaluate() << endl; // Evaluated = 9
+
 	return 0;
 
 	// 수식 트리에 저장되어 있는 수식을 Infix 방식으로 출력합니다.
