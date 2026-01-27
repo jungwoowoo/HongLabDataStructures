@@ -161,26 +161,28 @@ public:
 		cout << "Postfix: ";
 		postfix.Print();
 
+		// Postfix : 5 3 2 - 4 * +
+
 		// Postfix -> Expression tree
 
-		// Stack<Node*> s;
+		Stack<Node*> s;
 
-		// while (!postfix.IsEmpty())
-		// {
-		// 	char c = postfix.Front();
-		// 	postfix.Dequeue();
+		while (!postfix.IsEmpty())
+		{
+			char c = postfix.Front();
+			postfix.Dequeue();
 
-		// 	if (c >= '0' && c <= '9')
-		// 	{
-		// 		// TODO:
-		// 	}
-		// 	else
-		// 	{
-		// 		// TODO:
-		// 	}
-		// }
+			if (c >= '0' && c <= '9')
+			{
+				// TODO:
+			}
+			else
+			{
+				// TODO:
+			}
+		}
 
-		// root_ = s.Top();
+		root_ = s.Top();
 	}
 };
 
@@ -246,7 +248,7 @@ int main()
 		tree.Print2D();
 
 		// 수식 트리에 저장되어 있는 수식을 실제로 계산해서 그 결과를 출력합니다.
-		//cout << "Evaluated = " << tree.Evaluate() << endl; // Evaluated = 9
+		cout << "Evaluated = " << tree.Evaluate() << endl; // Evaluated = 9
 	}
 
 	return 0;
