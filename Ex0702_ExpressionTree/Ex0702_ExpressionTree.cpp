@@ -48,8 +48,7 @@ public:
 			{
 				if(IsDigit(node->left->item))
 				{
-					//cout << " left node->left->item ? " <<  node->left->item << endl;
-					//Evaluate(node->left);
+
 				}
 				else if(!IsDigit(node->left->item)) Evaluate(node->left);
 			}
@@ -85,8 +84,7 @@ public:
 			{
 				if(IsDigit(node->right->item))
 				{
-					//cout << " right node->right->item ? " <<  node->right->item << endl;
-					//Evaluate(node->right);
+
 				}
 				else if(!IsDigit(node->right->item)) Evaluate(node->right);
 			}
@@ -97,12 +95,55 @@ public:
 
 	void Infix() { Infix(root_); cout << endl; }
 	void Infix(Node* node) {
+		using namespace std;
 		// TODO: 수식을 Infix 형식으로 출력 (괄호 포함)
+
+		if(node)
+		{
+			if(node->left)
+			{
+				if(IsDigit(node->left->item))
+				{
+					//Infix(node->left);
+				}
+				else if(!IsDigit(node->left->item))
+				{
+					//cout << node->left->item << flush;
+					Infix(node->left);
+				}
+			}
+
+			if(!IsDigit(node->item))
+			{
+				if(IsDigit(node->left->item)) cout << "(" << node->left->item << flush;
+				cout << node->item << flush;
+				if(IsDigit(node->right->item)) cout << node->right->item << ")" << flush;
+
+				//Infix(node);
+			}
+
+			if(node->right)
+			{
+				if(IsDigit(node->right->item))
+				{
+					//cout << node->right->item << ")" << flush;
+					//Infix(node->right);
+				}
+				else if(!IsDigit(node->right->item))
+				{
+					//cout << node->right->item << flush;
+					Infix(node->right);
+				}
+			}			
+		}
+
+		// cout << " node->item " << node->item << endl;
 	}
 
 	void Postfix() { Postfix(root_);  cout << endl; }
 	void Postfix(Node* node) {
 		// TODO: 수식을 Postfix 형식으로 출력
+		Postorder(node);
 	}
 
 	// Infix -> postfix -> expression tree
@@ -183,8 +224,6 @@ int main()
 	// 수식 트리에 저장되어 있는 수식을 실제로 계산해서 그 결과를 출력합니다.
 	cout << "Evaluated = " << tree.Evaluate() << endl; // Evaluated = 9
 
-	return 0;
-
 	// 수식 트리에 저장되어 있는 수식을 Infix 방식으로 출력합니다.
 	cout << "  Infix: ";
 	tree.Infix();   // (5+((3-2)*4)) <- 출력 예시
@@ -194,6 +233,8 @@ int main()
 	tree.Postfix(); // 532-4*+ <- 출력 예시
 
 	cout << endl;
+
+	return 0;
 
 	// Infix -> Postfix -> Expression Tree
 	{
