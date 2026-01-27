@@ -170,19 +170,23 @@ public:
 		while (!postfix.IsEmpty())
 		{
 			char c = postfix.Front();
+
 			postfix.Dequeue();
 
 			if (c >= '0' && c <= '9')
 			{
 				// TODO:
+				Node *temp = new Node{c, nullptr, nullptr};
+				s.Push(temp);
 			}
 			else
 			{
 				// TODO:
+				Node *temp2 = s.Top();
 			}
 		}
 
-		root_ = s.Top();
+		//root_ = s.Top();
 	}
 };
 
