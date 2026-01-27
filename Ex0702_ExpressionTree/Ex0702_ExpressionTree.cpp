@@ -144,6 +144,7 @@ public:
 	void Postfix(Node* node) {
 		// TODO: 수식을 Postfix 형식으로 출력
 		Postorder(node);
+		
 	}
 
 	// Infix -> postfix -> expression tree
@@ -162,24 +163,24 @@ public:
 
 		// Postfix -> Expression tree
 
-		Stack<Node*> s;
+		// Stack<Node*> s;
 
-		while (!postfix.IsEmpty())
-		{
-			char c = postfix.Front();
-			postfix.Dequeue();
+		// while (!postfix.IsEmpty())
+		// {
+		// 	char c = postfix.Front();
+		// 	postfix.Dequeue();
 
-			if (c >= '0' && c <= '9')
-			{
-				// TODO:
-			}
-			else
-			{
-				// TODO:
-			}
-		}
+		// 	if (c >= '0' && c <= '9')
+		// 	{
+		// 		// TODO:
+		// 	}
+		// 	else
+		// 	{
+		// 		// TODO:
+		// 	}
+		// }
 
-		root_ = s.Top();
+		// root_ = s.Top();
 	}
 };
 
@@ -234,8 +235,6 @@ int main()
 
 	cout << endl;
 
-	return 0;
-
 	// Infix -> Postfix -> Expression Tree
 	{
 		// const char infix[] = "1+(1*2+3)*4";
@@ -247,7 +246,7 @@ int main()
 		tree.Print2D();
 
 		// 수식 트리에 저장되어 있는 수식을 실제로 계산해서 그 결과를 출력합니다.
-		cout << "Evaluated = " << tree.Evaluate() << endl; // Evaluated = 9
+		//cout << "Evaluated = " << tree.Evaluate() << endl; // Evaluated = 9
 	}
 
 	return 0;
@@ -304,11 +303,11 @@ void InfixToPostfix(Queue<char>& q, Queue<char>& output)
 			s.Push(c);
 		}
 
-		//cout << "Stack: ";
-		//s.Print();
-		//cout << "Output:";
-		//output.Print();
-		//cout << endl;
+		cout << "Stack: ";
+		s.Print();
+		cout << "Output:";
+		output.Print();
+		cout << endl;
 	}
 
 	// 스택에 남아있는 것들을 모두 추가
