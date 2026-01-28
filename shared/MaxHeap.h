@@ -3,6 +3,7 @@
 #include <cassert>
 #include <iostream>
 #include <iomanip>
+#include <cstring>
 
 template<typename T>
 class MaxHeap
@@ -52,7 +53,7 @@ public:
 
 	void Push(const T& item)
 	{
-		//using namespace std;
+		using namespace std;
 		//cout << "Push " << item << endl;
 
 		if (size_ == capacity_)
@@ -60,14 +61,20 @@ public:
 
 		// 삽입: 일단 맨 마지막에 삽입한 후에 부모 노드로 올린다.
 
-		size_ += 1;
+		size_ += 1; // 0번 인덱스가 아닌 1번 인덱스부터 ?
 		int current = size_; // 마지막에 추가가될 위치 (인덱스)
 
-		while (current != 1 /* && TODO */) // 부모 위치의 값이 추가하려는 값보다 작다면
+		while (current != 1 && heap_[int(current/2)] < item/* && TODO */) // 부모 위치의 값이 추가하려는 값보다 작다면
 		{
 			// 부모 위치의 값을 자식 위치로 복사해서 내린다.
 			// TODO:
+			int parent_current = int(current/2);
+			int parent_value = heap_[parent_current];
+			cout << "parent_value " << parent_value << endl;
 
+			heap_[current] = parent_value;
+
+			current = parent_current;
 			//cout << "Current = " << current << endl;
 			//Print();
 
