@@ -150,6 +150,7 @@ public:
 	// Infix -> postfix -> expression tree
 	ExpressionTree(const char* infix)
 	{
+		using namespace std;
 		// Infix -> Postfix (예제 재사용)
 		Queue<char> q;
 		for (int i = 0; infix[i] != '\0'; i++)
@@ -162,6 +163,26 @@ public:
 		postfix.Print();
 
 		// Postfix : 5 3 2 - 4 * +
+
+	// Node* n1 = new Node{ '5', nullptr, nullptr };
+	// Node* n2 = new Node{ '+', nullptr, nullptr };
+	// Node* n3 = new Node{ '3', nullptr, nullptr };
+	// Node* n4 = new Node{ '-', nullptr, nullptr };
+	// Node* n5 = new Node{ '2', nullptr, nullptr };
+	// Node* n6 = new Node{ '*', nullptr, nullptr };
+	// Node* n7 = new Node{ '4', nullptr, nullptr };
+
+		// +
+		// n2->left = n1; // 5
+		// n2->right = n6; // *
+
+		// // *
+		// n6->left = n4; // -
+		// n6->right = n7; // 4
+
+		// // -
+		// n4->left = n3; // 3
+		// n4->right = n5; // 2
 
 		// Postfix -> Expression tree
 
@@ -176,14 +197,23 @@ public:
 			if (c >= '0' && c <= '9')
 			{
 				// TODO:
-				// Node *temp = new Node{c, nullptr, nullptr};
-				// s.Push(temp);
+				Node *temp = new Node{c, nullptr, nullptr};
+				s.Push(temp);
 			}
 			else
 			{
-				// TODO:
-				//Node *temp2 = s.Top();
+				cout << "current c ?" << c << endl;
+
 				Node *temp = new Node{c, nullptr, nullptr};
+
+				Node *temp_right = s.Top();
+				s.Pop();
+				Node *temp_left = s.Top();
+				s.Pop();
+				
+				temp->right = temp_right;
+				temp->left = temp_left;
+				
 				s.Push(temp);
 			}
 		}
@@ -206,29 +236,29 @@ int main()
 	//	  / \
 	//	 3   2
 
-	// Node* n1 = new Node{ '5', nullptr, nullptr };
-	// Node* n2 = new Node{ '+', nullptr, nullptr };
-	// Node* n3 = new Node{ '3', nullptr, nullptr };
-	// Node* n4 = new Node{ '-', nullptr, nullptr };
-	// Node* n5 = new Node{ '2', nullptr, nullptr };
-	// Node* n6 = new Node{ '*', nullptr, nullptr };
-	// Node* n7 = new Node{ '4', nullptr, nullptr };
+	Node* n1 = new Node{ '5', nullptr, nullptr };
+	Node* n2 = new Node{ '+', nullptr, nullptr };
+	Node* n3 = new Node{ '3', nullptr, nullptr };
+	Node* n4 = new Node{ '-', nullptr, nullptr };
+	Node* n5 = new Node{ '2', nullptr, nullptr };
+	Node* n6 = new Node{ '*', nullptr, nullptr };
+	Node* n7 = new Node{ '4', nullptr, nullptr };
 
-	// // +
-	// n2->left = n1; // 5
-	// n2->right = n6; // *
+	// +
+	n2->left = n1; // 5
+	n2->right = n6; // *
 
-	// // *
-	// n6->left = n4; // -
-	// n6->right = n7; // 4
+	// *
+	n6->left = n4; // -
+	n6->right = n7; // 4
 
-	// // -
-	// n4->left = n3; // 3
-	// n4->right = n5; // 2
+	// -
+	n4->left = n3; // 3
+	n4->right = n5; // 2
 
-	// ExpressionTree tree(n2);
+	ExpressionTree tree(n2);
 
-	// tree.Print2D();
+	tree.Print2D();
 
 	// // 수식 트리에 저장되어 있는 수식을 실제로 계산해서 그 결과를 출력합니다.
 	// cout << "Evaluated = " << tree.Evaluate() << endl; // Evaluated = 9
