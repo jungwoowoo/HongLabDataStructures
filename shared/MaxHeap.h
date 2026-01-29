@@ -120,7 +120,7 @@ public:
 			cout << " greater child item ! " << heap_[child_index] << endl;
 			cout << " greater child index ! " << child_index << endl;
 			// 마지막 값이 더 큰 자식의 값 이상이면 더이상 적절한 위치를 찾을 필요가 없기 때문에 루프 중단
-			// 마지막 값이 max heap 의 루트 노드로?
+			
 			// TODO:
 			if(last_item >= heap_[child_index]) break;
 
