@@ -69,8 +69,8 @@ public:
 			// 부모 위치의 값을 자식 위치로 복사해서 내린다.
 			// TODO:
 			int parent_current = int(current/2);
-			int parent_value = heap_[parent_current];
-			cout << "parent_value " << parent_value << endl;
+			T parent_value = heap_[parent_current];
+			//cout << "parent_value " << parent_value << endl;
 
 			heap_[current] = parent_value;
 
@@ -89,7 +89,7 @@ public:
 		assert(!IsEmpty());
 
 		using namespace std;
-		cout << "Pop()" << endl;
+		//cout << "Pop()" << endl;
 
 		// heap[1].~T(); // 소멸자 호출 
 
@@ -97,7 +97,7 @@ public:
 
 		T last_item = heap_[size_]; // 마지막 아이템 (임시변수에) 복사
 		
-		cout << " last_item " << last_item << endl;
+		//cout << " last_item " << last_item << endl;
 
 		size_--;					// 크기 줄이기
 
@@ -117,8 +117,8 @@ public:
 				else if(heap_[left_child_index] < heap_[right_child_index]) child_index = right_child_index;
 			}
 
-			cout << " greater child item ! " << heap_[child_index] << endl;
-			cout << " greater child index ! " << child_index << endl;
+			//cout << " greater child item ! " << heap_[child_index] << endl;
+			//cout << " greater child index ! " << child_index << endl;
 			// 마지막 값이 더 큰 자식의 값 이상이면 더이상 적절한 위치를 찾을 필요가 없기 때문에 루프 중단
 			
 			// TODO:
@@ -128,7 +128,7 @@ public:
 			// TODO:
 			heap_[int(child_index/2)] = heap_[child_index];
 
-			cout << "Current = " << current << ", child = " << child << endl;
+			//cout << "Current = " << current << ", child = " << child << endl;
 			Print();
 
 			// 그 자식 위치로 current 인덱스 변경, child 인덱스도 그 다음 자식 위치로 변경

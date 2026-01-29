@@ -19,14 +19,34 @@ struct Patient
 			return a.severity > b.severity; // 우선순위가 큰 쪽 기준
 	}
 
+	friend bool operator && (const Patient& a, const Patient& b)
+	{
+		if (a.severity && b.severity) return true;
+		else return false;
+	}
+
+	friend bool operator <= (const Patient& a, const Patient& b)
+	{
+		if (a.severity == b.severity) // 우선순위가 같을 때는 시간을 기준으로 다시 판단 (선착순)
+			return a.time >= b.time;   // 숫자로써 time이 작은 것이 먼저 왔다는 의미니까 최종 우선순위가 더 높다.
+		else
+			return a.severity < b.severity; // 우선순위가 큰 쪽 기준
+	}	
+
 	friend bool operator < (const Patient& a, const Patient& b)
 	{
 		return !(a >= b); // 앞의 ! 주의 (operator >= 활용) 
 	}
 
+	friend bool operator > (const Patient& a, const Patient& b)
+	{
+		return !(a <= b); // 앞의 ! 주의 (operator >= 활용) 
+	}	
+
 	friend std::ostream& operator << (std::ostream& os, const Patient& p)
 	{
 		// TODO: 필요하면 구현
+		cout << " patient " << p.name << flush;
 		return os;
 	}
 };
