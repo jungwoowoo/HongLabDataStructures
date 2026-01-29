@@ -88,34 +88,53 @@ public:
 	{
 		assert(!IsEmpty());
 
-		//using namespace std;
-		//cout << "Pop()" << endl;
+		using namespace std;
+		cout << "Pop()" << endl;
 
 		// heap[1].~T(); // 소멸자 호출 
 
 		// 삭제: 가장 마지막 값을 루트로 옮긴 후에 내려 보낸다.
 
-		T last_item = heap_[size_]; // 마지막 아이템 복사
+		T last_item = heap_[size_]; // 마지막 아이템 (임시변수에) 복사
+		
+		cout << " last_item " << last_item << endl;
+
 		size_--;					// 크기 줄이기
 
 		int current = 1;			// 루트 노드에서 시작
-		int child = 2;				// current * 2 (루트의 왼쪽 자식 인덱스)
+		int child = current*2;				// current * 2 (루트의 왼쪽 자식 인덱스)
 		while (child <= size_)
 		{
 			// left, right 중에서 더 큰 자식의 인덱스를 찾는다. 이때 자식이 하나라면 찾을 필요 없음
 			// TODO:
+			int left_child_index = current*2;
+			int right_child_index = (current*2)+1;
+			int child_index = 0;
 
+			if(heap_[left_child_index] && heap_[right_child_index])
+			{
+				if(heap_[left_child_index] > heap_[right_child_index]) child_index = left_child_index;
+				else if(heap_[left_child_index] < heap_[right_child_index]) child_index = right_child_index;
+			}
+
+			cout << " greater child item ! " << heap_[child_index] << endl;
+			cout << " greater child index ! " << child_index << endl;
 			// 마지막 값이 더 큰 자식의 값 이상이면 더이상 적절한 위치를 찾을 필요가 없기 때문에 루프 중단
+			// 마지막 값이 max heap 의 루트 노드로?
 			// TODO:
+			if(last_item >= heap_[child_index]) break;
 
 			// 자식 값을 부모 위치로 복사, 
 			// TODO:
+			heap_[int(child_index/2)] = heap_[child_index];
 
-			//cout << "Current = " << current << ", child = " << child << endl;
-			//Print();
+			cout << "Current = " << current << ", child = " << child << endl;
+			Print();
 
 			// 그 자식 위치로 current 인덱스 변경, child 인덱스도 그 다음 자식 위치로 변경
 			// TODO:
+			current = child_index;
+			child = current*2;
 		}
 
 		heap_[current] = last_item;
