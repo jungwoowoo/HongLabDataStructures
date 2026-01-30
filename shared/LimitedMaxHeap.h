@@ -6,16 +6,17 @@
 #include <cstring>
 
 template<typename T>
-class MaxHeap
+class LimitedMaxHeap
 {
 public:
-	MaxHeap(int cap = 10)
+	LimitedMaxHeap(int cap = 5)
 	{
 		assert(cap > 0);
 
 		capacity_ = cap;
 		size_ = 0;
 		heap_ = new T[capacity_ + 1]; // heap[0]은 비워둡니다.
+		heap_min_ = new T[capacity_ + 1];
 	}
 
 	void Resize(int new_capacity)
@@ -56,9 +57,20 @@ public:
 		using namespace std;
 		//cout << "Push " << item << endl;
 
-		if (size_ == capacity_)
-			Resize(capacity_ * 2);
+		//if(size_ == capacity_) Resize(size_*2);
 
+		if (heap_[1] > item)
+		{
+			return;
+		}
+
+		if (size_ == capacity_ && heap_[1] < item)
+		{
+			cout << "Push when size overflow , new item greater than max " << endl;
+			deleteMin();
+			return;
+		}
+			
 		// 삽입: 일단 맨 마지막에 삽입한 후에 부모 노드로 올린다.
 
 		size_ += 1; // 0번 인덱스가 아닌 1번 인덱스부터 ?
@@ -82,6 +94,21 @@ public:
 		}
 
 		heap_[current] = item; // 최종적으로 결정된 위치에 복사
+	}
+
+	void deleteMin()
+	{
+		assert(!IsEmpty());
+
+		using namespace std;
+
+		int min = 0;
+
+		for(int i=1; i<=size_; i++)
+		{
+			//heap_[i]
+		}
+
 	}
 
 	void Pop()
@@ -142,6 +169,7 @@ public:
 
 private:
 	T* heap_ = nullptr;
+	T* heap_min_ = nullptr;
 	int size_ = 0;
 	int capacity_ = 0;
 };
