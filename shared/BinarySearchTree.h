@@ -99,16 +99,19 @@ public:
 			node = new Node;
 			node->item = item;
 		}
-		else if(root_->item.key > item.key)
+		else if(node->item.key > item.key)
 		{
 			node->left = new Node;
 			node->left->item = item;
 		}
-		else if(root_->item.key < item.key)
+		else if(node->item.key < item.key)
 		{
 			node->right = new Node;
 			node->right->item = item;
 		}
+
+		using namespace std;
+		cout << " when insert new node ? " << node << endl;
 
 		return node;
 	}
