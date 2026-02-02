@@ -14,7 +14,9 @@ public:
 		assert(cap > 0);
 
 		capacity_ = cap;
+		capacity_min_ = cap;
 		size_ = 0;
+		size_min_ = 0;
 		heap_ = new T[capacity_ + 1]; // heap[0]은 비워둡니다.
 		heap_min_ = new T[capacity_ + 1];
 	}
@@ -28,14 +30,42 @@ public:
 		capacity_ = new_capacity;
 	}
 
+	void ResizeMin(int new_capacity)
+	{
+		T* new_heap = new T[new_capacity];
+		memcpy(new_heap, heap_min_, sizeof(T) * (size_min_ + 1)); // +1 주의
+		if (heap_min_) delete[] heap_min_;
+		heap_min_ = new_heap;
+		capacity_min_ = new_capacity;
+	}
+
 	T Top()
 	{
 		return heap_[1]; // 1번 인덱스 자리
 	}
 
+	T TopMin()
+	{
+		return heap_min_[1]; // 1번 인덱스 자리
+	}
+
 	bool IsEmpty()
 	{
 		return size_ == 0;
+	}
+
+	void PrintMin()
+	{
+		using namespace std;
+		cout << "Index: ";
+		for (int i = 1; i <= size_; i++)
+			cout << setw(3) << i;
+		cout << endl;
+
+		cout << "Value: ";
+		for (int i = 1; i <= size_; i++)
+			cout << setw(3) << heap_min_[i];
+		cout << endl << endl;
 	}
 
 	void Print()
@@ -52,9 +82,55 @@ public:
 		cout << endl << endl;
 	}
 
+	void PushMin(const T& item)
+	{
+		using namespace std;
+		//cout << "Push " << item << endl;
+
+		//if(size_min_ == capacity_min_) Resize(size_min_*2);
+
+		// if (heap_min_[1] < item)
+		// {
+		// 	return;
+		// }
+
+		// if (size_ == capacity_ && heap_[1] < item)
+		// {
+		// 	cout << "Push when size overflow , new item greater than max " << endl;
+		// 	deleteMin();
+		// 	return;
+		// }
+			
+		// 삽입: 일단 맨 마지막에 삽입한 후에 부모 노드로 올린다.
+
+		size_min_ += 1; // 0번 인덱스가 아닌 1번 인덱스부터 ?
+		int current = size_min_; // 마지막에 추가가될 위치 (인덱스)
+
+		while (current != 1 && heap_min_[int(current/2)] > item/* && TODO */) // 부모 위치의 값이 추가하려는 값보다 작다면
+		{
+			// 부모 위치의 값을 자식 위치로 복사해서 내린다.
+			// TODO:
+			int parent_current = int(current/2);
+			T parent_value = heap_min_[parent_current];
+			//cout << "parent_value " << parent_value << endl;
+
+			heap_min_[current] = parent_value;
+
+			current = parent_current;
+			//cout << "Current = " << current << endl;
+			//Print();
+
+			// TODO:
+		}
+
+		heap_min_[current] = item; // 최종적으로 결정된 위치에 복사
+	}
+	
+
 	void Push(const T& item)
 	{
 		using namespace std;
+
 		//cout << "Push " << item << endl;
 
 		//if(size_ == capacity_) Resize(size_*2);
@@ -67,8 +143,10 @@ public:
 		if (size_ == capacity_ && heap_[1] < item)
 		{
 			cout << "Push when size overflow , new item greater than max " << endl;
-			deleteMin();
-			return;
+			cout << "Min " << TopMin() << " will be removed !" << endl;
+			deleteMin(TopMin());
+			size_ -= 1;
+			//return;
 		}
 			
 		// 삽입: 일단 맨 마지막에 삽입한 후에 부모 노드로 올린다.
@@ -96,17 +174,24 @@ public:
 		heap_[current] = item; // 최종적으로 결정된 위치에 복사
 	}
 
-	void deleteMin()
+	void deleteMin(T min_item)
 	{
 		assert(!IsEmpty());
 
 		using namespace std;
 
-		int min = 0;
-
+		int current = 1;
 		for(int i=1; i<=size_; i++)
 		{
-			//heap_[i]
+			if(min_item == heap_[i]) current = i;
+		}
+
+		cout << " min item index ! " << current << endl;
+
+		while(current!=1)
+		{
+			heap_[current] = heap_[int(current/2)];
+			current=int(current/2);
 		}
 
 	}
@@ -171,6 +256,8 @@ private:
 	T* heap_ = nullptr;
 	T* heap_min_ = nullptr;
 	int size_ = 0;
+	int size_min_ = 0;
 	int capacity_ = 0;
+	int capacity_min_ = 0;
 };
 

@@ -16,17 +16,28 @@ int main()
 	 */	
 
 	 h.Push(1);
+     h.PushMin(1);
 	 h.Push(2);
+	 h.PushMin(2);
 	 h.Push(3);
+	 h.PushMin(3);
 	 h.Push(4);
+	 h.PushMin(4);
 	 h.Push(5);
+	 h.PushMin(5);
+
+	 h.Print();
 
 	//  h.Push(3);
 	//  cout << h.Top() << endl;  // must be 5
 
 	 // or
 	h.Push(6);
-	cout << h.Top() << endl;  // must be 6
+
+	h.Print();
+
+	//h.PrintMin();
+	// cout << h.Top() << endl;  // must be 6
 
 	//h.Pop();
 
