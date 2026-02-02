@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <cassert>
 #include <iostream>
+#include <math.h>
 
 template<typename K, typename V>
 class BinarySearchTree
@@ -91,9 +92,23 @@ public:
 
 	Node* Insert(Node* node, const Item& item)
 	{
-		// 힌트: RecurGet()
-
+		// 힌트: RecurGet() 
 		// TODO:
+		if(!node)
+		{
+			node = new Node;
+			node->item = item;
+		}
+		else if(root_->item.key > item.key)
+		{
+			node->left = new Node;
+			node->left->item = item;
+		}
+		else if(root_->item.key < item.key)
+		{
+			node->right = new Node;
+			node->right->item = item;
+		}
 
 		return node;
 	}
