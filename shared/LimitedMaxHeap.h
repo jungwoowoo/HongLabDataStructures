@@ -126,7 +126,9 @@ public:
 		heap_min_[current] = item; // 최종적으로 결정된 위치에 복사
 	}
 	
-
+// Index:   1  2  3  4  5
+// Value:   5  5  2  4  3
+	
 	void Push(const T& item)
 	{
 		using namespace std;
@@ -143,12 +145,14 @@ public:
 		if (size_ == capacity_ && heap_[1] < item)
 		{
 			cout << "Push when size overflow , new item greater than max " << endl;
-			cout << "Min " << TopMin() << " will be removed !" << endl;
+			// cout << "Min " << TopMin() << " will be removed !" << endl;
 			deleteMin(TopMin());
-			size_ -= 1;
-			//return;
+
+			heap_[1] = item;
+			//size_ -= 1;
+			return;
 		}
-			
+		
 		// 삽입: 일단 맨 마지막에 삽입한 후에 부모 노드로 올린다.
 
 		size_ += 1; // 0번 인덱스가 아닌 1번 인덱스부터 ?
@@ -160,12 +164,17 @@ public:
 			// TODO:
 			int parent_current = int(current/2);
 			T parent_value = heap_[parent_current];
-			//cout << "parent_value " << parent_value << endl;
 
+			cout << "Current = " << current << endl;
+			cout << "parent_current = " << parent_current << endl;
+
+			cout << "Item = " << item << endl;
+			cout << "parent_value " << parent_value << endl;
+
+			//if( !(parent_value > heap_[current]))
 			heap_[current] = parent_value;
 
 			current = parent_current;
-			//cout << "Current = " << current << endl;
 			//Print();
 
 			// TODO:
@@ -188,12 +197,19 @@ public:
 
 		cout << " min item index ! " << current << endl;
 
+// Index:   1  2  3  4  5
+// Value:   5  4  2  1  3		
+
 		while(current!=1)
 		{
+			//cout << " current while deleteMin " << current << endl;
+			// 최소값 node 의 부모의 값을 자식노드로
 			heap_[current] = heap_[int(current/2)];
 			current=int(current/2);
 		}
 
+// Index:   1  2  3  4  5
+// Value:   5  5  2  4  3
 	}
 
 	void Pop()
@@ -260,4 +276,5 @@ private:
 	int capacity_ = 0;
 	int capacity_min_ = 0;
 };
+
 
