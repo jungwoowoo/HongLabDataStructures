@@ -19,6 +19,7 @@ int main()
 		bst.Print2D();
 	}
 
+	//bst.Print2D();
 	return 0;
 
 	bst.Insert({ 6, 'Z' }); // 키 값이 같으면 덮어쓴다.

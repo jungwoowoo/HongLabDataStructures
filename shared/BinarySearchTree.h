@@ -92,28 +92,44 @@ public:
 
 	Node* Insert(Node* node, const Item& item)
 	{
+		using namespace std;
+
 		// 힌트: RecurGet() 
 		// TODO:
 		if(!node)
 		{
 			node = new Node;
 			node->item = item;
+			return node;
 		}
-		else if(node->item.key > item.key)
+		else if(node)
 		{
-			node->left = new Node;
-			node->left->item = item;
-		}
-		else if(node->item.key < item.key)
-		{
-			node->right = new Node;
-			node->right->item = item;
-		}
+			if(node->item.key > item.key)
+			{
+				Node* new_left = Insert(node->left , item);
+				node->left = new_left;				
+				// if(!node->left)
+				// {
+				// 	Node* new_left = Insert(node->left , item);
+				// 	node->left = new_left;
+				// }
+				// else if(node->left)
+				// {
 
-		using namespace std;
-		cout << " when insert new node ? " << node << endl;
+				// }
+			}
 
-		return node;
+			else if(node->item.key < item.key)
+			{
+				Node* new_right = Insert(node->right , item);
+				node->right = new_right;				
+				// if(!node->right)
+				// {
+				// 	Node* new_right = Insert(node->right , item);
+				// 	node->right = new_right;
+				// }
+			}			
+		}
 	}
 
 	void IterInsert(const Item& item)
