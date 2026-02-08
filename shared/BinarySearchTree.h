@@ -107,7 +107,8 @@ public:
 			if(node->item.key > item.key)
 			{
 				Node* new_left = Insert(node->left , item);
-				node->left = new_left;				
+				node->left = new_left;
+				//return new_left;
 				// if(!node->left)
 				// {
 				// 	Node* new_left = Insert(node->left , item);
@@ -122,13 +123,11 @@ public:
 			else if(node->item.key < item.key)
 			{
 				Node* new_right = Insert(node->right , item);
-				node->right = new_right;				
-				// if(!node->right)
-				// {
-				// 	Node* new_right = Insert(node->right , item);
-				// 	node->right = new_right;
-				// }
-			}			
+				node->right = new_right;
+				//return new_right;
+			}
+
+			return node;
 		}
 	}
 
