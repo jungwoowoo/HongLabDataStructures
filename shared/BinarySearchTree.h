@@ -104,6 +104,7 @@ public:
 		}
 		else if(node)
 		{
+
 			if(node->item.key > item.key)
 			{
 				Node* new_left = Insert(node->left , item);
@@ -124,6 +125,12 @@ public:
 			{
 				Node* new_right = Insert(node->right , item);
 				node->right = new_right;
+				//return new_right;
+			}
+
+			else if(node->item.key == item.key)
+			{
+				node->item = item;
 				//return new_right;
 			}
 
@@ -162,6 +169,8 @@ public:
 		else
 		{
 			// TODO:
+			//node->item.key = 0;
+			node->item.value = 'Z';
 		}
 
 		return node;

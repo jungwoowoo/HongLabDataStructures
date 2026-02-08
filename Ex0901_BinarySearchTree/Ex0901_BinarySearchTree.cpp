@@ -11,7 +11,7 @@ int main()
 	BinarySearchTree<int, char> bst;
 
 	for (int i : { 5, 3, 7, 1, 4, 6, 8 })
-	//for (int i : { 5 })
+	//for (int i : { 5 , 3 })
 	//for (int i : { 9, 8, 7, 6, 5}) // these nodes will be append to just only the left side of this tree.
 	{
 		// bst.Insert({ i, char('A' + i) }); // 참고: C++ 문법에서는 자료형의 이름 Item 생략하고 물결괄호 초기화 가능
@@ -20,7 +20,6 @@ int main()
 	}
 
 	//bst.Print2D();
-	return 0;
 
 	bst.Insert({ 6, 'Z' }); // 키 값이 같으면 덮어쓴다.
 	bst.Print2D();
