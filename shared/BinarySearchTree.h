@@ -109,16 +109,6 @@ public:
 			{
 				Node* new_left = Insert(node->left , item);
 				node->left = new_left;
-				//return new_left;
-				// if(!node->left)
-				// {
-				// 	Node* new_left = Insert(node->left , item);
-				// 	node->left = new_left;
-				// }
-				// else if(node->left)
-				// {
-
-				// }
 			}
 
 			else if(node->item.key < item.key)
@@ -160,6 +150,7 @@ public:
 
 	Node* Remove(Node* node, const K& key)
 	{
+		using namespace std;
 		if (!node) return node;
 
 		if (key < node->item.key)
@@ -169,8 +160,35 @@ public:
 		else
 		{
 			// TODO:
-			//node->item.key = 0;
-			node->item.value = 'Z';
+			// node has two children
+			if(node->left && node->right)
+			{
+				cout << "node has two children Remove target node's key " << node->item.key << endl;
+			}
+
+			// node has one left child
+			else if(node->left)
+			{
+				cout << "node has one left child Remove target node's key " << node->item.key << endl;
+				Item origin_left_item = node->left->item;
+				Node* origin_left = node->left;
+				node = nullptr;
+				origin_left = nullptr;
+				Insert(origin_left_item);
+			}
+
+			// node has one right child
+			else if(node->right)
+			{
+				cout << "node has one right child Remove target node's key " << node->item.key << endl;
+			}
+
+			// node has no  children
+			else
+			{
+				node = nullptr;
+			}
+			
 		}
 
 		return node;
