@@ -169,12 +169,19 @@ public:
 			// node has one left child
 			else if(node->left)
 			{
+				cout << "node has one left child Remove target node's address " << node << endl;
 				cout << "node has one left child Remove target node's key " << node->item.key << endl;
 				Item origin_left_item = node->left->item;
 				Node* origin_left = node->left;
-				node = nullptr;
-				origin_left = nullptr;
-				Insert(origin_left_item);
+				//node = nullptr;
+
+				cout << "node has one left child root_'s address " << root_ << endl;
+
+				cout << "node has one left child origin_left " << origin_left << endl;
+				cout << "node has one left child origin_left_item " << origin_left_item.key << endl;
+				root_->left = origin_left;
+				root_->left->item = origin_left_item;
+				//Insert(origin_left_item);
 			}
 
 			// node has one right child
