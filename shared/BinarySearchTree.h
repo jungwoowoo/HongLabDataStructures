@@ -179,9 +179,10 @@ public:
 
 				cout << "node has one left child origin_left " << origin_left << endl;
 				cout << "node has one left child origin_left_item " << origin_left_item.key << endl;
-				root_->left = origin_left;
-				root_->left->item = origin_left_item;
-				//Insert(origin_left_item);
+				// root_->left = origin_left;
+				// root_->left->item = origin_left_item;
+				Insert(origin_left_item);
+				node = origin_left;
 			}
 
 			// node has one right child
