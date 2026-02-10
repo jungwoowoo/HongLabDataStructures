@@ -59,6 +59,24 @@ public:
 		}
 	}
 
+	K InorderReturnNode(Node* node , bool max)
+	{
+		using namespace std;
+		
+		if (node)
+		{
+			K temp = node->item.key;
+			temp = InorderReturnNode(node->left , true);
+			cout << node->item.key << " ";
+			temp = node->item.key;
+			temp = InorderReturnNode(node->right , true);
+
+			return temp;
+		}
+
+		
+	}	
+
 	Item* RecurGet(const K& key)
 	{
 		return RecurGet(root_, key);
@@ -141,6 +159,14 @@ public:
 		return node;
 	}
 
+	Node* MinKeyLeftParent(Node* node)
+	{
+		assert(node);
+		while (node->left->left)
+			node = node->left;
+		return node;
+	}	
+
 	void Remove(const K& key)
 	{
 		using namespace std;
@@ -164,23 +190,24 @@ public:
 			if(node->left && node->right)
 			{
 				cout << "node has two children Remove target node's key " << node->item.key << endl;
+
+				// K from_left = InorderReturnNode(node->left , true);
+				// cout << " from_left " << from_left << endl;
+
+				cout << " MinKeyLeft(node->right) " << MinKeyLeft(node->right)->item.key << endl;
+
+				Node *temp = MinKeyLeft(node->right);
+				node->item = temp->item;
+				// set temp's parent->left nullptr
+				MinKeyLeftParent(node->right)->left = nullptr;
 			}
 
 			// node has one left child
 			else if(node->left)
 			{
-				cout << "node has one left child Remove target node's address " << node << endl;
-				cout << "node has one left child Remove target node's key " << node->item.key << endl;
 				Item origin_left_item = node->left->item;
 				Node* origin_left = node->left;
-				//node = nullptr;
-
-				cout << "node has one left child root_'s address " << root_ << endl;
-
-				cout << "node has one left child origin_left " << origin_left << endl;
-				cout << "node has one left child origin_left_item " << origin_left_item.key << endl;
-				// root_->left = origin_left;
-				// root_->left->item = origin_left_item;
+			
 				Insert(origin_left_item);
 				node = origin_left;
 			}
@@ -188,7 +215,11 @@ public:
 			// node has one right child
 			else if(node->right)
 			{
-				cout << "node has one right child Remove target node's key " << node->item.key << endl;
+				Item origin_right_item = node->right->item;
+				Node* origin_right = node->right;
+			
+				Insert(origin_right_item);
+				node = origin_right;
 			}
 
 			// node has no  children
