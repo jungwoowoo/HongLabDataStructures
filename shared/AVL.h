@@ -5,21 +5,22 @@
 template<typename K, typename V>
 class AVL : public BinarySearchTree<K, V>
 {
+	typedef BinarySearchTree<K, V> Base;
 public:
-	using Base = BinarySearchTree<K, V>;
-	using Item = BinarySearchTree<K, V>::Item;
-	using Node = BinarySearchTree<K, V>::Node;
+	
+    using typename BinarySearchTree<K, V>::Item;
+    using typename BinarySearchTree<K, V>::Node;
 
-	//struct Item {
-	//	K key = K();	// first
-	//	V value = V();	// second
-	//};
+	// struct Item {
+	// 	K key = K();	// first
+	// 	V value = V();	// second
+	// };
 
-	//struct Node {
-	//	Item item;
-	//	Node* left = nullptr;
-	//	Node* right = nullptr;
-	//};
+	// struct Node {
+	// 	Item item;
+	// 	Node* left = nullptr;
+	// 	Node* right = nullptr;
+	// };
 
 	int Height(Node* node)
 	{
@@ -29,7 +30,7 @@ public:
 	int Balance(Node* node)
 	{
 		if (node)
-			return Base::Height(node->left) - Base::Height(node->right);
+			return this->Height(node->left) - this->Height(node->right);
 		else
 			return 0;
 	}
@@ -153,6 +154,6 @@ public:
 	}
 
 private:
-	Node*& root_ = BinarySearchTree<K, V>::root_;
-	// this->root_로도 사용 가능
+	Node*& root_ = Base::root_;
+    //this->root_로도 사용 가능
 };
