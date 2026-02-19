@@ -38,15 +38,82 @@ public:
 	Node* RotateLeft(Node* parent)
 	{
 		// TODO:
+		using namespace std;
+		// TODO:
+		int balance = Balance(parent) * (-1);
+		Node *center_node = parent;
+		int center_count = int(balance/2);
 
-		return nullptr;
+		int count = 0;
+		while(count!=center_count)
+		{
+			center_node = center_node->right;
+			count++;
+		}
+
+		//cout << "parent->item.key " << parent->item.key << endl;
+
+		if(!center_node->left)
+		{
+			center_node->left = new Node{ parent->item , nullptr , nullptr };
+			swap( parent , center_node );
+		}
+		else if(center_node->left)
+		{
+			Node* temp_parent = parent;
+
+			//cout << "temp_parent->item.key " << temp_parent->item.key << endl;
+
+			// center_node->left->left = new Node{ temp_parent->left->item , nullptr , nullptr };
+			// center_node->left->left->left = new Node{ temp_parent->item , nullptr , nullptr };
+			center_node->left->left = new Node{ temp_parent->item , nullptr , nullptr };
+			center_node->left->left->left = new Node{ temp_parent->left->item , nullptr , nullptr };
+			//center_node->left = center_node->right;
+			swap( parent , center_node );
+		}
+
+		return parent;
 	}
 
 	Node* RotateRight(Node* parent)
 	{
+		using namespace std;
 		// TODO:
+		int balance = Balance(parent);
+		Node *center_node = parent;
+		int center_count = int(balance/2);
 
-		return nullptr;
+		int count = 0;
+		while(count!=center_count)
+		{
+			center_node = center_node->left;
+			count++;
+		}
+
+		// cout << "parent->item.key " << parent->item.key << endl;
+		// cout << "center_node->item.key " << center_node->item.key << endl;
+		// center_node->right = new Node{ node->item , nullptr , nullptr };
+		// swap( node , center_node );
+
+		if(!center_node->right)
+		{
+			center_node->right = new Node{ parent->item , nullptr , nullptr };
+			swap( parent , center_node );
+		}
+		else if(center_node->right)
+		{
+			Node* temp_parent = parent;
+
+			//cout << "temp_parent->item.key " << temp_parent->item.key << endl;
+			//center_node->right->right = new Node{ temp_parent->item , nullptr , nullptr };
+
+			center_node->right->left = new Node{ temp_parent->item , nullptr , nullptr };
+			center_node->right->right = new Node{ temp_parent->right->item , nullptr , nullptr };
+			//center_node->left = center_node->right;
+			swap( parent , center_node );
+		}
+
+		return parent;
 	}
 
 	void Insert(const Item& item)
@@ -56,6 +123,7 @@ public:
 
 	Node* Insert(Node* node, const Item& item)
 	{
+		using namespace std;
 		if (!node)
 			return new Node{ item, nullptr, nullptr };
 
@@ -73,27 +141,51 @@ public:
 
 		int balance = Balance(node);
 
+		//cout << "current node " << node->item.key << " balance " << balance << endl;
+		cout << item.key << " will be inserted " << endl;
+		// cout << " Balance(node->left) " << Balance(node->left) << endl;
+		// cout << " Balance(node->right) " << Balance(node->right) << endl;
+
 		// balance가 0, 1, -1 이면 조절할 필요가 없다고 판단
 
 		// LL -> Right Rotation
-		//if (balance > 1 && Balance(node->left) >= 0)
-		//	TODO:
+		if (balance > 1 && Balance(node->left) >= 0)
+		{
+			//	TODO:
+			cout << " LL -> Right Rotation " << endl;
 
+			node = RotateRight(node);
+			//Insert(Item{ 8 , 'I'});
+		}
+		
 		// RR -> Left Rotation
-		//if (balance < -1 && Balance(node->right) <= 0)
-		//	TODO:
-
+		if (balance < -1 && Balance(node->right) <= 0)
+		{
+			//	TODO:
+			cout << " RR -> Left Rotation " << endl;
+			
+			node = RotateLeft(node);
+		}
+		
 		// LR -> Left-Right Rotation
-		//if (balance > 1 && Balance(node->left) < 0)
-		//{
-		//	TODO:
-		//}
+		if (balance > 1 && Balance(node->left) < 0)
+		{
+			//	TODO:
+			cout << " LR -> Left-Right Rotation " << endl;
+
+			node = RotateLeft(node);
+			node = RotateRight(node);
+		}
 
 		// RL -> Right-Left Rotation
-		//if (balance < -1 && Balance(node->right) > 0)
-		//{
-		//	TODO:
-		//}
+		if (balance < -1 && Balance(node->right) > 0)
+		{
+			//	TODO:
+			cout << " RL -> Right-Left Rotation " << endl;
+			node = RotateRight(node);
+			node = RotateLeft(node);
+			
+		}
 
 		return node;
 	}
