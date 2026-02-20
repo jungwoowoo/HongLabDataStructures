@@ -55,6 +55,17 @@ void InsertionSort(int arr[], int n, int gap) // gap 추가
 		Print(arr, n, i, gap);
 
 		// TODO:
+		cout << " arr[i-gap] " << arr[i-gap] << endl;		
+		cout << " arr[i] " << arr[i] << endl;
+		if(arr[i] < arr[i-gap] && gap>1)
+		{
+			// cout << " arr[i-gap] " << arr[i-gap] << endl;
+			swap(arr[i] , arr[i-gap]);
+		}
+		else if(arr[i] < arr[i-gap] && gap==1)
+		{
+			InsertionSort(arr , n);
+		}
 
 		cout << " After : ";
 		Print(arr, n, i, gap);
