@@ -47,9 +47,16 @@ int Partition(int arr[], int low, int high, int n)
 		{
 			swap(arr[i],arr[j]);
 		}
-		else if( i > (size_t(floorf((high - low) / 2.0f)) + low) && j < (size_t(floorf((high - low) / 2.0f)) + low) && arr[j] )
+		
+		if( i > (size_t(floorf((high - low) / 2.0f)) + low) )
 		{
-			return pivot;
+			int new_pivot_index =  
+			return new_pivot_index;
+		}
+		if( j < (size_t(floorf((high - low) / 2.0f)) + low) )
+		{
+			int new_pivot_index = 
+			return new_pivot_index;
 		}
 		
 		i = i + 1;
