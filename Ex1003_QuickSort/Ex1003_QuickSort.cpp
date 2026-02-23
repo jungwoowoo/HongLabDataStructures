@@ -38,7 +38,22 @@ int Partition(int arr[], int low, int high, int n)
 
 		cout << "pivot=" << pivot << ", i=" << i << ", j=" << j << endl;
 		cout << "         ";
+
 		Print(arr, low, high, n);
+
+		if(	( i<(size_t(floorf((high - low) / 2.0f)) + low) && arr[i] > pivot )
+		&& ( j>(size_t(floorf((high - low) / 2.0f)) + low) && arr[j] < pivot )
+		)
+		{
+			swap(arr[i],arr[j]);
+		}
+		else if( i > (size_t(floorf((high - low) / 2.0f)) + low) && j < (size_t(floorf((high - low) / 2.0f)) + low) && arr[j] )
+		{
+			return pivot;
+		}
+		
+		i = i + 1;
+		j = j - 1;
 	}
 }
 
