@@ -51,66 +51,48 @@ int Partition(int arr[], int low, int high, int n)
 		{
 			i=i+1;
 			//j=j-1;
-		}while( arr[i]<pivot && i > pivot_index );
+		}while( arr[i]<pivot && i < pivot_index );
 		//}while( arr[i]<pivot && arr[j]>pivot );
 
 		do 
 		{
 			j=j-1;
 			//j=j-1;
-		}while( arr[j]>pivot && j < pivot_index+1 );
+		}while( arr[j]>pivot && j > pivot_index+1 );
 
-		if( arr[i] > pivot && arr[j] < pivot ) swap(arr[i],arr[j]);
+			cout << "after pivot=" << pivot << ", i=" << i << ", j=" << j << endl;
+			cout << "pivot_index=" << pivot_index << endl;		
 
-		
+		if( arr[i] > pivot && arr[j] < pivot )
+		{
+			swap(arr[i],arr[j]);
+			Print(arr, low, high, n);
+		}
 
 		if( i == pivot_index && j == pivot_index+1 ) 
 		{
-			cout << "after pivot=" << pivot << ", i=" << i << ", j=" << j << endl;
-			cout << "pivot_index=" << pivot_index << endl;
-
 			if( arr[i] > arr[j] ) swap(arr[i],arr[j]);
 
 			Print(arr, low, high, n);
 
 			return i;
 		}
+		else if( i == pivot_index-1 && j == pivot_index ) 
+		{
+			if( arr[i] > arr[j] ) swap(arr[i],arr[j]);
 
-		// if( arr[i+1]<pivot && arr[j-1]>pivot )
-		// {
-		// 	i=i+1;
-		// 	j=j-1;
-		// }
-		// else if( arr[i+1]<pivot && arr[j-1]<=pivot )
-		// {
-		// 	i=i+1;
-		// }
-		// else if( arr[i+1]>=pivot && arr[j-1]>pivot )
-		// {
-		// 	j=j-1;
-		// }		
-		// else if( arr[i+1]>pivot && arr[j-1]<pivot )
-		// {			
-		// 	swap(arr[i+1],arr[j-1]);
-		// 	i=i+1;
-		// 	j=j-1;
-		// }
-	
-		// else if( arr[i+1]==pivot && arr[j-1]<pivot )
-		// {
-		// 	swap(arr[i+1] , arr[j-1]);
-		// 	return i+1;
-		// }
-		// else if( arr[i+1]>pivot && arr[j-1]==pivot )
-		// {
-		// 	swap(arr[i+1] , arr[j-1]);
-		// 	return j-1;
-		// }		
-		// else if( arr[i+1]==pivot && arr[j-1]==pivot )
-		// {
-		// 	return i+1;
-		// }
+			Print(arr, low, high, n);
 
+			return i;
+		}
+		// else if( i == pivot_index && j == pivot_index+1 ) 
+		// {
+		// 	if( arr[i] > arr[j] ) swap(arr[i],arr[j]);
+
+		// 	Print(arr, low, high, n);
+
+		// 	return i;
+		// }				
 	}
 }
 
