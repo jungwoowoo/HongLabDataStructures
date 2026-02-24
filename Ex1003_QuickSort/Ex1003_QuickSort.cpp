@@ -32,35 +32,61 @@ int Partition(int arr[], int low, int high, int n)
 	int i = low - 1;
 	int j = high + 1;
 
+	// int middle_index = size_t(floorf((high - low) / 2.0f)) + low;
+
+	// cout << "pivot=" << pivot << ", i=" << i << ", j=" << j << endl;
+	// cout << "middle_index=" << middle_index << endl;
+
 	while (true)
 	{
 		// TODO:
 
-		cout << "pivot=" << pivot << ", i=" << i << ", j=" << j << endl;
-		cout << "         ";
+		// int middle_index = size_t(floorf((high - low) / 2.0f)) + low;
 
+		cout << "pivot=" << pivot << ", i=" << i << ", j=" << j << endl;
+		// cout << "middle_index=" << middle_index << endl;
+		// cout << "arr[i]=" << arr[i] << endl;
+		// cout << "arr[j]=" << arr[j] << endl;
+		// cout << "         ";
 		Print(arr, low, high, n);
 
-		if(	( i<(size_t(floorf((high - low) / 2.0f)) + low) && arr[i] > pivot )
-		&& ( j>(size_t(floorf((high - low) / 2.0f)) + low) && arr[j] < pivot )
-		)
+		if( arr[i+1]<pivot && arr[j-1]>pivot )
 		{
-			swap(arr[i],arr[j]);
+			i=i+1;
+			j=j-1;
 		}
-		
-		if( i > (size_t(floorf((high - low) / 2.0f)) + low) )
+		else if( arr[i+1]<pivot && arr[j-1]<=pivot )
 		{
-			int new_pivot_index =  
-			return new_pivot_index;
+			i=i+1;
 		}
-		if( j < (size_t(floorf((high - low) / 2.0f)) + low) )
+		else if( arr[i+1]>=pivot && arr[j-1]>pivot )
 		{
-			int new_pivot_index = 
-			return new_pivot_index;
+			j=j-1;
+		}		
+		else if( arr[i+1]>pivot && arr[j-1]<pivot )
+		{			
+			swap(arr[i+1],arr[j-1]);
+			i=i+1;
+			j=j-1;
 		}
-		
-		i = i + 1;
-		j = j - 1;
+	
+		else if( arr[i+1]==pivot && arr[j-1]<pivot )
+		{
+			swap(arr[i+1] , arr[j-1]);
+			return i+1;
+
+		}
+		else if( arr[i+1]>pivot && arr[j-1]==pivot )
+		{
+			swap(arr[i+1] , arr[j-1]);
+			return j-1;
+
+		}		
+		else if( arr[i+1]==pivot && arr[j-1]==pivot )
+		{
+			return i+1;
+		}
+
 	}
 }
 
@@ -70,6 +96,8 @@ void QuickSort(int arr[], int low, int high, int n) // 마지막 n은 출력용
 	{
 		// Partitioning Index
 		int p = Partition(arr, low, high, n);
+
+		cout << " p = " << p << endl;
 
 		QuickSort(arr, low, p, n); // Note: the pivot is now included
 		QuickSort(arr, p + 1, high, n);
