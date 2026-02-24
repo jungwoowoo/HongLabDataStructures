@@ -41,28 +41,28 @@ int Partition(int arr[], int low, int high, int n)
 	while (true)
 	{
 		// TODO:
-		//cout << "pivot=" << pivot << ", i=" << i << ", j=" << j << endl;
+		cout << "pivot=" << pivot << ", i=" << i << ", j=" << j << endl;
 		// cout << "         ";
 		//Print(arr, low, high, n);
+
+		int pivot_index = size_t(floorf((high - low) / 2.0f)) + low;
 
 		do 
 		{
 			i=i+1;
 			//j=j-1;
-		}while( arr[i]<pivot );
+		}while( arr[i]<pivot && i > pivot_index );
 		//}while( arr[i]<pivot && arr[j]>pivot );
 
 		do 
 		{
 			j=j-1;
 			//j=j-1;
-		}while( arr[j]>pivot );
-
-		
+		}while( arr[j]>pivot && j < pivot_index+1 );
 
 		if( arr[i] > pivot && arr[j] < pivot ) swap(arr[i],arr[j]);
 
-		int pivot_index = size_t(floorf((high - low) / 2.0f)) + low;
+		
 
 		if( i == pivot_index && j == pivot_index+1 ) 
 		{
