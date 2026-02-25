@@ -28,6 +28,8 @@ void Merge(int init[], int merged[], int left, int mid, int right)
 	j = mid + 1;
 	k = left;
 
+	cout << " left " << left << " mid " << mid << " right " << right << endl;	
+
 	cout << "  Left : ";
 	Print(init, left, mid);
 	cout << " Right : ";
@@ -35,6 +37,23 @@ void Merge(int init[], int merged[], int left, int mid, int right)
 
 	// 인덱스를 2개 이용해서 정렬하면서 merge
 	// TODO:
+	if(left == mid)
+	{
+		if(init[left] > init[right])
+		{
+			merged[right] = init[left];
+			merged[left] = init[right];
+		}
+		else
+		{
+			merged[right] = init[right];
+			merged[left] = init[left];			
+		}
+	}
+	else
+	{
+
+	}
 
 	// 남은 내용들 복사
 	// TODO:
@@ -53,7 +72,7 @@ void MergeSort(int arr[], int merged[], int left, int right)
 	int mid;
 	if (left < right)
 	{
-		mid = (left + right) / 2;
+		mid = (left + right) / 2; 
 
 		MergeSort(arr, merged, left, mid);
 		MergeSort(arr, merged, mid + 1, right);
