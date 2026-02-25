@@ -33,17 +33,18 @@ int Partition(int arr[], int low, int high, int n)
 	int j = high + 1;
 
 	// cout << "middle_index=" << middle_index << endl;
+	cout << "pivot=" << pivot << ", i=" << i << ", j=" << j << endl;
 	// cout << "arr[i]=" << arr[i] << endl;
 	// cout << "arr[j]=" << arr[j] << endl;
 	// cout << "         ";
-	//Print(arr, low, high, n);
+	Print(arr, low, high, n);
 
 	while (true)
 	{
 		// TODO:
 		cout << "pivot=" << pivot << ", i=" << i << ", j=" << j << endl;
 		// cout << "         ";
-		//Print(arr, low, high, n);
+		Print(arr, low, high, n);
 
 		int pivot_index = size_t(floorf((high - low) / 2.0f)) + low;
 
@@ -58,41 +59,39 @@ int Partition(int arr[], int low, int high, int n)
 		{
 			j=j-1;
 			//j=j-1;
-		}while( arr[j]>pivot && j > pivot_index+1 );
+		//}while( arr[j]>pivot && j > pivot_index+1 );
+		}while( arr[j]>pivot && j > pivot_index );
+ 
+		cout << "after i=" << i << ", j=" << j << endl;
+		cout << "after arr[i]=" << arr[i] << ", arr[j]=" << arr[j] << endl;
+		cout << "pivot_index=" << pivot_index << endl;
+		
+		if( arr[i] > pivot && arr[j] < pivot ) swap(arr[i] , arr[j]);
+		else if( arr[i] > arr[j] ) swap(arr[i] , arr[j]);
 
-			cout << "after pivot=" << pivot << ", i=" << i << ", j=" << j << endl;
-			cout << "pivot_index=" << pivot_index << endl;		
-
-		if( arr[i] > pivot && arr[j] < pivot )
-		{
-			swap(arr[i],arr[j]);
-			Print(arr, low, high, n);
-		}
 
 		if( i == pivot_index && j == pivot_index+1 ) 
 		{
 			if( arr[i] > arr[j] ) swap(arr[i],arr[j]);
-
-			Print(arr, low, high, n);
+			//Print(arr, low, high, n);
 
 			return i;
 		}
 		else if( i == pivot_index-1 && j == pivot_index ) 
 		{
 			if( arr[i] > arr[j] ) swap(arr[i],arr[j]);
-
-			Print(arr, low, high, n);
+			//Print(arr, low, high, n);
 
 			return i;
 		}
-		// else if( i == pivot_index && j == pivot_index+1 ) 
-		// {
-		// 	if( arr[i] > arr[j] ) swap(arr[i],arr[j]);
+		else if( i == pivot_index || j == pivot_index )
+		{
+			//if( arr[i] > arr[j] ) swap(arr[i],arr[j]);
 
-		// 	Print(arr, low, high, n);
+			//Print(arr, low, high, n);
 
-		// 	return i;
-		// }				
+			return i;
+		}				
 	}
 }
 
