@@ -28,7 +28,7 @@ void Merge(int init[], int merged[], int left, int mid, int right)
 	j = mid + 1;
 	k = left;
 
-	cout << " left " << left << " mid " << mid << " right " << right << endl;	
+	cout << " left " << left << " mid " << mid << " right " << right << endl;
 
 	cout << "  Left : ";
 	Print(init, left, mid);
@@ -50,6 +50,8 @@ void Merge(int init[], int merged[], int left, int mid, int right)
 			merged[left] = init[left];			
 		}
 	}
+
+	// write code like polynomial structure
 	else
 	{
 
@@ -57,6 +59,16 @@ void Merge(int init[], int merged[], int left, int mid, int right)
 
 	// 남은 내용들 복사
 	// TODO:
+	int size_of_init = sizeof(init) / sizeof(init[0]);
+
+	cout << " ### right " << right << endl;
+
+	cout << " ### size_of_init " << sizeof(init) << endl;
+
+	for(int t=right; t<size_of_init-1; t++)
+	{
+		cout << " ### after right init[t] " << init[t] << endl;
+	}
 
 	// merged -> init 복사
 	for (l = left; l <= right; l++)
