@@ -54,21 +54,56 @@ void Merge(int init[], int merged[], int left, int mid, int right)
 	// write code like polynomial structure
 	else
 	{
+		for(int a=left; a<=mid; a++)
+		{
+			for(int b=mid+1; b<=right; b++)
+			{
+				if(a + mid + 1 == b )
+				{
+					if(merged[a] > merged[b])
+					{
+						cout << " like at poly " << merged[a] << " " << merged[b] << endl;
+						swap(merged[a] , merged[b]);
+					}
+				}
 
+				else
+				{
+					merged[a] = init[a];
+					merged[b] = init[b];
+				}
+			}
+		}
+
+		cout << " after poly way : ";
+		Print(merged, left, right);
+
+		for(int a=left; a<=mid; a++)
+		{
+			for(int b=mid+1; b<=right; b++)
+			{
+				if(merged[a] > merged[b])
+				{
+					//merged[a] = init[b];
+					swap(merged[a] , merged[b]);
+				}
+			}
+		}
 	}
 
 	// 남은 내용들 복사
 	// TODO:
-	int size_of_init = sizeof(init) / sizeof(init[0]);
 
-	cout << " ### right " << right << endl;
+	// int size_of_init = sizeof(&merged) / sizeof(merged[0]);
 
-	cout << " ### size_of_init " << sizeof(init) << endl;
+	// cout << " ### sizeof(merged) " << sizeof(&merged) << endl;
 
-	for(int t=right; t<size_of_init-1; t++)
-	{
-		cout << " ### after right init[t] " << init[t] << endl;
-	}
+	//cout << " ### init[right+1] " << init[right+1] << endl;
+
+	// for(int t=0; t<size_of_init-1; t++)
+	// {
+	// 	cout << " ### after right init[t] " << init[t] << endl;
+	// }
 
 	// merged -> init 복사
 	for (l = left; l <= right; l++)
