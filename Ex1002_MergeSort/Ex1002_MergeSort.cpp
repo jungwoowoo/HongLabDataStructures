@@ -23,10 +23,11 @@ void Print(int* arr, int left, int right)
 
 void Merge(int init[], int merged[], int left, int mid, int right)
 {
-	int i, j, k, l;
+	int i, j, k, l, w;
 	i = left;
 	j = mid + 1;
 	k = left;
+	w = left;
 
 	cout << " left " << left << " mid " << mid << " right " << right << endl;
 
@@ -54,55 +55,52 @@ void Merge(int init[], int merged[], int left, int mid, int right)
 	// write code like polynomial structure
 	else
 	{
-		for(int a=left; a<=mid; a++)
-		{
-			for(int b=mid+1; b<=right; b++)
-			{
-				if(a + mid + 1 == b )
-				{
-					if(merged[a] > merged[b])
-					{
-						cout << " like at poly " << merged[a] << " " << merged[b] << endl;
-						swap(init[a] , init[b]);
-						merged[a] = init[a];
-						merged[b] = init[b];						
-					}
-				}
+		cout << "init after: ";
 
-				else
-				{
-					merged[a] = init[a];
-					merged[b] = init[b];
-				}
-			}
-		}
+		Print(init, left, right);
 
-		for(int a=left; a<=mid; a++)
+		while( k <= mid && j <= right && w <= right)
 		{
-			for(int b=mid+1; b<=right; b++)
+			if ( init[k] < init[j] )
 			{
-				if(merged[a] > merged[b])
-				{
-					//merged[a] = init[b];
-					swap(merged[a] , merged[b]);
-				}
+				cout << "!! init[k]=" << init[k] << " init[j]=" << init[j] << endl;
+				cout << "!! k=" << k << " j=" << j << endl;
+				cout << "!! w=" << w << endl;
+				merged[w] = init[k];
+				k++;
 			}
+			else if ( init[k] > init[j] )
+			{
+				cout << "@@@ init[k]=" << init[k] << " init[j]=" << init[j] << endl;
+				cout << "@@@ k=" << k << " j=" << j << endl;
+				cout << "@@@ w=" << w << endl;
+				merged[w] = init[j];
+				j++;
+			}
+			w++;
 		}
 	}
-
 	// 남은 내용들 복사
 	// TODO:
 
-	// int size_of_init = sizeof(&merged) / sizeof(merged[0]);
+	//cout << "~~~~ init[k]=" << init[k] << " init[j]=" << init[j] << endl;
+	
+	if(k<=mid)
+	{
+		cout << "~~~~ left side not completed ! " << endl;
+		merged[w] = init[k];
+	}
 
-	// cout << " ### sizeof(merged) " << sizeof(&merged) << endl;
+	else if(j<=right)
+	{
+		cout << "~~~~ right side not completed ! " << endl;
 
-	//cout << " ### init[right+1] " << init[right+1] << endl;
+		merged[w] = init[j];
+	}
 
-	// for(int t=0; t<size_of_init-1; t++)
-	// {
-	// 	cout << " ### after right init[t] " << init[t] << endl;
-	// }
+
+	cout << "merged after: ";
+	Print(merged, left, right);
 
 	// merged -> init 복사
 	for (l = left; l <= right; l++)
