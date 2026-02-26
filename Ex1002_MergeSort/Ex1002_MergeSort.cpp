@@ -85,13 +85,13 @@ void Merge(int init[], int merged[], int left, int mid, int right)
 
 	//cout << "~~~~ init[k]=" << init[k] << " init[j]=" << init[j] << endl;
 	
-	if(k<=mid)
+	if(k<=mid && left != mid)
 	{
 		cout << "~~~~ left side not completed ! " << endl;
 		merged[w] = init[k];
 	}
 
-	else if(j<=right)
+	else if(j<=right && left != mid)
 	{
 		cout << "~~~~ right side not completed ! " << endl;
 
