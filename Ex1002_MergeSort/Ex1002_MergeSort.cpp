@@ -63,7 +63,9 @@ void Merge(int init[], int merged[], int left, int mid, int right)
 					if(merged[a] > merged[b])
 					{
 						cout << " like at poly " << merged[a] << " " << merged[b] << endl;
-						swap(merged[a] , merged[b]);
+						swap(init[a] , init[b]);
+						merged[a] = init[a];
+						merged[b] = init[b];						
 					}
 				}
 
@@ -74,9 +76,6 @@ void Merge(int init[], int merged[], int left, int mid, int right)
 				}
 			}
 		}
-
-		cout << " after poly way : ";
-		Print(merged, left, right);
 
 		for(int a=left; a<=mid; a++)
 		{
