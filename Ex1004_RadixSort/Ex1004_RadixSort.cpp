@@ -48,9 +48,19 @@ int main()
 		// TODO:
 		for(int i=0; i<n; i++)
 		{
-			//float temp = float(arr[i]) * 10^(-exp);
+			int origin_val = arr[i];
 			float temp = pow(10,-k);
-			cout << " temp="  << temp << endl;
+			float temp2 = float(origin_val) * temp;
+			float t = trunc(temp2);
+
+			float target_n = (temp2 - t) * 10;
+			//float target_n = temp2 - t;
+			//int target_n = float(origin_val)
+
+			cout << "target_n=" << target_n << endl;
+			// cout << "temp2=" << temp2 << endl;
+			// cout << "t=" << t << endl;
+			
 		}
 
 		Print(arr, n);
