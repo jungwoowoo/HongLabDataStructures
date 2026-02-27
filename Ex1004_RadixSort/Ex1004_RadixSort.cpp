@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include "../shared/Queue.h"
-#include <math.h>
+//#include <math.h>
+#include <cmath> 
 
 using namespace std;
 
@@ -49,15 +50,22 @@ int main()
 		for(int i=0; i<n; i++)
 		{
 			int origin_val = arr[i];
-			float temp = pow(10,-k);
+			float temp = pow(10.0f,-k);
 			float temp2 = float(origin_val) * temp;
 			float t = trunc(temp2);
 
 			float target_n = (temp2 - t) * 10;
+			int n = int(target_n);
+
+			cout << "target_n=" << n << endl;
+
+			queues->Enqueue(n);
+
+			if(queues->Front() < n) queues->Enqueue(n);
 			//float target_n = temp2 - t;
 			//int target_n = float(origin_val)
 
-			cout << "target_n=" << target_n << endl;
+			
 			// cout << "temp2=" << temp2 << endl;
 			// cout << "t=" << t << endl;
 			
