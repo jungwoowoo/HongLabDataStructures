@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 #include "../shared/Queue.h"
+#include <math.h>
 
 using namespace std;
 
@@ -41,11 +42,19 @@ int main()
 
 	int m = GetMax(arr, n); // 가장 큰 자리수를 찾기 위해서
 
+	int k = 1;
 	for (int exp = 1; m / exp > 0; exp *= 10)
 	{
 		// TODO:
+		for(int i=0; i<n; i++)
+		{
+			//float temp = float(arr[i]) * 10^(-exp);
+			float temp = pow(10,-k);
+			cout << " temp="  << temp << endl;
+		}
 
 		Print(arr, n);
+		k++;
 	}
 
 	return 0;
