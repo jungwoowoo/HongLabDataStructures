@@ -1,5 +1,6 @@
 ﻿#include <iostream>
-#include "../shared/Queue.h"
+//#include "../shared/Queue.h"
+#include <queue>
 //#include <math.h>
 #include <cmath> 
 
@@ -39,7 +40,7 @@ int main()
 
 	Print(arr, n);
 
-	Queue<int> queues[10];
+	std::queue<int> queues[10];
 
 	int m = GetMax(arr, n); // 가장 큰 자리수를 찾기 위해서
 
@@ -50,25 +51,47 @@ int main()
 		for(int i=0; i<n; i++)
 		{
 			int origin_val = arr[i];
-			float temp = pow(10.0f,-k);
-			float temp2 = float(origin_val) * temp;
-			float t = trunc(temp2);
+			int pow_n = pow(10,k-1);
 
-			float target_n = (temp2 - t) * 10;
-			int n = int(target_n);
+			int target_n = 0;
 
-			cout << "target_n=" << n << endl;
+			if(k==1)
+			{
+				target_n = origin_val%10;
+			}
+			else
+			{
+				target_n = static_cast<int>(floor(origin_val/pow_n))%pow_n;
+				//target_n = int(floor(origin_val/pow_n))%pow_n;
+			}
 
-			queues->Enqueue(n);
+			cout << "target_n=" << target_n << endl;
 
-			if(queues->Front() < n) queues->Enqueue(n);
-			//float target_n = temp2 - t;
-			//int target_n = float(origin_val)
+			//cout << "queues[target_n]= " << queues[target_n].Size() << endl;
 
-			
-			// cout << "temp2=" << temp2 << endl;
-			// cout << "t=" << t << endl;
-			
+			queues[target_n].push(origin_val);
+		}
+
+		for(int w=0; w<10; w++)
+		{
+			//cout << "queues[w].Size" << queues[w].Size() << endl;
+			for(int y=0; y<queues[w].size(); y++)
+			{
+				cout << "w=" << w << " queues[w].Size()=" << queues[w].size() << endl;
+				//queues[w].();
+			}
+		}
+
+		int target = 0;
+		for(int w=0; w<10; w++)
+		{
+			while(!queues[w].empty())
+			{
+				int top = queues[w].front();
+				arr[target] = top;
+				queues[w].pop();
+				target++;
+			}
 		}
 
 		Print(arr, n);
