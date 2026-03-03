@@ -69,6 +69,15 @@ int main()
 		{
 			// TODO: 이 부분을 어렵게 생각하시는 분들이 많네요. 
 			//       Count1: 과 Count2: 의 출력을 보고 맞춰보세요.
+			int sum = 0;
+
+			for(int k = i; k >= i-1 ; k--)
+			{
+				sum += count[k];
+			}
+
+			count[i] = sum;
+			
 		}
 
 		cout << "Count2: ";
@@ -79,7 +88,12 @@ int main()
 			cout << temp[i] << endl; // 자기 자리를 찾아갈 값
 
 			// TODO: count[temp[i] / exp % 10] 업데이트 (아주 간단해요)
-			arr[count[temp[i] / exp % 10]] = temp[i];
+			int origin_accum_count = count[temp[i]];
+			origin_accum_count--; // 각 queue 에서 pop 하는 의미와 동일
+
+			count[temp[i]] = origin_accum_count;
+
+			arr[origin_accum_count] = temp[i];
 
 			cout << " Count: ";
 			Print(count, 11);
