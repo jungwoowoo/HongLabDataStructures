@@ -88,10 +88,10 @@ int main()
 			cout << temp[i] << endl; // 자기 자리를 찾아갈 값
 
 			// TODO: count[temp[i] / exp % 10] 업데이트 (아주 간단해요)
-			int origin_accum_count = count[temp[i] / exp % 10]; // 배열의 가상의 개별 queue 원래 사이즈
+			int origin_accum_count = count[(temp[i] / exp) % 10]; // 배열의 가상의 개별 queue 원래 사이즈
 			origin_accum_count--; // 배열의 가상의 개별 queue 에서 pop 하는 의미와 동일
 
-			count[temp[i] / exp % 10] = origin_accum_count;
+			count[(temp[i] / exp) % 10] = origin_accum_count;
 
 			arr[origin_accum_count] = temp[i];
 
