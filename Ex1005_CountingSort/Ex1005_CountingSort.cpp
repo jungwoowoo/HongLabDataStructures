@@ -33,8 +33,8 @@ int GetMax(int arr[], int n)
 
 int main()
 {
-	//int arr[] = { 170, 45, 75, 90, 802, 24, 2, 66 };
-	int arr[] = { 1, 0, 2, 3, 4, 2, 3, 1, 2 }; // 0이 1개, 1이 2개, 2가 3개, 4가 1개
+	int arr[] = { 170, 45, 75, 90, 802, 24, 2, 66 };
+	//int arr[] = { 1, 0, 2, 3, 4, 2, 3, 1, 2 }; // 0이 1개, 1이 2개, 2가 3개, 4가 1개
 	int n = sizeof(arr) / sizeof(arr[0]);
 
 	Print(arr, n);
@@ -88,10 +88,10 @@ int main()
 			cout << temp[i] << endl; // 자기 자리를 찾아갈 값
 
 			// TODO: count[temp[i] / exp % 10] 업데이트 (아주 간단해요)
-			int origin_accum_count = count[temp[i]]; // 배열의 가상의 개별 queue 원래 사이즈
+			int origin_accum_count = count[temp[i] / exp % 10]; // 배열의 가상의 개별 queue 원래 사이즈
 			origin_accum_count--; // 배열의 가상의 개별 queue 에서 pop 하는 의미와 동일
 
-			count[temp[i]] = origin_accum_count;
+			count[temp[i] / exp % 10] = origin_accum_count;
 
 			arr[origin_accum_count] = temp[i];
 
