@@ -18,6 +18,8 @@ int InterpolationSearch(int arr[], int low, int high, int x)
 
 		int pos = ((high - low)*(x - arr[low]) / (arr[high] - arr[low])) + low;
 
+		cout << " pos=" << pos << endl;
+
 		if (arr[pos] == x)
 			return pos;
 
