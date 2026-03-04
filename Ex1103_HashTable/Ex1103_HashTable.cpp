@@ -27,16 +27,27 @@ public:
 	void Insert(const Item& item)
 	{
 		// TODO:
+		size_t index = HashFunc(item.key); // 키를 인덱스로 사용
 
-		size_t index = item.key; // 키를 인덱스로 사용
-		table_[index] = item;
+        cout << " index=" << index << endl;
+
+		//cout << " Get=" << Get(this->table_[index].key) << endl;
+
+		int after_index = index;
+
+		while( Get(this->table_[after_index].key) )
+		{
+			after_index++;
+		}
+		
+		table_[after_index] = item;
 	}
 
 	V Get(const K& key)
 	{
 		// TODO: 못 찾으면 0을 반환
 
-		size_t index = key;
+		size_t index = HashFunc(key);
 		return table_[index].value;
 	}
 
@@ -44,8 +55,9 @@ public:
 	size_t HashFunc(const int& key)
 	{
 		// TODO:
+		//key = *key % capacity_;
 
-		return key;
+		return key % capacity_;
 	}
 
 	// 문자열을 정수 인덱스(해시값)로 변환
@@ -84,20 +96,20 @@ int main()
 
 		h.Print();
 
-		cout << "Get 123 " << h.Get(123) << endl;
+		//cout << "Get 123 " << h.Get(123) << endl;
 
 		h.Insert(Item{ 1000021, 9898 });
 
 		h.Print();
 
-		cout << "Get 1000021 " << h.Get(1000021) << endl;
+		//cout << "Get 1000021 " << h.Get(1000021) << endl;
 
 		h.Insert(Item{ 1211, 999 }); // 충돌!
 
 		h.Print();
 
-		cout << "Get 123 " << h.Get(123) << endl;
-		cout << "Get 1211 " << h.Get(1211) << endl;
+		//cout << "Get 123 " << h.Get(123) << endl;
+		//cout << "Get 1211 " << h.Get(1211) << endl;
 	}
 
 	// 키: std::string, 값: int
