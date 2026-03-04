@@ -42,6 +42,7 @@ int main()
 				{
 					start = keys[i];
 					start_index = indices[i];
+					end_index = n;
 				}
 				else if ( keys[i] > x && keys[i] <= end )
 				{
@@ -61,8 +62,8 @@ int main()
 			cout << end_index << " end_index" << endl;
 
 			int found_index = SequentialSearch(arr , start_index , end_index , x);
-
-			cout << x << " was found at " << found_index << endl;
+			if(found_index>0) cout << x << " was found at " << found_index << endl;
+			else if(found_index<0) cout << x << " was not found" << endl;
 
 		}
 	}
