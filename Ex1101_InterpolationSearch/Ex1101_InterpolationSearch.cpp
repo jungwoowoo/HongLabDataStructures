@@ -14,7 +14,7 @@ int InterpolationSearch(int arr[], int low, int high, int x)
 
 		// TODO: int pos = 보간 탐색으로 수정
 		// (high - low) : (pos - low) = (arr[high] - arr[low]) : (arr[pos] - arr[low])
-		// x = arr[pos]
+		// x is close to arr[pos]
 
 		int pos = ((high - low)*(x - arr[low]) / (arr[high] - arr[low])) + low;
 
