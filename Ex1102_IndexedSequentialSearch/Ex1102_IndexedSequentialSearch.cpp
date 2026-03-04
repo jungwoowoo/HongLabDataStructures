@@ -24,12 +24,46 @@ int main()
 	int indices[] = { 0, 3, 6, n }; // 마지막에 n 하나 더 추가
 
 	for (int x : {1, 2, 8, 13, 22, 45, 55, 75, 88, 99, -1, 47, 101, 1000, 7, 10, 50, 60 })
+	//for (int x : {8,22})
 	{
 		if (x < arr[0] || x > arr[n - 1])
 			cout << x << " was not found" << endl;
 		else
 		{
 			// TODO: 
+			int start = keys[0];
+			int end = keys[kn-1];
+
+			int start_index = 0;
+			int end_index = kn-1;
+			for( int i=0; i < kn; i++)
+			{
+				if( keys[i] < x && keys[i] > start ) 
+				{
+					start = keys[i];
+					start_index = indices[i];
+				}
+				else if ( keys[i] > x && keys[i] <= end )
+				{
+					end = keys[i];
+					end_index = indices[i];
+				}
+
+				else if( x == keys[i] )
+				{
+					cout << arr[indices[i]] << " x found at " << indices[i] << endl;
+					start_index = indices[i];
+					end_index = start_index + 1;
+				}
+			}
+
+			cout << start_index << " start_index" << endl;
+			cout << end_index << " end_index" << endl;
+
+			int found_index = SequentialSearch(arr , start_index , end_index , x);
+
+			cout << x << " was found at " << found_index << endl;
+
 		}
 	}
 
