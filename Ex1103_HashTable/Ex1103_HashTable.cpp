@@ -39,7 +39,7 @@ public:
 		{
 			after_index++;
 		}
-		
+
 		table_[after_index] = item;
 	}
 
@@ -47,25 +47,51 @@ public:
 	{
 		// TODO: 못 찾으면 0을 반환
 
+		int exist_key_index = -1;
+
+		for(int i=0; i<capacity_; i++)
+		{
+			if(table_[i].key == key)
+			{
+				exist_key_index = i;
+				break;
+			}
+		}
+
 		size_t index = HashFunc(key);
-		return table_[index].value;
+
+		if( !table_[index].value ) return 0;
+
+		else if ( exist_key_index > -1 ) return table_[exist_key_index].value;
+		else if ( exist_key_index == -1 ) return table_[index].value;
 	}
 
 	// 정수 -> 해시값
-	size_t HashFunc(const int& key)
-	{
-		// TODO:
-		//key = *key % capacity_;
+	// size_t HashFunc(const int& key)
+	// {
+	// 	// TODO:
+	// 	//key = *key % capacity_;
 
-		return key % capacity_;
-	}
+	// 	return key % capacity_;
+	// }
 
 	// 문자열을 정수 인덱스(해시값)로 변환
 	// Horner's method
-	//size_t HashFunc(const string& s)
-	//{
-	//  return TODO:
-	//}
+	size_t HashFunc(const string& s)
+	{
+	 //return TODO:
+
+		int temp_sum_char_code = 0;
+		for(int i=0; i<s.size(); i++)
+		{
+			temp_sum_char_code+=int(s[i]);
+		}
+
+		temp_sum_char_code = temp_sum_char_code%capacity_;
+
+		return temp_sum_char_code;
+
+	}
 
 	void Print()
 	{
@@ -88,57 +114,58 @@ int main()
 	// 키: int, 값: int 인 경우
 	// 키의 범위가 아주 크고 아이템의 개수는 적을 경우
 	{
-		using Item = HashTable<int, int>::Item;
+		// using Item = HashTable<int, int>::Item;
 
-		HashTable<int, int> h(8);
+		// HashTable<int, int> h(8);
 
-		h.Insert(Item{ 123, 456 });
+		// h.Insert(Item{ 123, 456 });
 
-		h.Print();
+		// h.Print();
 
-		//cout << "Get 123 " << h.Get(123) << endl;
+		// cout << "Get 123 " << h.Get(123) << endl;
 
-		h.Insert(Item{ 1000021, 9898 });
+		// h.Insert(Item{ 1000021, 9898 });
 
-		h.Print();
+		// h.Print();
 
-		//cout << "Get 1000021 " << h.Get(1000021) << endl;
+		// cout << "Get 1000021 " << h.Get(1000021) << endl;
 
-		h.Insert(Item{ 1211, 999 }); // 충돌!
+		// h.Insert(Item{ 1211, 999 }); // 충돌!
 
-		h.Print();
+		// h.Print();
 
-		//cout << "Get 123 " << h.Get(123) << endl;
-		//cout << "Get 1211 " << h.Get(1211) << endl;
+		// cout << "Get 0 " << h.Get(0) << endl;
+		// cout << "Get 123 " << h.Get(123) << endl;
+		// cout << "Get 1211 " << h.Get(1211) << endl;
 	}
 
 	// 키: std::string, 값: int
-	//{
-	//	using Item = HashTable<string, int>::Item;
+	{
+		using Item = HashTable<string, int>::Item;
 
-	//	HashTable<string, int> h(8);
+		HashTable<string, int> h(8);
 
-	//	h.Insert(Item{ "apple", 1 });
-	//	h.Insert(Item{ "orange", 2 });
-	//	h.Insert(Item{ "mandarin", 4 });
+		h.Insert(Item{ "apple", 1 });
+		h.Insert(Item{ "orange", 2 });
+		h.Insert(Item{ "mandarin", 4 });
 
-	//	h.Print();
+		h.Print();
 
-	//	cout << "apple " << h.Get("apple") << endl;
-	//	cout << "orange " << h.Get("orange") << endl;
-	//	cout << endl;
+		cout << "apple " << h.Get("apple") << endl;
+		cout << "orange " << h.Get("orange") << endl;
+		cout << endl;
 
-	//	h.Print();
+		h.Print();
 
-	//	h.Insert(Item{ "tomato", 4 });
+		h.Insert(Item{ "tomato", 4 });
 
-	//	h.Print(); 
+		h.Print(); 
 
-	//	cout << "apple " << h.Get("apple") << endl;
-	//	cout << "orange " << h.Get("orange") << endl;
-	//	cout << "pineapple " << h.Get("pineapple") << endl;
-	//	cout << endl;
-	//}
+		cout << "apple " << h.Get("apple") << endl;
+		cout << "orange " << h.Get("orange") << endl;
+		cout << "pineapple " << h.Get("pineapple") << endl;
+		cout << endl;
+	}
 
 	return 0;
 }
