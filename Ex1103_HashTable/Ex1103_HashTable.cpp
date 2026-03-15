@@ -33,14 +33,19 @@ public:
 
 		//cout << " Get=" << Get(this->table_[index].key) << endl;
 
-		int after_index = index;
+		// 빈 생성자로 empty 또는 null check
+		while( table_[index].key != K() ) index++;
 
-		while( Get(this->table_[after_index].key) )
-		{
-			after_index++;
-		}
+		table_[index] = item;
 
-		table_[after_index] = item;
+		// int after_index = index;
+
+		// while( Get(this->table_[after_index].key) )
+		// {
+		// 	after_index++;
+		// }
+
+		// table_[after_index] = item;
 	}
 
 	V Get(const K& key)
@@ -60,7 +65,7 @@ public:
 
 		size_t index = HashFunc(key);
 
-		if( !table_[index].value ) return 0;
+		if( !table_[index].value ) return V();
 
 		else if ( exist_key_index > -1 ) return table_[exist_key_index].value;
 		else if ( exist_key_index == -1 ) return table_[index].value;
@@ -80,16 +85,33 @@ public:
 	size_t HashFunc(const string& s)
 	{
 	 //return TODO:
+	 /**
+	  * "AB" 와 "BA" 의 hash 처리 값이 같아서 처리못하는 HashFunc
+	  */
+		// int temp_sum_char_code = 0;
+		// for(int i=0; i<s.size(); i++)
+		// {
+		// 	temp_sum_char_code+=int(s[i]);
+		// }
 
-		int temp_sum_char_code = 0;
-		for(int i=0; i<s.size(); i++)
-		{
-			temp_sum_char_code+=int(s[i]);
-		}
+		// temp_sum_char_code = temp_sum_char_code%capacity_;
 
-		temp_sum_char_code = temp_sum_char_code%capacity_;
+		// return temp_sum_char_code;
 
-		return temp_sum_char_code;
+		/**
+		 * Horner's method
+		 * "AB" 와 "BA" 의 hash 처리 값이 달라져서 처리 가능한 HashFunc
+		 */
+
+		 int g = 17;
+
+		 int result = 0;
+		 for(int i=0; i<s.size(); i++)
+		 {
+			result = g * result + int(s[i]);
+		 }
+
+		 return result%capacity_;
 
 	}
 
@@ -165,6 +187,11 @@ int main()
 		cout << "orange " << h.Get("orange") << endl;
 		cout << "pineapple " << h.Get("pineapple") << endl;
 		cout << endl;
+
+		h.Insert(Item{ "AB", 5 });
+		h.Insert(Item{ "BA", 6 });
+
+		h.Print(); 
 	}
 
 	return 0;
