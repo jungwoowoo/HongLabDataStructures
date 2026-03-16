@@ -86,14 +86,71 @@ public:
 		cout << endl;
 	}
 
+	// recursive
 	void DepthFirstTraversal(int v) // v는 인덱스
 	{
 		// TODO:
+		ResetVisited();
+
+		int visited_count = 0;
+		while(visited_[visited_count]==true) visited_count++;
+
+		//cout << "visited_count=" << visited_count << " max_vertices_=" << max_vertices_ << endl;
+		if(visited_count==max_vertices_) return;
+		else
+		{
+			cout << v << " Stack : " << flush;
+
+			visited_[v] = true;
+
+			for(int i=max_vertices_-1; i>=0; --i)
+			{
+				//if(matrix_[v][i]==1 && visited_[i]==false)
+				if(matrix_[v][i]==1)
+				{
+					cout << i << " " << flush;
+
+					visited_[i] = true;
+					DepthFirstTraversal(i);
+				}
+			}
+
+			cout << endl;
+		}
 	}
 
+	//
 	void IterDFT()
 	{
 		// TODO:
+
+		ResetVisited();
+		Stack<T> stacks;
+
+		int start = 0;
+		stacks.Push(start);
+		visited_[start] = true;
+
+		while(!stacks.IsEmpty())
+		{
+			//stacks.Pop();
+			int stacks_top = stacks.Top();
+			stacks.Pop();
+
+			for( int e = max_vertices_-1; e>=0; e--)
+			{
+				if( matrix_[stacks_top][e] == 1 && visited_[e] == false )
+				{
+					stacks.Push(e);
+					visited_[e] = true;
+				}
+			}
+			
+			cout << stacks_top << " Stack : " << flush;
+
+			stacks.Print();
+		}		
+		
 	}
 
 	void BreadthFirstTraversal()
@@ -159,8 +216,9 @@ int main()
 	g.PrintMatrix();
 
 	g.DepthFirstTraversal();
+	g.IterDFT();
 
-	g.BreadthFirstTraversal();
+	// g.BreadthFirstTraversal();
 
 	return 0;
 }
