@@ -158,15 +158,61 @@ public:
 		
 	}
 
+
+	/**
+	 * 
+	 * 	
+	 * 0 Queue :1 2
+		1 Queue :2 3 4
+		2 Queue :3 4
+		3 Queue :4 6
+		4 Queue :6
+		6 Queue :5
+		5 Queue :
+	*/
+	
 	void BreadthFirstTraversal()
 	{
 		int v = 0; // 0번에서 시작
 
-		Queue<int> q;
+		Queue<int> q(8);
 
 		ResetVisited();
 
 		// TODO:
+		
+		visited_[v] = true;
+		q.Enqueue(v);
+
+		while(!q.IsEmpty())
+		{
+			int visited_index = q.Front();
+
+			for(int i=0; i<=max_vertices_; i++)
+			{
+				//cout << boolalpha;
+				//cout << " i " << i << " visited_[i]?? " << visited_[i] << " matrix_[v][i]?? " << matrix_[v][i] << endl;
+				if(matrix_[visited_index][i]==1 && visited_[i]==false)
+				//if(matrix_[v][i]==1)
+				{
+					//cout << i << " will be visited " << flush;
+					visited_[i] = true;
+					q.Enqueue(i);
+				}
+			}
+
+			cout << visited_index << " Queue : " << flush;
+
+			q.Dequeue();			
+
+			q.Print();
+
+			cout << endl;
+		}
+
+
+		//visited_index = q.Front();
+
 	}
 
 	void ResetVisited()
@@ -220,10 +266,10 @@ int main()
 
 	g.PrintMatrix();
 
-	g.DepthFirstTraversal();
-	g.IterDFT();
+	// g.DepthFirstTraversal();
+	// g.IterDFT();
 
-	// g.BreadthFirstTraversal();
+	g.BreadthFirstTraversal();
 
 	return 0;
 }
