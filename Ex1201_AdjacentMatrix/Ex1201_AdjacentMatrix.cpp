@@ -89,33 +89,38 @@ public:
 	// recursive
 	void DepthFirstTraversal(int v) // v는 인덱스
 	{
+		cout << v << " -> " << flush;		
 		// TODO:
-		ResetVisited();
-
 		int visited_count = 0;
-		while(visited_[visited_count]==true) visited_count++;
+
+		for(int i=0; i<max_vertices_; i++)
+		{
+			//cout << boolalpha;
+			//cout << " ?? " << visited_[i] << flush;
+			if(visited_[i]==true) visited_count++;
+		}
+
+		//cout << endl;
 
 		//cout << "visited_count=" << visited_count << " max_vertices_=" << max_vertices_ << endl;
+
 		if(visited_count==max_vertices_) return;
 		else
 		{
-			cout << v << " Stack : " << flush;
-
 			visited_[v] = true;
 
-			for(int i=max_vertices_-1; i>=0; --i)
+			for(int i=0; i<=max_vertices_; i++)
 			{
-				//if(matrix_[v][i]==1 && visited_[i]==false)
-				if(matrix_[v][i]==1)
+				//cout << boolalpha;
+				//cout << " i " << i << " visited_[i]?? " << visited_[i] << " matrix_[v][i]?? " << matrix_[v][i] << endl;
+				if(matrix_[v][i]==1 && visited_[i]==false)
+				//if(matrix_[v][i]==1)
 				{
-					cout << i << " " << flush;
-
+					//cout << i << " will be visited " << flush;
 					visited_[i] = true;
 					DepthFirstTraversal(i);
 				}
 			}
-
-			cout << endl;
 		}
 	}
 
