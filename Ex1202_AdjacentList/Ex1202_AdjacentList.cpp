@@ -49,6 +49,8 @@ public:
 		n_++;
 	}
 
+	// 0 , 2
+	// 0 , 1
 	void InsertEdge(int u, int v) // 여기서 u, v는 인덱스
 	{
 		assert(u < n_ && v < n_);
@@ -92,6 +94,18 @@ public:
 	void DepthFirstTraversal(int v) // v는 인덱스
 	{
 		// TODO:
+		visited_[v] = true;
+
+		Node *current = list_[v];
+
+		while(current)
+		{
+			cout << " current->vertax " << current->vertex << endl;
+			current = current->next;
+		}
+
+
+		//DepthFirstTraversal(v);
 	}
 
 	void IterDFT()
@@ -141,9 +155,9 @@ int main()
 	g.DepthFirstTraversal();
 	cout << endl;
 
-	g.IterDFT();
+	// g.IterDFT();
 
-	g.BreadthFirstTraversal();
+	// g.BreadthFirstTraversal();
 
 	return 0;
 }
