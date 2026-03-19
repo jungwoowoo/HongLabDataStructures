@@ -141,6 +141,7 @@ public:
 				if( visited_[stacks.Top()] == true )
 				{
 					// skip visited vertex
+					stacks.Pop();
 				}
 
 				else if ( visited_[stacks.Top()] == false )
@@ -156,12 +157,13 @@ public:
 
 			visited_[start] = true;
 			cout << vertices_[start].item << " Stack :" << flush;
+			//cout << vertices_[start].item << " Stack :" << endl;
 
 			//stacks.Pop();
 
 			while(current)
 			{
-				cout << " current->vertex=" << current->vertex << endl;
+				//cout << " current->vertex=" << current->vertex << endl;
 				stacks.Push(current->vertex);
 				current = current->next;
 			}
