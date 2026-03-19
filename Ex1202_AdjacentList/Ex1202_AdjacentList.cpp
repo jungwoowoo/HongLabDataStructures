@@ -135,16 +135,21 @@ public:
 
 			//start = stacks.Top();
 
-			for(int i=0; i<stacks.Size(); i++)
+			//for(int i=0; i<stacks.Size(); i++)
+			while(!stacks.IsEmpty())
 			{
-				if( visited_[stacks.Top()] == true ) continue;
-				
+				if( visited_[stacks.Top()] == true )
+				{
+					// skip visited vertex
+				}
+
 				else if ( visited_[stacks.Top()] == false )
 				{
 					start = stacks.Top();
+					stacks.Pop();
 					break;
 				}
-				stacks.Pop();
+				
 			}
 			
 			Node *current = list_[start];
@@ -156,7 +161,7 @@ public:
 
 			while(current)
 			{
-				//cout << " current->vertex=" << current->vertex << endl;
+				cout << " current->vertex=" << current->vertex << endl;
 				stacks.Push(current->vertex);
 				current = current->next;
 			}
@@ -173,6 +178,8 @@ public:
 
 			if(visited_count == max_vertices_) all_visted = true;
 			else all_visted = false;
+
+			//break;
 		}
 	}
 
