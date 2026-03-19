@@ -102,21 +102,78 @@ public:
 
 			Node *current = list_[v];
 
-			cout << vertices_[v].item << " starting " << endl;
-
+			cout << vertices_[v].item << " " << flush;
 			while(current)
 			{
 				//cout << " current->vertax " << current->vertex << endl;
 				DepthFirstTraversal(current->vertex);
 				//cout << " current->vertax " << current->vertex << endl;
 				current = current->next;
-			}			
+			}
+
+			//cout << endl;
 		}
 	}
 
 	void IterDFT()
 	{
 		// TODO:
+		ResetVisited();
+
+		int start = 0;
+
+		Stack<int> stacks;
+	
+		stacks.Push(start);
+
+		//while(!stacks.IsEmpty())
+
+		bool all_visted = false;
+
+		while(all_visted == false)
+		{
+
+			//start = stacks.Top();
+
+			for(int i=0; i<stacks.Size(); i++)
+			{
+				if( visited_[stacks.Top()] == true ) continue;
+				else if ( visited_[stacks.Top()] == false )
+				{
+					start = stacks.Top();
+					stacks.Pop();
+					break;
+				}
+			}
+			
+
+			Node *current = list_[start];
+
+			visited_[start] = true;
+			cout << vertices_[start].item << " Stack :" << flush;
+
+			//stacks.Pop();
+
+			while(current)
+			{
+				//cout << " current->vertex=" << current->vertex << endl;
+				stacks.Push(current->vertex);
+				current = current->next;
+			}
+			
+			stacks.Print();
+
+			cout << endl;
+
+			int visited_count = 0;
+			for(int i=0; i<max_vertices_; i++)
+			{
+				if(visited_[i]==true) visited_count++;
+			}
+
+			if(visited_count == max_vertices_) all_visted = true;
+			else all_visted = false;
+		}
 	}
 
 	void BreadthFirstTraversal()
@@ -161,7 +218,7 @@ int main()
 	g.DepthFirstTraversal();
 	cout << endl;
 
-	// g.IterDFT();
+	g.IterDFT();
 
 	// g.BreadthFirstTraversal();
 
