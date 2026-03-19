@@ -138,15 +138,15 @@ public:
 			for(int i=0; i<stacks.Size(); i++)
 			{
 				if( visited_[stacks.Top()] == true ) continue;
+				
 				else if ( visited_[stacks.Top()] == false )
 				{
 					start = stacks.Top();
-					stacks.Pop();
 					break;
 				}
+				stacks.Pop();
 			}
 			
-
 			Node *current = list_[start];
 
 			visited_[start] = true;
